@@ -4,7 +4,7 @@ body{
 	background: #d0db97;
 	font-family: Arial, Helvetica, sans-serif;
 }
-h1, main {
+h1, main, h3 {
 	text-align: center;
 	color: #181d27;
 }
