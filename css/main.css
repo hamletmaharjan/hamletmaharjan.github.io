@@ -1,61 +1,29 @@
 /*general*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 body{
-	background: rgb(64, 55, 88);
-}
-article, aside, figure, footer, header, main, menu, nav, section {
-	display: block;
-}
-body, h1, h2, p, ul, ol, li, dd, dl {
-	margin: 0; padding: 0;
-}
-/*table styling*/
-header {
-	padding: 50px 20px;
+	background: #d0db97;
+	font-family: 'Noto Sans', sans-serif;
 }
 h1, main {
 	text-align: center;
+	color: #181d27;
 }
-table {
+#table{
 	border-collapse: collapse;
-	display: inline-block;
+	margin-left: auto;
+  	margin-right: auto;
+}
+
+#table td, #table th {
+	border: 1px solid #69b578;
+	padding: 8px;
+	color: #181d27;
+}
+
+#table th {
+	padding-top: 12px;
+	padding-bottom: 12px;
 	text-align: left;
-	border-top: 1px solid #888;
-}
-table thead {
-	background: #bbb;
-}
-table tr th {
-	background: white;
-}
-table tr{
-	background: #b9b8b8;
-}
-table tr:nth-child(even) {
-	background: #dfdfdf;
-}
-table th, table td {
-	padding: 10px 20px;
-	border: 1px solid rgb(7, 7, 7);
-	border-width: 0 1px 1px;
-}
-/*responsive table*/
-@media screen and (max-width: 1000px) {
-	/*put each field on its own line and align text to the right
-	 *border is added for further readability
-	 */
-	table td {
-		display: block;
-		text-align: right;
-	}
-	/*put data-label content before each field floated to the left*/
-	table td:before {
-		content: attr(data-label);
-		float: left;
-		font-weight: bold;
-		margin-right: 10px;
-	}
-	/*remove thead*/
-	table thead {
-		display: none;
-	}
-}
+	background-color: #4CAF50;
+	color: #181d27;
+  }
