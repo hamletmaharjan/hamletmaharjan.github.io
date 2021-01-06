@@ -23,17 +23,19 @@
 }
 
 .nav-btn a:hover{
-    background-color:#2fc1d8;
+    padding-right: 0px 10px;
     color: #ffffff;
 }
-.nav-btn a:hover .nav-btn-left{
+.nav-btn .nav-btn-left:hover  {
+    background-color:#2fc1d8;
     background-image: url("../images/active-btn-left.jpg");
     background-position: left;
     background-repeat: no-repeat;
 }
-.nav-btn a:hover .nav-btn-right{
+.nav-btn .nav-btn-right:hover  {
     background-image: url("../images/active-btn-right.jpg");
-    
+    background-position: right;
+    background-repeat: no-repeat;
      
 }
 

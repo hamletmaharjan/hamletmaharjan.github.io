@@ -205,13 +205,18 @@ li{
 }
 .articles-content ul li {
     
-    clear: both;
+    display: inline-block;
+    width: 100%
     
 }
+.articles-content ul li:hover{
+    cursor: pointer;
+    background-color: #ffffff;
+}
 .articles-content ul li a {
-    display: inline-block;
-    /* background-color: red; */
-    /* width: 100%; */
+    max-width: 75%;
+    float: left;
+
     padding: 15px 11px 13px 11px;
     /* padding-top: 12px;
     padding-bottom: 13px; */
@@ -219,8 +224,9 @@ li{
 .articles-content ul li a span{
     display: block;
 }
-.articles-content ul li a span img{
+.articles-content ul li img{
     float: right;
+    padding: 18px 5px;
 }
 
 
