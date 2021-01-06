@@ -20,7 +20,7 @@
     
 }
 .logo{
-    background-image: url('..images/logo.jpg');
+    background-image: url('../images/logo.jpg');
     float: left;
     width: 222px;
     height: 49px;
