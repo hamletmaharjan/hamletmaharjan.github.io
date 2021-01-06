@@ -9,9 +9,9 @@
     margin: 0 auto;
     width: 940px;
     display: block;
-    background-color: indigo;
+    /* background-color: indigo; */
     margin-top: 20px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     padding-top: 10px;
     padding-bottom: 50px;
     
@@ -19,14 +19,16 @@
 
 .top-header-left{
     float: left;
-    padding: 2px;
-    background-color: red;
+    /* padding: 2px; */
+    /* background-color: red; */
 }
 .logo{
     background-color: #3b767c;
     float: left;
-    width: 222px;
-    padding: 10px;
+    width: 223px;
+    height: 49px;
+    background-image: url('../images/logo.jpg');
+    
 }
 .input{
     background-color: #caeff7;
@@ -92,13 +94,11 @@
     background-color: #ffffff;
     /* display: inline-block; */
     overflow: hidden;
-    
+    margin-top: 20px;
 }
 .page-container {
     margin: 0 auto;
     width: 940px;
-    padding: 5px 1px 220px 1px;
-    background-color: darkgreen;
 }
 .page-left{
     float: left;
