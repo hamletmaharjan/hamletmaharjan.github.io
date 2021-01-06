@@ -28,6 +28,8 @@
 }
 .nav-btn a:hover .nav-btn-left{
     background-image: url("../images/active-btn-left.jpg");
+    background-position: left;
+    background-repeat: no-repeat;
 }
 .nav-btn a:hover .nav-btn-right{
     background-image: url("../images/active-btn-right.jpg");
@@ -54,6 +56,10 @@ p.title{
 }
 .primary{
     color: #2f9eaf;
+}
+.primary:hover{
+    color: #2f9eaf;
+    cursor: pointer;
 }
 
 .danger{

@@ -217,7 +217,7 @@ li{
     padding-bottom: 13px; */
 }
 .articles-content ul li a span{
-    display: inline-block;
+    display: block;
 }
 .articles-content ul li a span img{
     float: right;
