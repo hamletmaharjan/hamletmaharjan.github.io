@@ -30,7 +30,7 @@ body {
                                 <div class="input-field-left">
                                     <div class="input-field-right">
                                         
-                                        <input type="text" placeholder="Search by Term, Member or Entity Title">
+                                        <input type="text" value="Search by Term, Member or Entity Title">
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@ body {
                     <div class="bottom-header-right">
                         <ul>
                             <li><img src="images/tbi.png"> Topic box invites - 2</li>
-                            <li><img src="images/fr.png"> Friend Requests - 0</li>
+                            <li><img src="images/fr.png"> <span class="disabled"> Friend Requests - 0</span></li>
                         </ul>
                     </div>
                 </div>
@@ -88,10 +88,13 @@ body {
                                 Recent Searches
                             </div>
                             <div class="articles-content">
-                                <ul>
-                                    <li><a>Nick Cave And The Bad Seeds<span><img src="images/download.png"</span></a></li>
-                                    <li><a>Africal Animals<span><img src="images/download.png"</span></a></li>
-                                </ul>
+                                <div>
+                                    <ul>
+                                        <li><a><span>Nick Cave And The Bad Seeds</span><img src="images/download.png"></a></li>
+                                        <li><a><span>Africal Animals<span><img src="images/download.png"></a></li>
+                                    </ul>
+                                </div>
+                                
                             </div>
                         </div>
                         <div class="recent-searches-bottom">
@@ -100,12 +103,12 @@ body {
                             </div>
                             <div class="articles-content">
                                 <ul>
-                                    <li>Different versions of the Tristan Und Isolde Prelude</li>
-                                    <li>Music</li>
-                                    <li>Guitar</li>
-                                    <li>Bob Cohen</li>
-                                    <li>Mark Schnack</li>
-                                    <li>Jefferson Dickey</li>
+                                    <li><a><span>Different versions of the Tristan Und Isolde Prelude</span></a><img src="images/option.png"></span></li>
+                                    <li><a><span>Music</span></a><img src="images/option.png"></li>
+                                    <li><a><span>Guitar</span></a><img src="images/option.png"></li>
+                                    <li><a><span>Bob Cohen</span></a><img src="images/option.png"></li>
+                                    <li><a><span>Mark Schnack</span></a><img src="images/option.png"></li>
+                                    <li><a><span>Jefferson Dickey</span></a><img src="images/option.png"></li>
                                 </ul>
                             </div>
                         </div>
@@ -131,9 +134,9 @@ body {
                                     <div class="sub-category-left">
                                         <ul>
                                             <li>
-                                                <div class="nav-btn">
-                                                    <div class="nav-btn-left">
-                                                        <div class="nav-btn-right">
+                                                <div class="nav-btn active">
+                                                    <div class="nav-btn-left active">
+                                                        <div class="nav-btn-right active">
                                                             <a href="#">All Members</a>
                                                         </div>
                                                     </div>
@@ -174,6 +177,7 @@ body {
                                     </div>
                                     
                                 </div>
+                                <hr>
                             </div>
                             <div class="article-container">
                                 <ul>
@@ -184,7 +188,7 @@ body {
                                             </div>
                                             <div class="article-content">
                                                 <p class="title">Day for Night by Francous Truffaut, a groundbreaking film</p>
-                                                <p class="small">by <span class="primary">Alan Coe</span> | Febuary 10,2020 | <span>Subscribed</span></p>
+                                                <p class="small">by <span class="primary">Alan Coe</span> | Febuary 10,2020 | <span class="sub">Subscribed</span></p>
                                                 <p class="small">from topic box: <span class="primary">my favorite movie</span></p>
                                             </div>
                                         </div>
@@ -222,7 +226,7 @@ body {
                                             </div>
                                             <div class="article-content">
                                                 <p class="title">The Meaning of Night. Dark Book but incredibly well writeen.</p>
-                                                <p class="small">by <span class="primary">Jon-Peter Moise</span> | February 7,2012 | Subscribed</p>
+                                                <p class="small">by <span class="primary">Jon-Peter Moise</span> | February 7,2012 | <span class="sub">Subscribed</span></p>
                                                 <p class="small">From Topic Box: <span class="primary">Books Read & Books to Read</span></p>
                                             </div>
                                         </div>
@@ -253,15 +257,15 @@ body {
                             </div>
                             <div class="articles-content">
                                 <ul>
-                                    <li>Overview of TuTangle</li>
-                                    <li>Searching the Site</li>
-                                    <li>Previews & Saved Searches</li>
-                                    <li>The Topic Box Page</li>
-                                    <li>Creating a Topic Box</li>
-                                    <li>View Topic Box Entries</li>
-                                    <li>Creaing an Entry</li>
-                                    <li>Privacy Settings</li>
-                                    <li>Co-Authoring</li>
+                                    <li><a>Overview of TuTangle</a></li>
+                                    <li><a>Searching the Site</a></li>
+                                    <li><a>Previews & Saved Searches</a></li>
+                                    <li><a>The Topic Box Page</a></li>
+                                    <li><a>Creating a Topic Box</a></li>
+                                    <li><a>View Topic Box Entries</a></li>
+                                    <li><a>Creaing an Entry</a></li>
+                                    <li><a>Privacy Settings</a></li>
+                                    <li><a>Co-Authoring</a></li>
                                 </ul>
                             </div>
                         </div>
