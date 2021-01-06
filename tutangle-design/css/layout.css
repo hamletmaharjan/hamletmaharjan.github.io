@@ -37,13 +37,13 @@
     
 }
 .input-field-left{
-    background-image: url("images/input-left.png");
+    background-image: url("../images/input-left.png");
     background-position: left top;
     background-repeat: no-repeat;
     
 }
 .input-field-right{
-    background-image: url("images/input-right.png");
+    background-image: url("../images/input-right.png");
     background-position: right top;
     background-repeat: no-repeat;
     /* margin-right: 20px; */
@@ -63,13 +63,13 @@ input{
     float: left;
 }
 .search-btn-left{
-    background-image: url("images/search-btn-left.png");
+    background-image: url("../images/search-btn-left.png");
     background-position: left;
     background-repeat: no-repeat;
     background-color: #275056;
 }
 .search-btn-right{
-    background-image: url("images/search-btn-right.png");
+    background-image: url("../images/search-btn-right.png");
     background-position: right;
     background-repeat: no-repeat;
 }
@@ -244,13 +244,13 @@ li{
     background-color: #dddddd;
 }
 .nav-btn-left{
-    background-image: url("images/default-btn-left.jpg");
+    background-image: url("../images/default-btn-left.jpg");
     background-position: left;
     background-repeat: no-repeat;
     
 }
 .nav-btn-right{
-    background-image: url("images/default-btn-right.jpg");
+    background-image: url("../images/default-btn-right.jpg");
     background-position: right;
     background-repeat: no-repeat; 
      
