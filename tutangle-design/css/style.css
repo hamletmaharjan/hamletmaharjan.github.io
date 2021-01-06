@@ -20,7 +20,7 @@ p.title{
 }
 
 .nav-btn a {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: bold;
     color: black;
 }
@@ -48,4 +48,8 @@ p.title{
 .footer a {
     color: #d4d4d4;
     font-weight: bold;
+}
+
+.center{
+    text-align: center;
 }
