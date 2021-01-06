@@ -26,6 +26,7 @@
     padding-right: 0px 10px;
     color: #ffffff;
 }
+
 .nav-btn .nav-btn-left:hover  {
     background-color:#2fc1d8;
     background-image: url("../images/active-btn-left.jpg");
