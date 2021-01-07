@@ -1,5 +1,7 @@
 
-@media only screen and (min-width: 768px){
+
+
+@media only screen and (min-width: 1002px){
 
 .top-header {
     max-width: 58.75em;
@@ -108,7 +110,7 @@ li{
     /* overflow: hidden; */
 }
 
-.footer-container{
+.footer-wrapper{
     width: 100%;
     background-color: #727272;
     display: inline-block;
@@ -116,9 +118,10 @@ li{
 }
 .footer {
     margin: 0 auto;
-    width: 58.75em;
+    width: 940px;
     padding-top: 19px;
     padding-bottom: 30px;
+    overflow: hidden;
     /* background-color: red; */
 }
 .footer-left {
@@ -138,13 +141,15 @@ li{
 .footer-right{
     float: right; 
 }
+/* .footer-container ul{
+    width: 100%;
+} */
 
-
-.footer-container ul{
+.footer-container ul li{
     display: inline-block;
-}
-.footer-container li{
-    float: left;
+    width: inherit;
+    /* width: 100%; */
+    /* text-align: center; */
 }
     
 }
