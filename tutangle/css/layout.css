@@ -2,6 +2,7 @@
 .top-header-wrapper {
     width: 100%;
     background-color: #7dd9e8;
+    /* min-width: 1002px; */
     overflow: hidden;
 }
 
