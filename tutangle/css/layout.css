@@ -18,18 +18,16 @@
     background-image: url('../images/logo.jpg');
     width: 222px;
     height: 49px;
+    margin: 0 auto;
     /* margin-top: 20px; */
 }
 
 
-.search{
-    /* float: left; */
-    margin-left: 24px;
-    margin-top: 20px;
 
-}
 .input-field{
     background-color: #caeff7;
+    margin-top: 15px;
+    width: 100%;
 }
 .input-field-left{
     background-image: url("../images/input-left.png");
@@ -48,17 +46,26 @@ input{
     display: block;
     background:none;
     padding: 2px 4px 2px 6px;
-    width: 265px;
+    /* width: 265px; */
+    width: 100%;
     
 }
 input:focus{
     outline: none;
 }
+.search{
+    /* float: left; */
+    /* margin-left: 24px; */
+    margin-top: 20px;
+    display: inline;
+
+}
 
 .search-btn-wrapper{
-    margin-top: 20px;
-    margin-left: 7px;
+    margin-top: 15px;
+    margin-left: 200px;
     float: left;
+    display: inline;
 }
 .search-btn-left{
     background-image: url("../images/search-btn-left.png");
@@ -83,7 +90,7 @@ input:focus{
 }
 
 .top-header-right{
-    float: right;
+    /* float: right; */
     width: 15%;
 }
 .top-header-right li {
@@ -105,14 +112,12 @@ input:focus{
     font-size: 15px;
     text-align: right;
 }
-ul {
+ul, li{
     
     display: inline-block;
-}
-li{
-    float: left;
     list-style-type: none;
 }
+
 /* .page-nav{
     background-color: darkred;
     width: 139px;
@@ -156,6 +161,7 @@ li{
     /* background-color: red; */
     /* width: 302px; */
     margin-left: 9px;
+    margin-top: 15px;
 }
 .bottom-header-right li:after{ 
     content: "";
@@ -310,9 +316,12 @@ li{
 .sub-category a:hover{
     cursor: pointer;
 }
+/* .sub-category ul li{
+    display: inline-block;
+} */
 .nav-btn{
     margin: 0px 5px;
-    width: 114px;
+    width: 220px;
     background-color: #dddddd;
 }
 .nav-btn-left{
@@ -379,7 +388,9 @@ li{
 
 .article{
     display: inline-block;
+    overflow: hidden;
 }
+
 .article-image{
     float: left;
     /* background-image: url("images/user1.png"); */
@@ -387,11 +398,10 @@ li{
     height: 72px;
 }
 .article-content{
-    /* float: left; */
-    margin-left: 50px;
+    float: right;
+    margin-left: 10px;
     
-    /* width: 438px; */
-    width: 100%;
+    width: 390px;
 }
 
 
