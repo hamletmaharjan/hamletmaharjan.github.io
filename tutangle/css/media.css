@@ -1,4 +1,6 @@
-
+@media only screen and (min-width:768px){
+    
+}
 
 
 @media only screen and (min-width: 1002px){
@@ -115,6 +117,9 @@ li{
     background-color: #727272;
     display: inline-block;
     margin-top: 32px;
+}
+.footer-container{
+    max-width: 58.75em;
 }
 .footer {
     margin: 0 auto;
