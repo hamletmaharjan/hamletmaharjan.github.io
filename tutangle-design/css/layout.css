@@ -1,6 +1,7 @@
 
 .top-header-wrapper {
     width: 100%;
+    min-width: 1002px;
     background-color: #7dd9e8;
     overflow: hidden;
 }
@@ -124,6 +125,7 @@ li{
 
 .bottom-header-wrapper{
     width: 100%;
+    min-width: 1002px;
     background-color: #f5f5f5;
     /* display:  inline-block; */
     overflow: hidden;
@@ -168,6 +170,7 @@ li{
 
 .page-wrapper {
     width: 100%;
+    min-width: 1002px;
     background-color: #ffffff;
     /* overflow: hidden; */
 }
@@ -391,6 +394,7 @@ li{
 
 .footer-wrapper{
     width: 100%;
+    min-width: 1002px;
     background-color: #727272;
     display: inline-block;
     margin-top: 32px;
