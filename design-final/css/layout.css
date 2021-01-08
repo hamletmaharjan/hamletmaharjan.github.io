@@ -29,7 +29,13 @@
 
 .mid-header{
     width: 30em;
+    /* width: 100%; */
     background-color: #efefef;
+    padding-bottom: 50px;
+}
+.wrapper {
+    width: 28.125em;
+    margin: 0 auto;
 }
 .slider-wrapper{
     overflow: hidden;
@@ -76,3 +82,14 @@
     float: left;
     padding: 10px;
 } 
+
+.bottom-header{
+    width: 30em;
+    /* width: 100%; */
+    background-color: #1c1105;
+    
+}
+.navbar ul li{
+    list-style-type:none;
+    padding: 5px;
+}
