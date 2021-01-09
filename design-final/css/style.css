@@ -11,3 +11,29 @@
     text-decoration: none;
     color: #ffffff;
 }
+
+.latest-furniture p{
+    text-align: center;
+    padding: 10px;
+}
+
+
+
+hr{
+    width: 20%;
+    border: 1px solid #e7e7e7;
+    margin: 0 auto;
+}
+p.price{
+    color: #fac012;
+    padding: 20px;
+}
+.cart-btn{
+    /* width: 100%; */
+    background-color: #fac012;
+    padding: 10px;
+}
+.cart-btn-txt{
+    color: #ffffff;
+    display: block;
+}
