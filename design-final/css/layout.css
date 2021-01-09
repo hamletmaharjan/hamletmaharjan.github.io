@@ -204,3 +204,16 @@
     float: right;
     /* background-color: yellow; */
 }
+
+.content-fourth{
+    width: 30em;
+    background-color: #323232;
+    /* margin-top: 50px; */
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /* width: 100%; */
+}
+.get-your-discounts{
+    padding-left:20px;
+}
+

@@ -67,3 +67,26 @@ p.price{
 .post-link:hover{
     cursor: pointer;
 }
+
+.content-fourth p {
+    color: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.content-fourth hr{
+    width: 10%;
+    border: 1px solid #ffffff;
+}
+
+.content-fourth input{
+    display: block;
+    width: 90%;
+    border: 1px solid #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #323232;
+}
+
+.subscribe-btn{
+    margin: 30px;
+}
