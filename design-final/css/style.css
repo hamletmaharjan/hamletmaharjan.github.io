@@ -1,11 +1,14 @@
 .title{
-    font-size: 30px;
+    font-size: 18px;
 }
 .txt-white{
     color: #ffffff;
 }
 .txt-small{
     font-size: 11px;
+}
+.center{
+    text-align: center;
 }
 .navbar ul li a{
     text-decoration: none;
@@ -18,8 +21,7 @@
 }
 
 
-
-hr{
+.content-first hr{
     width: 20%;
     border: 1px solid #e7e7e7;
     margin: 0 auto;
@@ -36,4 +38,32 @@ p.price{
 .cart-btn-txt{
     color: #ffffff;
     display: block;
+}
+
+.content-second p{
+    color: #ffffff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.content-second hr{
+    width: 10%;
+    border: 1px solid #fac012;
+}
+
+.content-third p {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.content-third hr{
+    width: 20%;
+    border: 1px solid #e7e7e7;
+    margin: 0 auto;
+}
+
+.post-link{
+    color: #fac528;
+}
+.post-link:hover{
+    cursor: pointer;
 }
