@@ -90,3 +90,67 @@ p.price{
 .subscribe-btn{
     margin: 30px;
 }
+
+.content-fifth p {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.content-fifth hr{
+    width: 20%;
+    border: 1px solid #e7e7e7;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+
+.collection-tab ul li{
+    display:  inline-block;
+    font-size: 11px;
+    width: 18%;
+    text-align: center;
+}
+.tab-btn{
+    border:1px solid #d5d5d5;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.tab-btn a{
+    display: block;
+}
+.tab-btn a:hover{
+    color: #ffffff;
+}
+.tab-btn:hover{
+    background-color: #fac012;
+}
+
+.contact-txt{
+    font-size: 11px;
+    text-align: center;
+}
+.contact-detail p{
+    text-align: center;
+}
+.contact-detail ul{
+    list-style: none;
+    text-align: center;
+    margin-top: 15px;
+}
+.contact-detail ul li{
+    display: inline-block;
+}
+.content-sixth input, textarea{
+    display: block;
+    border: 1px solid #dadada;
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f7f7f7;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.send-btn{
+    margin: 30px;
+}
