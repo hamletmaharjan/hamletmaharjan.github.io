@@ -1,6 +1,50 @@
-@media screen and (min-width: 768px) {
-    .top-header{
-        width: 48em;
-        /* width: 100%; */    
+@media only screen and (min-width:768px){
+    .cart-info{
+        display: initial;
     }
+    .products-item-container{
+        width: 100%;
+        /* background-color: red; */
+    }
+    .content-first ul{
+        width: 100%;
+        text-align: center;
+        /* background-color: red; */
+        overflow: hidden;
+    }
+    .products-item-container ul li{
+        /* display: inline-block; */
+        float: left;
+        width: 47%;
+        margin: 10px;
+    }
+
+    .furniture-container ul li{
+        display: inline-block;
+        /* float: left; */
+        width: 47%;
+        margin-right: 10px;
+    }
+    .content-third ul{
+        width: 100%;
+        text-align: center;
+        /* background-color: red; */
+        overflow: hidden;
+    }
+    .post-container ul li{
+        /* display: inline-block; */
+        float: left;
+        width: 48%;
+        margin-right: 10px;
+    }
+    .content-fifth ul{
+        width: 100%;
+        text-align: center;
+    }
+    .collection-container ul li{
+        display: inline-block;
+        width: 48%;
+    }
+
+    
 }

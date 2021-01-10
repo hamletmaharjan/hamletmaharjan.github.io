@@ -31,6 +31,9 @@
     display: inline-block;
     padding-left: 15px;
 }
+.cart-info{
+    display: none;
+}
 .mid-header-spread{
     width: 100%;
     background-color: #efefef;
