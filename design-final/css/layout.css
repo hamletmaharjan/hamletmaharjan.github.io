@@ -312,6 +312,8 @@
 .social-media
 {
     overflow: hidden;
+    padding-top: 20px;
+    padding-bottom: 20px;
     
 }
 .social-left{
@@ -321,4 +323,37 @@
 .social-right{
     float: right;
     width: 50%;
+}
+.media-item{
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.media-item img{
+    float: left;
+}
+.media-item-right{
+    float: left;
+    margin-left: 10px;
+}
+
+.footer-item{
+    overflow: hidden;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.footer-item-img{
+    float: left;
+    /* width: 31.83%; */
+    width: 15%;
+}
+.footer-item-right{
+    float: left;
+    margin-left: 15px;
+}
+
+.feed-container{
+    margin-top:15px;
+}
+.instagram-feed ul li{
+    display: inline-block;
 }

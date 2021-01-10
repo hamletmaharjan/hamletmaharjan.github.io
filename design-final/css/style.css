@@ -161,3 +161,16 @@ p.price{
     color: #594d40;
 }
 
+.read-more a{
+    color: #fac012;
+}
+.footer p{
+    margin-bottom: 5px;
+}
+
+.footer hr{
+    width: 20%;
+    border: 1px solid #fac012;
+    
+}
+
