@@ -115,13 +115,28 @@
         width: 80%;  
     }
 
-    
-    .content-fifth ul{
-        width: 100%;
-        text-align: center;
+    .discounts-container{
+        overflow: hidden;
     }
+    .get-your-discounts{
+        float: right;
+        width: 46.22%;
+    }
+
     .collection-container ul li{
         display: inline-block;
-        width: 48%;
+        width: 33%;
+    }
+
+    .contact{
+        overflow: hidden;
+    }
+    .contact-detail{
+        float: left;
+        width: 14.91%;
+    }
+    .contact-form{
+        float: right;
+        width: 54.56%;
     }
 }
