@@ -46,6 +46,23 @@
         width: 48%;
     }
 
+    .footer-container{
+        overflow: hidden;
+    }
+
+    .about{
+        float: left;
+        width: 50%;
+    }
+    .footer-mid-container{
+        float: left;
+        width: 50%;
+    }
+    
+    .instagram-feed{
+        float: left;
+    }
+
     
 }
 
@@ -138,5 +155,19 @@
     .contact-form{
         float: right;
         width: 54.56%;
+    }
+
+    .about{
+        width: 23.42%;
+    }
+    .footer-mid-container{
+        width: 47.10%;
+    }
+    
+    .instagram-feed{
+        width: 17%;
+    }
+    .instagram-feed ul li{
+        width: 45%;
     }
 }

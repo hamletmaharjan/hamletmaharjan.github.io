@@ -304,7 +304,7 @@
     background-color: #1c1105;
 }
 .footer{
-    max-width: 64em;
+    /* max-width: 64em; */
     margin-top: 25px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -334,6 +334,18 @@
 .media-item-right{
     float: left;
     margin-left: 10px;
+}
+
+.footer-mid-container{
+    overflow: hidden;
+}
+.latest-products{
+    float: left;
+    width: 50%;
+}
+.top-sellers{
+    float: left;
+    width: 50%;
 }
 
 .footer-item{
