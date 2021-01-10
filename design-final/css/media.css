@@ -49,6 +49,9 @@
     .footer-container{
         overflow: hidden;
     }
+    .footer p{
+        font-size: 11px;
+    }
 
     .about{
         float: left;
@@ -96,7 +99,13 @@
     .navbar ul li{
         display:inline-block;
         padding: 24px 0px 24px 0px;
+        margin:0px 20px;
     }
+
+    .navbar ul li a{
+        font-size: 11px;
+    }
+    
     .products-item-container{
         width: 100%;
         /* background-color: red; */

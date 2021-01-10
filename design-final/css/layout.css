@@ -175,6 +175,9 @@
 .furniture-img{
     padding: 15px;
 }
+.cart-btn:hover{
+    cursor: pointer;
+}
 
 
 .content-second-spread{
@@ -291,6 +294,9 @@
     margin-bottom: 5px;
     /* background-color: red; */
 }
+.collection-item:hover{
+    cursor: pointer;
+}
 .collection-content{
     display:none;
 }
@@ -362,6 +368,10 @@
 .top-sellers{
     float: left;
     width: 50%;
+}
+
+.footer-container{
+    padding:20px 0px;
 }
 
 .footer-item{

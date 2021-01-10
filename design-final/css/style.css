@@ -91,7 +91,13 @@ p.price{
 }
 
 .subscribe-btn{
-    margin: 30px;
+    margin: 15px 0px;
+    display: inline-block;
+    background-color: #ffffff;
+    padding: 10px 15px;  
+}
+.subscribe-btn:hover{
+    cursor: pointer;
 }
 
 .content-fifth p {
@@ -156,7 +162,13 @@ p.price{
 }
 
 .send-btn{
-    margin: 30px;
+    margin: 15px 15px 30px 15px;
+    display: inline-block;
+    background-color: #1c1105;
+    padding: 10px 15px;    
+}
+.send-btn:hover{
+    cursor: pointer;
 }
 
 .footer p{
