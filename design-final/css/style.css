@@ -87,6 +87,7 @@ p.price{
     padding: 10px;
     margin-bottom: 10px;
     background-color: #323232;
+    color: #ffffff;
 }
 
 .subscribe-btn{
@@ -124,6 +125,7 @@ p.price{
     color: #ffffff;
 }
 .tab-btn:hover{
+    cursor: pointer;
     background-color: #fac012;
 }
 

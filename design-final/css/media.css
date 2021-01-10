@@ -147,6 +147,11 @@
 
     .contact{
         overflow: hidden;
+        margin-top: 15px;
+    }
+    .contact-txt{
+        font-size: 14px;
+        /* text-align: center; */
     }
     .contact-detail{
         float: left;
@@ -161,11 +166,13 @@
         width: 23.42%;
     }
     .footer-mid-container{
+        margin-left: 36px;
         width: 47.10%;
     }
     
     .instagram-feed{
         width: 17%;
+        margin-left: 36px;
     }
     .instagram-feed ul li{
         width: 45%;
