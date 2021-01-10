@@ -3,26 +3,25 @@
     background-color: #efefef;
 }
 .top-header{
-    /* width: 30em; */
-    max-width: 62.625em;
-    /* width: 100%; */    
+    
+    max-width: 64em;
+   
 }
 
 .top-header-wrapper {
     /* width: 28.125em; */
     width: 93.75%;
-    
     margin: 0 auto;
     overflow: hidden;
 }
 .logo{
     float: left;
-    margin-top: 65px;
-    margin-bottom: 50px;
+    margin-top: 34px;
+    margin-bottom: 34px;
 }
 .navigation{
     float: right;
-    margin-top: 65px;
+    margin-top: 34px;
     margin-bottom: 50px;
 }
 
@@ -40,9 +39,7 @@
 }
 .mid-header{
     /* width: 30em; */
-    max-width: 62.625em;
-    /* width: 100%; */
-    
+    /* max-width: 64em; */
     padding-bottom: 50px;
 }
 .wrapper {
@@ -100,12 +97,10 @@
     width: 100%;
     background-color: #1c1105;
 }
-.bottom-header{
-    max-width: 62.625em;
-    /* width: 100%; */
-    
-    
-}
+/* .bottom-header{
+    max-width: 64em; 
+     width: 100%;
+} */
 .navbar ul li{
     list-style-type:none;
     padding: 5px;
@@ -114,11 +109,11 @@
 /* .content-first-spread{
 
 } */
-.content-first{
-    max-width: 62.625em;
-    /* background-color: red; */
-    /* width: 100%; */
-}
+/* .content-first{
+    max-width: 64em;
+    background-color: red; 
+     width: 100%;
+} */
 
 .featured-products{
     margin-top: 20px;
@@ -175,7 +170,7 @@
     width: 100%;
 }
 .content-second{
-    max-width: 62.625em;
+    /* max-width: 64em; */
     
     margin-top: 50px;
     padding-top: 30px;
@@ -202,7 +197,7 @@
 
 } */
 .content-third{
-    max-width: 62.625em;
+    /* max-width: 64em; */
     /* background-color: #28231d; */
     /* margin-top: 50px; */
     padding-top: 30px;
@@ -240,7 +235,7 @@
     background-color: #323232;
 }
 .content-fourth{
-    max-width: 62.625em;
+    /* max-width: 64em; */
     
     /* margin-top: 50px; */
     padding-top: 30px;
@@ -255,7 +250,7 @@
 
 } */
 .content-fifth{
-    max-width: 62.625em;
+    /* max-width: 64em; */
     /* margin-top: 50px; */
     padding-top: 30px;
     padding-bottom: 30px;
@@ -290,7 +285,7 @@
     background-color: #f7f7f7;
 }
 .content-sixth{
-    max-width: 62.625em;
+    /* max-width: 64em; */
     margin-top: 25px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -309,8 +304,21 @@
     background-color: #1c1105;
 }
 .footer{
-    max-width: 62.625em;
+    max-width: 64em;
     margin-top: 25px;
     padding-top: 30px;
     padding-bottom: 30px;
+}
+.social-media
+{
+    overflow: hidden;
+    
+}
+.social-left{
+    float: left;
+    width: 50%;
+}
+.social-right{
+    float: right;
+    width: 50%;
 }

@@ -39,7 +39,9 @@ p.price{
     color: #ffffff;
     display: block;
 }
-
+.navbar a:hover{
+    color: #fac012;
+}
 .content-second p{
     color: #ffffff;
     padding-top: 10px;
