@@ -64,8 +64,9 @@
 }
 .details-btn{
     float: right;
-    background-color: #1c1105;
-    padding: 5px;
+    margin-right: 5px;
+    /* background-color: #1c1105;
+    padding: 5px; */
     /* width: 150px; */
 }
 .details-btn:hover{
