@@ -399,3 +399,7 @@
 .instagram-feed ul li{
     display: inline-block;
 }
+
+.copyright-container{
+    margin-top: 20px;
+}

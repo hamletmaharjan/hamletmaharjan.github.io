@@ -186,10 +186,16 @@ p.price{
     cursor: pointer;
 }
 
-.footer p{
+.about p{
     color: #594d40;
 }
 
+.txt-dark{
+    color: #594d40;
+}
+.footer-price{
+    color:#fac012;
+}
 
 .read-more a{
     color: #fac012;
@@ -200,10 +206,14 @@ p.price{
 
 .footer hr{
     width: 20%;
-    border: 1px solid #fac012;
-    
+    border: 1px solid #fac012;   
 }
 
+.footer hr.last-line{
+    width: 100%;
+    border: 1px solid #281909; 
+    margin-bottom: 15px;  
+}
 
 /* .details-btn{
     background-color: #1c1105;
