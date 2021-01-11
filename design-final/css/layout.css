@@ -47,9 +47,7 @@
     width: 93.75%;
     margin: 0 auto;
 }
-.slider-wrapper{
-    overflow: hidden;
-}
+
 .slider{
     width: 80%;
     margin: 0 auto;
@@ -57,7 +55,11 @@
     padding: 20px 12px 100px 12px;
     /* background-color: red; */
 }
-.featured{
+.slider-wrapper{
+    overflow: hidden;
+    padding-bottom: 15px;
+}
+.featured-title{
     float: left;
 }
 .details-btn{
