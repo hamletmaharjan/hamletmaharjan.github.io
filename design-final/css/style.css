@@ -1,6 +1,19 @@
 .title{
-    font-size: 18px;
+    font-size: 24px;
 }
+.big{
+    font-size: 16px;
+}
+.medium{
+    font-size: 14px;
+}
+.bold{
+    font-weight: bold;
+}
+.small{
+    font-size: 11px;
+}
+
 .txt-white{
     color: #ffffff;
 }
@@ -19,7 +32,9 @@
     text-align: center;
     padding: 10px;
 }
-
+.navigation ul li:hover{
+    cursor: pointer;
+}
 
 .content-first hr{
     width: 20%;
@@ -174,6 +189,7 @@ p.price{
 .footer p{
     color: #594d40;
 }
+
 
 .read-more a{
     color: #fac012;

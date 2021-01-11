@@ -18,6 +18,9 @@
         width: 47%;
         margin: 10px;
     }
+    .buttons-container{
+        width: 10%;
+    }
 
     .furniture-container ul li{
         display: inline-block;
@@ -150,6 +153,9 @@
         float: right;
         width: 51%;
     }
+    .post-content p{
+        text-align: left;
+    }
     
     .post-container ul li{ 
         width: 32%;
@@ -176,9 +182,10 @@
         overflow: hidden;
         margin-top: 15px;
     }
-    .contact-txt{
-        font-size: 14px;
-        /* text-align: center; */
+    
+    .contact-title{
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
     .contact-detail{
         float: left;

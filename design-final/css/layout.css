@@ -151,7 +151,7 @@
 
 .buttons-container{
     margin: 0 auto;
-    width: 10%;
+    width: 20%;
     overflow: hidden;
 }
 .pagi-left {
@@ -232,6 +232,7 @@
     margin-top: 20px;
     /* background-color: red; */
 }
+
 .post-body{
     padding-top: 10px;
     /* background-color: green; */
