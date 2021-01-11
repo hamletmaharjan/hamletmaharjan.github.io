@@ -141,6 +141,7 @@ p.price{
 }
 .tab-btn a{
     display: block;
+    color: #1c1105;
 }
 .tab-btn a:hover{
     color: #ffffff;
