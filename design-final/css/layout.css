@@ -313,6 +313,7 @@
 }
 
 .collection-item{
+    position: relative;
     width: 100%;
     margin-top: 5px;
     margin-bottom: 5px;
@@ -320,9 +321,27 @@
 }
 .collection-item:hover{
     cursor: pointer;
+    background-color: #fac012;
+    color: #ffffff;
+
 }
 .collection-content{
+    position: absolute;
     display:none;
+    margin-left: auto;
+    top: 50%;  /* position the top  edge of the element at the middle of the parent */
+    left: 50%; /* position the left edge of the element at the middle of the parent */
+
+    transform: translate(-50%, -50%);
+}
+.collection-content p{
+    font-size: 11px;
+}
+.collection-item:hover img{
+    visibility: hidden;
+}
+.collection-item:hover .collection-content{
+    display: initial;
 }
 
 
