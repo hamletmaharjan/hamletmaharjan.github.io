@@ -7,6 +7,18 @@
 .medium{
     font-size: 14px;
 }
+h1{
+    font-size: 24px;
+}
+h2{
+    font-size: 24px;
+}
+h3{
+    font-size: 14px;
+}
+.light{
+    font-weight: lighter;
+}
 .bold{
     font-weight: bold;
 }
@@ -44,6 +56,13 @@
 p.price{
     color: #fac012;
     padding: 20px;
+}
+
+.furniture-img:hover{
+    cursor: pointer;
+}
+.link{
+    cursor: pointer;
 }
 .cart-btn{
     /* width: 100%; */

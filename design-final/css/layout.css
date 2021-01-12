@@ -107,6 +107,14 @@
 .navbar ul li{
     list-style-type:none;
     padding: 5px;
+    /* background-color: red; */
+}
+.navbar img{
+    margin-left: 10px;
+    visibility: hidden;
+}
+.active .arrow{
+    visibility: visible;
 }
 
 /* .content-first-spread{
