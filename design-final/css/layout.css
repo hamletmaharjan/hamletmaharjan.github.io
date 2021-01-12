@@ -256,6 +256,16 @@
     padding: 10px;
 }
 
+.post-img:hover{
+    cursor: pointer;
+    background-image: url("../images/post-img-hover.png");
+    background-size:cover;
+}
+.post-img:hover img{
+    cursor: pointer;
+    visibility: hidden;
+    
+}
 .post-content{
     width: 85%;
     float: right;

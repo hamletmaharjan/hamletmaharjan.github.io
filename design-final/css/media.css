@@ -165,6 +165,13 @@
         width: 80%;  
     }
 
+    .content-fourth-spread{
+        background-color:#f6f6f6;
+        background-image: url("../images/discounts-backg.png");
+        background-size:contain;
+        background-repeat: no-repeat;
+        background-position: right;
+    }
     .discounts-container{
         overflow: hidden;
     }
