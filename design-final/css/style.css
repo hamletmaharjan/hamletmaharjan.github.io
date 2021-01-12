@@ -291,9 +291,21 @@ p.price{
     text-align: center;
   }
 
-  .outer-btn{
-      position: absolute;
-      bottom: -7px;
-      right: -7px;
-  }
-  
+.outer-btn{
+    position: absolute;
+    bottom: -7px;
+    right: -7px;
+}
+
+.outer-right{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-image: url("../images/outer-btn.png");
+    background-size: cover;
+    top: 10px;
+    right: -10px;
+}
+.dropdown-btn:hover .outer-right{
+    background-image: url("../images/outer-down.png");
+}
