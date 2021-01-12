@@ -309,3 +309,31 @@ p.price{
 .dropdown-btn:hover .outer-right{
     background-image: url("../images/outer-down.png");
 }
+
+.slider-left{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-image: url("../images/slider-left.png");
+    background-size: cover;
+    top: 130px;
+    left: -20px;
+}
+.slider-left:hover{
+    cursor: pointer;
+    background-image: url("../images/slider-left-active.png");
+}
+.slider-right{
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-image: url("../images/slider-right.png");
+    background-size: cover;
+    top: 130px;
+    right: -20px;
+}
+.slider-right:hover{
+    cursor: pointer;
+    background-image: url("../images/slider-right-active.png");
+    
+}
