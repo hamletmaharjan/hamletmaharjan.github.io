@@ -8,13 +8,16 @@
     font-size: 14px;
 }
 h1{
-    font-size: 24px;
+    font-size: 28px;
 }
 h2{
     font-size: 24px;
 }
 h3{
-    font-size: 14px;
+    font-size: 20px;
+}
+h4{
+    font-size: 16px;
 }
 .light{
     font-weight: lighter;
@@ -39,7 +42,9 @@ h3{
     text-decoration: none;
     color: #ffffff;
 }
-
+.furniture-title{
+    padding: 10px;
+}
 .latest-furniture p{
     text-align: center;
     padding: 10px;
@@ -76,6 +81,11 @@ p.price{
 .navbar a:hover{
     color: #fac012;
 }
+
+.content-second h2{
+    padding: 10px 0px;
+    color: #ffffff;
+}
 .content-second p{
     color: #ffffff;
     padding-top: 10px;
@@ -91,6 +101,10 @@ p.price{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+.content-third h2{
+    padding: 10px;
+}
 .content-third hr{
     width: 20%;
     border: 1px solid #e7e7e7;
@@ -104,10 +118,15 @@ p.price{
     cursor: pointer;
 }
 
-.content-fourth p {
+.content-fourth h2{
+    padding: 10px 0px;
     color: #ffffff;
-    padding-top: 10px;
-    padding-bottom: 10px;
+}
+
+.paragraph {
+    color: #ffffff;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 .content-fourth hr{
     width: 10%;
@@ -128,10 +147,15 @@ p.price{
     margin: 15px 0px;
     display: inline-block;
     background-color: #ffffff;
-    padding: 10px 15px;  
+    color: #1c1105;
+    /* padding: 10px 15px;   */
 }
 .subscribe-btn:hover{
     cursor: pointer;
+}
+
+.content-fifth h2{
+    padding: 10px;
 }
 
 .content-fifth p {
@@ -197,10 +221,10 @@ p.price{
 }
 
 .send-btn{
-    margin: 15px 15px 30px 15px;
+    margin-left: 15px;
     display: inline-block;
     background-color: #1c1105;
-    padding: 10px 15px;    
+    /* padding: 10px 15px;     */
 }
 .send-btn:hover{
     cursor: pointer;
@@ -257,34 +281,19 @@ p.price{
     padding: 10px 20px;
     /* width: 100px; */
     text-align: center;
-  }
-  
-  .right-arrow {
-    position: absolute;
-    background-color: #fac012;
-    padding: 10px 10px;
-    top: 50%;
-    right: -15px;
-    /* font-weight: bold; */
+}
+.button-light {
+    position: relative;
+    background-color: #ffffff;
+    /* color: #fff; */
+    padding: 10px 20px;
+    /* width: 100px; */
+    text-align: center;
   }
 
-  .right-icon {
-    box-sizing: border-box;
-    position: relative;
-    display: block;
-    transform: scale(2);
-    width: 16px;
-    height: 6px;
+  .outer-btn{
+      position: absolute;
+      bottom: -7px;
+      right: -7px;
   }
-  .right-icon::before {
-    content: "";
-    display: block;
-    box-sizing: border-box;
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    transform: rotate(45deg);
-    border-top: 2px solid;
-    border-right: 2px solid;
-    left: 0;
-  }
+  
