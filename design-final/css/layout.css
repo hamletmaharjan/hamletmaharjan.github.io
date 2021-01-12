@@ -438,7 +438,9 @@
 .instagram-feed ul li{
     display: inline-block;
 }
-
+.instagram-feed ul li:hover{
+    cursor: pointer;
+}
 .copyright-container{
     margin-top: 20px;
 }
