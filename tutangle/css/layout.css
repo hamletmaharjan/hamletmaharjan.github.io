@@ -415,7 +415,8 @@ ul, li{
 
 
 .footer-wrapper{
-    margin-top: 32px;
+    /* margin-top: 32px; */
+    padding: 15px 0px;
     width: 100%;
     background-color: #727272;
 }
@@ -427,6 +428,6 @@ ul, li{
 }
 .footer-left{
     width: 100%;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     /* background-color: blue; */
 }

@@ -94,7 +94,9 @@ hr{
     border: 1px solid #2fc1d8;
 }
 
-
+.footer-left{
+    color: #d4d4d4;
+}
 
 .footer-container a {
     color: #d4d4d4;

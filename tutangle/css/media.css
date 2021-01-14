@@ -127,7 +127,7 @@
     .footer-left {
         float: left;
         margin-left: 3px;
-        /* width: 325px; */
+        width: 50%;
     }
     .footer-left li:after{ 
         content: ".";
@@ -284,7 +284,8 @@ li{
 .footer-left {
     float: left;
     margin-left: 3px;
-    /* width: 325px; */
+    width: 60%;
+   
 }
 .footer-left li:after{ 
     content: ".";
