@@ -98,7 +98,7 @@ p.price{
 }
 
 .content-third p {
-    padding-top: 10px;
+    /* padding-top: 10px; */
     padding-bottom: 10px;
 }
 
@@ -344,4 +344,8 @@ p.price{
     cursor: pointer;
     background-image: url("../images/slider-right-active.png");
     
+}
+.social-media .media-item:hover .social-link{
+    color: #fff;
+    cursor: pointer;
 }
