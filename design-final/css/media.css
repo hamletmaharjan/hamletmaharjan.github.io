@@ -1,6 +1,17 @@
 @media only screen and (min-width:768px){
     .cart-info{
         display: initial;
+        font-size: 28px;
+    }
+    .navigation sup{
+        display: initial;
+        vertical-align: top;
+    }
+    /* .navigation ul .burger-menu{
+        display: none;
+    } */
+    .bottom-header{
+        display: initial;
     }
     .products-item-container{
         width: 100%;
@@ -83,7 +94,7 @@
         /* background-color: gray; */
     }
     .top-header-wrapper ul li{
-        padding-left: 44px;
+        padding-left: 30px;
     }
     
     .slider{

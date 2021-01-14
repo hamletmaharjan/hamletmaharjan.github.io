@@ -240,6 +240,12 @@ p.price{
 .footer-price{
     color:#fac012;
 }
+/* .footer-item-right span{
+    text-decoration: line-through;
+} */
+.line{
+    text-decoration: line-through;
+}
 
 .read-more a{
     color: #fac012;

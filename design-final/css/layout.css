@@ -24,16 +24,33 @@
     margin-top: 34px;
     margin-bottom: 50px;
 }
+.navigation img{
+    width: 25px;
+}
 
 .top-header-wrapper ul li{
     /* background-color: red; */
     display: inline-block;
     padding-left: 15px;
 }
-.cart-info{
+.cart-info, sup{
     display: none;
 }
-.mid-header-spread{
+
+.mobile-header-spread{
+    width: 100%;
+    background-color: #1c1105;
+}
+
+.mobile-header-spread{
+    display: none;
+}
+
+/* .burger-menu:hover .mobile-header{
+    display: initial;
+} */
+
+.mid-header-spread {
     width: 100%;
     background-color: #efefef;
 }
@@ -101,10 +118,12 @@
     width: 100%;
     background-color: #1c1105;
 }
-/* .bottom-header{
-    max-width: 64em; 
-     width: 100%;
-} */
+
+.bottom-header{
+    display: none;
+}
+
+
 .navbar ul li{
     list-style-type:none;
     padding: 5px;
@@ -163,17 +182,27 @@
     width: 20%;
     overflow: hidden;
 }
+.buttons-container img{
+    visibility: hidden;
+}
 .pagi-left {
     float: left;
+    background-image: url("../images/slider-left.png");
+    background-size: contain;
 }
 .pagi-left:hover{
     cursor: pointer;
+    background-image: url("../images/slider-left-active.png");
 }
 .pagi-right{
     float: right;
-    cursor: pointer;
+    background-image: url("../images/slider-right.png");
+    background-size: contain;
 }
-
+.pagi-right:hover{
+    cursor: pointer;
+    background-image: url("../images/slider-right-active.png");
+}
 
 .latest-furniture{
     margin-top: 30px;
@@ -422,14 +451,29 @@
     margin-top: 15px;
     margin-bottom: 15px;
 }
+
 .footer-item-img{
     float: left;
     /* width: 31.83%; */
-    width: 15%;
+    width: 20%;
+    /* background-color: red; */
+    background-color: #44301a;
 }
+.footer-item-img img{
+    visibility: hidden;
+}
+.footer-item:hover {
+    cursor: pointer;
+}
+.footer-item:hover .footer-item-img{
+    background-image: url("../images/footer-item-hover.png");
+    background-size: contain;
+}
+
 .footer-item-right{
     float: left;
-    margin-left: 15px;
+    margin-left: 8px;
+    width: 70%;
 }
 
 .feed-container{
@@ -443,4 +487,15 @@
 }
 .copyright-container{
     margin-top: 20px;
+    position: relative;
 }
+
+.copyright-container .to-the-top {
+    position: absolute;
+    right: -25px;
+    top: -15px;
+}
+.to-the-top:hover{
+    cursor: pointer;
+}
+
