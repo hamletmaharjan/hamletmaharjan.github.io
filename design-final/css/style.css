@@ -249,7 +249,8 @@ p.price{
 
 .read-more a{
     color: #fac012;
-    font-size: 13px;
+    font-size: 11px;
+    vertical-align: center;
     margin-top: 20px;
 }
 .footer p{
@@ -316,6 +317,10 @@ p.price{
 }
 .dropdown-btn:hover .outer-right{
     background-image: url("../images/outer-down.png");
+}
+
+.slider-item:hover{
+    cursor: pointer;
 }
 
 .slider-left{
