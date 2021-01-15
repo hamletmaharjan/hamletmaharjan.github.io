@@ -240,9 +240,7 @@ p.price{
 .footer-price{
     color:#fac012;
 }
-/* .footer-item-right span{
-    text-decoration: line-through;
-} */
+
 .line{
     text-decoration: line-through;
 }
@@ -268,10 +266,6 @@ p.price{
     margin-bottom: 15px;  
 }
 
-/* .details-btn{
-    background-color: #1c1105;
-    padding: 5px 15px;
-} */
 
 .btn-container{
     width: 50%;
@@ -294,7 +288,6 @@ p.price{
 .button-light {
     position: relative;
     background-color: #ffffff;
-    /* color: #fff; */
     padding: 10px 20px;
     /* width: 100px; */
     text-align: center;

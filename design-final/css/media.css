@@ -10,12 +10,10 @@
     
     .products-item-container{
         width: 100%;
-        /* background-color: red; */
     }
     .content-first ul{
         width: 100%;
         text-align: center;
-        /* background-color: red; */
         overflow: hidden;
     }
     .products-item-container ul li{
@@ -37,7 +35,6 @@
     .content-third ul{
         width: 100%;
         text-align: center;
-        /* background-color: red; */
         overflow: hidden;
     }
     .post-container ul li{
@@ -86,7 +83,6 @@
     .wrapper {
         width: 59.375%;
         margin: 0 auto;
-        /* background-color: gray; */
     }
     .top-header-wrapper ul li{
         padding-left: 30px;
@@ -95,19 +91,15 @@
     .slider{
         width: 72.719%;
         margin: 0 auto;
-        /* background-color: red; */
     }
     .slider-wrapper{
         padding-top: 15px;
     }
     .slider-items{
-        /* clear: left; */
         border-top: 2px solid #23180c;
         padding-bottom: 50px;
     }
     .slider-items ul{
-        /* list-style-type:none; */
-        /* display: inline-block; */
         overflow: hidden;
     }
     .slider-item{
@@ -135,12 +127,10 @@
     
     .products-item-container{
         width: 100%;
-        /* background-color: red; */
     }
    
 
     .products-item-container ul li{
-        /* display: inline-block; */
         float: left;
         width: 30%;
         margin: 10px;
@@ -148,7 +138,6 @@
 
     .furniture-container ul li{
         display: inline-block;
-        /* float: left; */
         width: 23%;
         margin-right: 10px;
     }
