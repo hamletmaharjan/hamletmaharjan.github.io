@@ -354,3 +354,8 @@ p.price{
     color: #fff;
     cursor: pointer;
 }
+
+.height{
+    padding-bottom: 40px;
+    visibility: hidden;
+}
