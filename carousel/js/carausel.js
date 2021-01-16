@@ -14,6 +14,9 @@ function Carausel(){
     this.index = 0;
     this.imageCount = 3;
     this.imageWidth= 600;
+    this.transitionTime = 2;
+    this.speed = this.imageWidth/60;
+    this.holdtime = 5;
     // this.dots = [];
     this.init = function(){
         this.wrapper = document.getElementsByClassName('carausel-image-wrapper')[0];
@@ -45,19 +48,7 @@ function Carausel(){
             });
             
         }
-        // this.rightBtn = document.createElement('BUTTON');  
-        // this.text = document.createTextNode("next"); 
-            
-        // // appending text to button 
-        // this.rightBtn.appendChild(this.text); 
-            
-        // // appending button to div 
         
-        // this.rightBtn.innerHTML = "next";
-        // this.rightBtn.style.position = 'absolute';
-        // this.rightBtn.style.right = '5px';
-        // this.rightBtn.style.top= '100px';
-        // this.container.appendChild(this.rightBtn);
 
 
     }
@@ -65,40 +56,121 @@ function Carausel(){
     this.next = function(){
         //if(this.left<=-600){
         if(this.left <= -((this.imageCount-1)*this.imageWidth)){
+            let temp = this.left;
             this.left = 0;
             this.index = 0;
+
+            this.indicate(this.index);
+            var x = setInterval(() => {
+
+                temp += this.speed * (this.imageCount-1);
+                if(temp>=this.left){
+                    clearInterval(x);
+                }
+                this.wrapper.style.left = temp + 'px';
+            }, 16.67*this.transitionTime);
+
         }
         else{
+            let temp = this.left;
             this.left -= this.imageWidth;
             this.index++;
-            // var x = setInterval(() => {
-            //     this.left -= 5;
-            //     this.wrapper.style.left = this.left + 'px';
-            // }, 16);
+            this.indicate(this.index);
+            // this.dots[this.index].classList.add('active');
+            //interval
+            var x = setInterval(() => {
+                temp -= this.speed;
+                if(temp<=this.left){
+                    clearInterval(x);
+                }
+                this.wrapper.style.left = temp + 'px';
+            }, 16.67 * this.transitionTime);
         }
         // this.index = (this.index+1)%imageCount;
-        this.wrapper.style.left = this.left + 'px';
+        // this.wrapper.style.left = this.left + 'px';
         console.log(this.index);
     }
     this.previous = function(){
         if(this.left >= 0){
+            let temp = this.left;
             this.left = -((this.imageCount-1)*this.imageWidth);
             this.index = this.imageCount-1;
+
+
+            this.indicate(this.index);
+            var x = setInterval(() => {
+                temp -= this.speed * (this.imageCount-1);
+                if(temp<=this.left){
+                    clearInterval(x);
+                }
+                this.wrapper.style.left = temp + 'px';
+            }, 16 * this.transitionTime);
         }
         else{
+            let temp = this.left;
             this.left += this.imageWidth;
             this.index--;
+
+            this.indicate(this.index);
+
+            var x = setInterval(() => {
+                temp += this.speed;
+                if(temp>=this.left){
+                    clearInterval(x);
+                }
+                this.wrapper.style.left = temp + 'px';
+            }, 16 * this.transitionTime);
         }
         
-        this.wrapper.style.left = this.left + 'px';
+        // this.wrapper.style.left = this.left + 'px';
         console.log(this.index);
     }
 
     this.goToIndex = function(ind) {
+        // let initialIndex = this.index;
+        let temp = this.left;
         this.left = - (ind * this.imageWidth);
-        this.wrapper.style.left = this.left + 'px';
+        // console.log(this.index, ind, Math.abs(this.index-ind));
+        let multiple = Math.abs(this.index-ind);
         this.index = ind;
+
+        this.indicate(this.index);
+
+        if(temp<=this.left){
+            var x = setInterval(() => {
+                temp += this.speed * multiple;
+                if(temp>=this.left){
+                    clearInterval(x);
+                }
+                this.wrapper.style.left = temp + 'px';
+            }, 16 * this.transitionTime);
+        }
+        else{
+            var x = setInterval(() => {
+                temp -= this.speed * multiple;
+                if(temp<=this.left){
+                    clearInterval(x);
+                }
+                this.wrapper.style.left = temp + 'px';
+            }, 16 * this.transitionTime);
+        }
+
+        // var x = setInterval(() => {
+        //     temp -= this.speed * this;
+        //     if(temp<=this.left){
+        //         clearInterval(x);
+        //     }
+        //     this.wrapper.style.left = temp + 'px';
+        // }, 16 * this.transitionTime);
+        // this.wrapper.style.left = this.left + 'px';
         console.log(this.index);
+    }
+
+    this.indicate = function(ind){
+        for(let i=0; i<this.dots.length; i++){
+            this.dots[i].classList.remove("active");
+        }
+        this.dots[ind].classList.add("active");
     }
     this.obj = function(index){
         console.log(this);
@@ -109,13 +181,26 @@ function Carausel(){
 var c = new Carausel();
 c.init();
 
-var nextButton = document.getElementsByClassName('next-btn')[0];
+var imgContainer = document.getElementsByClassName('carausel-container')[0];
+var nextButton = document.createElement('a');
+nextButton.classList.add('next');
+nextButton.innerHTML = "&#10095;";
+// nextButton.style.position = "absolute";
+imgContainer.appendChild(nextButton);
+
+var prevButton = document.createElement('a');
+prevButton.classList.add('prev');
+prevButton.innerHTML = "&#10094;";
+// prevButton.style.position = "absolute";
+imgContainer.appendChild(prevButton);
+
+// var nextButton = document.getElementsByClassName('next-btn')[0];
 nextButton.addEventListener('click', function(){
     console.log('click');
     c.next();
    
 });
-var prevButton = document.getElementsByClassName('prev-btn')[0];
+// var prevButton = document.getElementsByClassName('prev-btn')[0];
 prevButton.addEventListener('click', function(){
     console.log('click');
     c.previous();
