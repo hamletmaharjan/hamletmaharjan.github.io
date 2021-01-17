@@ -1,7 +1,7 @@
 body{
   background-color: #d0db97;
 }
-.carausel-container{
+.carousel-container{
   width: 60%;
     /* width: 600px; */
     /* height: 300px; */
@@ -13,7 +13,7 @@ body{
     box-shadow: 0 0 10px 2px;
 }
 
-.carausel-image-wrapper{
+.carousel-image-wrapper{
     /* position: absolute; */
     position: relative;
     /* overflow: hidden; */

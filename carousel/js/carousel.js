@@ -1,4 +1,4 @@
-function Carausel(){
+function Carousel(){
     this.left = 0;
     this.index = 0;
     // this.imageCount = 3;
@@ -10,12 +10,12 @@ function Carausel(){
     // this.speed = 100/60;
     // this.holdTime = 5;
     this.dots = [];
-    this.init = function(carauselId,transitionTime, holdTime){
+    this.init = function(carouselId,transitionTime, holdTime){
         this.transitionTime = transitionTime || 1;
         this.holdTime = holdTime || 5;
 
-        this.container = document.getElementById(carauselId);
-        this.wrapper = this.container.querySelector('.carausel-image-wrapper');
+        this.container = document.getElementById(carouselId);
+        this.wrapper = this.container.querySelector('.carousel-image-wrapper');
         this.images = this.wrapper.querySelectorAll('img');
         this.imageCount = this.images.length;
         for(let i=0; i<this.imageCount; i++){
@@ -218,9 +218,9 @@ function Carausel(){
 
 }
 
-let c = new Carausel();
+let c = new Carousel();
 c.init('carousel-1',1,3);
 
 
-let d = new Carausel();
+let d = new Carousel();
 d.init('carousel-2',2,4);
