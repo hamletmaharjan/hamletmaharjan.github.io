@@ -181,6 +181,7 @@ function Carausel(){
 var c = new Carausel();
 c.init();
 
+
 var imgContainer = document.getElementsByClassName('carausel-container')[0];
 var nextButton = document.createElement('a');
 nextButton.classList.add('next');
