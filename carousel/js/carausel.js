@@ -1,19 +1,10 @@
-// for (var i = 0; i < 10; i++) {
-//   setTimeout((function display(i) {
-//     return function runFn() {
-//       console.log(i);
-//     }
-//   })(i), 1000);
-// }
-// var wrapper = document.getElementsByClassName('carausel-wrapper')[0];
-// // wrapper.style.left = '-500px';
-// console.log(wrapper);
 
 function Carausel(){
     this.left = 0;
     this.index = 0;
-    this.imageCount = 3;
+    // this.imageCount = 3;
     this.imageWidth= 600;
+    this.processing = false;
     // this.transitionTime = 2;
     // this.speed = this.imageWidth/60;
     this.speed = (100/60).toFixed(5);
@@ -24,13 +15,10 @@ function Carausel(){
         this.transitionTime = transitionTime || 1;
         this.holdTime = holdTime || 5;
 
-        // this.container = document.getElementsByClassName('carausel-container')[0];
-
-        // this.wrapper = document.getElementsByClassName('carausel-image-wrapper')[0];
-
         this.container = document.getElementById(carauselId);
         this.wrapper = this.container.querySelector('.carausel-image-wrapper');
         this.images = this.wrapper.querySelectorAll('img');
+        this.imageCount = this.images.length;
         for(let i=0; i<this.imageCount; i++){
             this.images[i].style.width = 100/this.imageCount + '%';
         }
@@ -72,54 +60,21 @@ function Carausel(){
         // var imgContainer = document.getElementsByClassName('carausel-container')[0];
         
         this.createButtons();
-        
+        this.slide();
         // setInterval(() => {
         //     this.next();
-        // }, 1000*this.holdTime);
+        // }, 1000*(this.holdTime + this.transitionTime));
 
     }
 
     this.next = function(){
-        if(this.index>=2){
+        if(this.index>=this.imageCount-1){
             this.goToIndex(0);
         }
         else{
             this.goToIndex(this.index+1);
         }
-        //if(this.left<=-600){
-        // if(this.left <= -((this.imageCount-1)*this.imageWidth)){
-        //     let temp = this.left;
-        //     this.left = 0;
-        //     this.index = 0;
-
-        //     this.indicate(this.index);
-        //     let x = setInterval(() => {
-
-        //         temp += this.speed * (this.imageCount-1);
-        //         if(temp>=this.left){
-        //             clearInterval(x);
-        //         }
-        //         this.wrapper.style.left = temp + 'px';
-        //     }, 16.67*this.transitionTime);
-
-        // }
-        // else{
-        //     let temp = this.left;
-        //     this.left -= this.imageWidth;
-        //     this.index++;
-        //     this.indicate(this.index);
-        //     // this.dots[this.index].classList.add('active');
-        //     //interval
-        //     let x = setInterval(() => {
-        //         temp -= this.speed;
-        //         if(temp<=this.left){
-        //             clearInterval(x);
-        //         }
-        //         this.wrapper.style.left = temp + 'px';
-        //     }, 16.67 * this.transitionTime);
-        // }
-        // this.index = (this.index+1)%imageCount;
-        // this.wrapper.style.left = this.left + 'px';
+        
         console.log(this.index);
     }
     this.previous = function(){
@@ -129,38 +84,7 @@ function Carausel(){
         else{
             this.goToIndex(this.index-1);
         }
-        // if(this.left >= 0){
-        //     let temp = this.left;
-        //     this.left = -((this.imageCount-1)*this.imageWidth);
-        //     this.index = this.imageCount-1;
-
-
-        //     this.indicate(this.index);
-        //     this.x = setInterval(() => {
-        //         temp -= this.speed * (this.imageCount-1);
-        //         if(temp<=this.left){
-        //             clearInterval(this.x);
-        //         }
-        //         this.wrapper.style.left = temp + 'px';
-        //     }, 16 * this.transitionTime);
-        // }
-        // else{
-        //     let temp = this.left;
-        //     this.left += this.imageWidth;
-        //     this.index--;
-
-        //     this.indicate(this.index);
-
-        //     let x = setInterval(() => {
-        //         temp += this.speed;
-        //         if(temp>=this.left){
-        //             clearInterval(x);
-        //         }
-        //         this.wrapper.style.left = temp + 'px';
-        //     }, 16 * this.transitionTime);
-        // }
         
-        // this.wrapper.style.left = this.left + 'px';
         console.log(this.index);
     }
 
@@ -174,21 +98,29 @@ function Carausel(){
         this.index = ind;
 
         this.indicate(this.index);
+        // console.log(this.nextButton);
+        // this.nextButton.
 
         if(temp<=this.left){
             let x = setInterval(() => {
+                
+                this.processing = true;
                 temp += this.speed * multiple;
                 if(temp>=this.left){
                     clearInterval(x);
+                    this.processing = false;
+                   
                 }
                 this.wrapper.style.left = temp + '%';
             }, 16 * this.transitionTime);
         }
         else{
             let x = setInterval(() => {
+                this.processing = true;
                 temp -= this.speed * multiple;
                 if(temp<=this.left){
                     clearInterval(x);
+                    this.processing = false;
                 }
                 this.wrapper.style.left = temp + '%';
             }, 16 * this.transitionTime);
@@ -202,6 +134,7 @@ function Carausel(){
         //     this.wrapper.style.left = temp + 'px';
         // }, 16 * this.transitionTime);
         // this.wrapper.style.left = this.left + 'px';
+        // this.slide();
         console.log(this.index);
     }
 
@@ -222,19 +155,54 @@ function Carausel(){
         this.prevButton.classList.add('prev');
         this.prevButton.innerHTML = "&#10094;";
         this.container.appendChild(this.prevButton);
+        // this.nextButton.disable= true;
 
         let dis = this;
-        this.nextButton.addEventListener('click', function(){
-            console.log('click');
-            dis.next();
+        this.nextButton.addEventListener('click', function(e){
+            // console.log('click');
+            // e.preventDefault();
+            console.log(dis.processing);
+            if(!dis.processing){
+                dis.next();
+            }
+            else{
+                console.log('processing');
+            }
         
         });
-        this.prevButton.addEventListener('click', function(){
-            console.log('click');
-            dis.previous();
+        this.prevButton.addEventListener('click', function(e){
+            // console.log('click');
+            // e.preventDefault()
+            if(!dis.processing){
+                dis.previous();
+            }
+            else{
+                console.log('processing');
+            }
+            
         });
+
+        this.container.addEventListener('mouseenter', function(){
+            console.log('eneter');
+            dis.stopSlide();
+        });
+        this.container.addEventListener('mouseleave', function(){
+            console.log('leave');
+            dis.slide();
+        });
+
         console.log(this.prevButton, this.nextButton);
 
+    }
+
+    this.slide = function(){
+        this.autoSlider = setInterval(() => {
+            this.next();
+        }, 1000*(this.holdTime + this.transitionTime));
+    }
+
+    this.stopSlide = function(){
+        clearInterval(this.autoSlider);
     }
     this.obj = function(index){
         console.log(this);
@@ -243,8 +211,8 @@ function Carausel(){
 }
 
 let c = new Carausel();
-c.init('carousel-1',1,4);
+c.init('carousel-1',1,3);
 
 
 // let d = new Carausel();
-// d.init('carousel-2',1,6);
+// d.init('carousel-2',1,4);
