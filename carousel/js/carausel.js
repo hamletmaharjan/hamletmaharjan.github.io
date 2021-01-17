@@ -1,4 +1,3 @@
-
 function Carausel(){
     this.left = 0;
     this.index = 0;
@@ -60,7 +59,16 @@ function Carausel(){
         // var imgContainer = document.getElementsByClassName('carausel-container')[0];
         
         this.createButtons();
-        this.slide();
+        this.autoSlide();
+
+        // document.addEventListener("visibilitychange", () => {
+        //     if (this.autoSlider) {
+        //         this.stopSlide();
+        //     } 
+        //     else {
+        //         this.slide();
+        //     }
+        // });
         // setInterval(() => {
         //     this.next();
         // }, 1000*(this.holdTime + this.transitionTime));
@@ -188,14 +196,14 @@ function Carausel(){
         });
         this.container.addEventListener('mouseleave', function(){
             console.log('leave');
-            dis.slide();
+            dis.autoSlide();
         });
 
         console.log(this.prevButton, this.nextButton);
 
     }
 
-    this.slide = function(){
+    this.autoSlide = function(){
         this.autoSlider = setInterval(() => {
             this.next();
         }, 1000*(this.holdTime + this.transitionTime));
@@ -214,5 +222,5 @@ let c = new Carausel();
 c.init('carousel-1',1,3);
 
 
-// let d = new Carausel();
-// d.init('carousel-2',1,4);
+let d = new Carausel();
+d.init('carousel-2',2,4);
