@@ -14,16 +14,26 @@ function Carausel(){
     this.index = 0;
     this.imageCount = 3;
     this.imageWidth= 600;
-    this.transitionTime = 2;
+    // this.transitionTime = 2;
     this.speed = this.imageWidth/60;
-    this.holdtime = 5;
-    // this.dots = [];
-    this.init = function(){
-        this.wrapper = document.getElementsByClassName('carausel-image-wrapper')[0];
+    // this.holdTime = 5;
+    this.dots = [];
+    this.init = function(carauselId,transitionTime, holdTime){
+        this.transitionTime = transitionTime || 1;
+        this.holdTime = holdTime || 5;
+
+        // this.container = document.getElementsByClassName('carausel-container')[0];
+
+        // this.wrapper = document.getElementsByClassName('carausel-image-wrapper')[0];
+
+        this.container = document.getElementById(carauselId);
+        this.wrapper = this.container.querySelector('.carausel-image-wrapper');
+        console.log(this.container, this.wrapper);
+
         this.wrapper.style.width = this.imageWidth * this.imageCount +'px';
         this.wrapper.style.left = this.left+'px';
 
-        this.container = document.getElementsByClassName('carausel-container')[0];
+        
 
         this.dotWrapper = document.createElement('div');
         this.dotWrapper.style.textAlign = "center";
@@ -36,9 +46,13 @@ function Carausel(){
         for(var i=0; i<this.imageCount; i++){
             var dot = document.createElement('span');
             dot.classList.add('dot');
+            if(i==0){
+                dot.classList.add('active');
+            }
             this.dotWrapper.appendChild(dot);
+            this.dots.push(dot);
         }
-        this.dots = document.getElementsByClassName('dot');
+        // this.dots = document.getElementsByClassName('dot');
         // console.log(this.dots);
         for(let i=0; i<this.dots.length; i++){
             var that = this;
@@ -48,8 +62,13 @@ function Carausel(){
             });
             
         }
+        // var imgContainer = document.getElementsByClassName('carausel-container')[0];
         
-
+        this.createButtons();
+        
+        // setInterval(() => {
+        //     this.next();
+        // }, 1000*this.holdTime);
 
     }
 
@@ -61,7 +80,7 @@ function Carausel(){
             this.index = 0;
 
             this.indicate(this.index);
-            var x = setInterval(() => {
+            let x = setInterval(() => {
 
                 temp += this.speed * (this.imageCount-1);
                 if(temp>=this.left){
@@ -78,7 +97,7 @@ function Carausel(){
             this.indicate(this.index);
             // this.dots[this.index].classList.add('active');
             //interval
-            var x = setInterval(() => {
+            let x = setInterval(() => {
                 temp -= this.speed;
                 if(temp<=this.left){
                     clearInterval(x);
@@ -98,10 +117,10 @@ function Carausel(){
 
 
             this.indicate(this.index);
-            var x = setInterval(() => {
+            this.x = setInterval(() => {
                 temp -= this.speed * (this.imageCount-1);
                 if(temp<=this.left){
-                    clearInterval(x);
+                    clearInterval(this.x);
                 }
                 this.wrapper.style.left = temp + 'px';
             }, 16 * this.transitionTime);
@@ -113,7 +132,7 @@ function Carausel(){
 
             this.indicate(this.index);
 
-            var x = setInterval(() => {
+            let x = setInterval(() => {
                 temp += this.speed;
                 if(temp>=this.left){
                     clearInterval(x);
@@ -137,7 +156,7 @@ function Carausel(){
         this.indicate(this.index);
 
         if(temp<=this.left){
-            var x = setInterval(() => {
+            let x = setInterval(() => {
                 temp += this.speed * multiple;
                 if(temp>=this.left){
                     clearInterval(x);
@@ -146,7 +165,7 @@ function Carausel(){
             }, 16 * this.transitionTime);
         }
         else{
-            var x = setInterval(() => {
+            let x = setInterval(() => {
                 temp -= this.speed * multiple;
                 if(temp<=this.left){
                     clearInterval(x);
@@ -155,7 +174,7 @@ function Carausel(){
             }, 16 * this.transitionTime);
         }
 
-        // var x = setInterval(() => {
+        // let x = setInterval(() => {
         //     temp -= this.speed * this;
         //     if(temp<=this.left){
         //         clearInterval(x);
@@ -172,37 +191,40 @@ function Carausel(){
         }
         this.dots[ind].classList.add("active");
     }
+
+    this.createButtons = function() {
+        this.nextButton = document.createElement('a');
+        this.nextButton.classList.add('next');
+        this.nextButton.innerHTML = "&#10095;";
+        this.container.appendChild(this.nextButton);
+
+        this.prevButton = document.createElement('a');
+        this.prevButton.classList.add('prev');
+        this.prevButton.innerHTML = "&#10094;";
+        this.container.appendChild(this.prevButton);
+
+        let dis = this;
+        this.nextButton.addEventListener('click', function(){
+            console.log('click');
+            dis.next();
+        
+        });
+        this.prevButton.addEventListener('click', function(){
+            console.log('click');
+            dis.previous();
+        });
+        console.log(this.prevButton, this.nextButton);
+
+    }
     this.obj = function(index){
         console.log(this);
     }
 
 }
 
-var c = new Carausel();
-c.init();
+let c = new Carausel();
+c.init('carousel-1',2,4);
 
 
-var imgContainer = document.getElementsByClassName('carausel-container')[0];
-var nextButton = document.createElement('a');
-nextButton.classList.add('next');
-nextButton.innerHTML = "&#10095;";
-// nextButton.style.position = "absolute";
-imgContainer.appendChild(nextButton);
-
-var prevButton = document.createElement('a');
-prevButton.classList.add('prev');
-prevButton.innerHTML = "&#10094;";
-// prevButton.style.position = "absolute";
-imgContainer.appendChild(prevButton);
-
-// var nextButton = document.getElementsByClassName('next-btn')[0];
-nextButton.addEventListener('click', function(){
-    console.log('click');
-    c.next();
-   
-});
-// var prevButton = document.getElementsByClassName('prev-btn')[0];
-prevButton.addEventListener('click', function(){
-    console.log('click');
-    c.previous();
-})
+let d = new Carausel();
+d.init('carousel-2',1,6);
