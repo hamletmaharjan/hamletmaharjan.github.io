@@ -1,13 +1,16 @@
 .carausel-container{
+  /* width: 80%; */
     width: 600px;
-    height: 300px;
+    /* height: 300px; */
     position: relative;
     overflow: hidden;
     margin: 0 auto;
 }
 
 .carausel-image-wrapper{
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
+    /* overflow: hidden; */
     /* transition-duration: 2s; */
     /* width: 900px; */
     /* left: 0px;  */
@@ -15,6 +18,7 @@
 
 img{
     float: left;
+    /* width: 33.33%; */
 }
 .dot-wrapper{
     width: 100%;
@@ -55,6 +59,9 @@ img{
   .next {
     right: 0;
     border-radius: 3px 0 0 3px;
+  }
+  .prev{
+    left: 0;
   }
   
   /* On hover, add a black background color with a little bit see-through */

@@ -16,6 +16,7 @@ function Carausel(){
     this.imageWidth= 600;
     // this.transitionTime = 2;
     this.speed = this.imageWidth/60;
+    // this.speed = 100/60;
     // this.holdTime = 5;
     this.dots = [];
     this.init = function(carauselId,transitionTime, holdTime){
@@ -28,9 +29,14 @@ function Carausel(){
 
         this.container = document.getElementById(carauselId);
         this.wrapper = this.container.querySelector('.carausel-image-wrapper');
-        console.log(this.container, this.wrapper);
+        // this.images = this.wrapper.querySelectorAll('img');
+        // for(let i=0; i<this.imageCount; i++){
+        //     this.images[i].style.width = 100/this.imageCount + '%';
+        // }
+        // console.log(this.container, this.wrapper);
 
         this.wrapper.style.width = this.imageWidth * this.imageCount +'px';
+        this.wrapper.style.width = this.imageCount * 100 + '%';
         this.wrapper.style.left = this.left+'px';
 
         
@@ -73,73 +79,85 @@ function Carausel(){
     }
 
     this.next = function(){
-        //if(this.left<=-600){
-        if(this.left <= -((this.imageCount-1)*this.imageWidth)){
-            let temp = this.left;
-            this.left = 0;
-            this.index = 0;
-
-            this.indicate(this.index);
-            let x = setInterval(() => {
-
-                temp += this.speed * (this.imageCount-1);
-                if(temp>=this.left){
-                    clearInterval(x);
-                }
-                this.wrapper.style.left = temp + 'px';
-            }, 16.67*this.transitionTime);
-
+        if(this.index>=2){
+            this.goToIndex(0);
         }
         else{
-            let temp = this.left;
-            this.left -= this.imageWidth;
-            this.index++;
-            this.indicate(this.index);
-            // this.dots[this.index].classList.add('active');
-            //interval
-            let x = setInterval(() => {
-                temp -= this.speed;
-                if(temp<=this.left){
-                    clearInterval(x);
-                }
-                this.wrapper.style.left = temp + 'px';
-            }, 16.67 * this.transitionTime);
+            this.goToIndex(this.index+1);
         }
+        //if(this.left<=-600){
+        // if(this.left <= -((this.imageCount-1)*this.imageWidth)){
+        //     let temp = this.left;
+        //     this.left = 0;
+        //     this.index = 0;
+
+        //     this.indicate(this.index);
+        //     let x = setInterval(() => {
+
+        //         temp += this.speed * (this.imageCount-1);
+        //         if(temp>=this.left){
+        //             clearInterval(x);
+        //         }
+        //         this.wrapper.style.left = temp + 'px';
+        //     }, 16.67*this.transitionTime);
+
+        // }
+        // else{
+        //     let temp = this.left;
+        //     this.left -= this.imageWidth;
+        //     this.index++;
+        //     this.indicate(this.index);
+        //     // this.dots[this.index].classList.add('active');
+        //     //interval
+        //     let x = setInterval(() => {
+        //         temp -= this.speed;
+        //         if(temp<=this.left){
+        //             clearInterval(x);
+        //         }
+        //         this.wrapper.style.left = temp + 'px';
+        //     }, 16.67 * this.transitionTime);
+        // }
         // this.index = (this.index+1)%imageCount;
         // this.wrapper.style.left = this.left + 'px';
         console.log(this.index);
     }
     this.previous = function(){
-        if(this.left >= 0){
-            let temp = this.left;
-            this.left = -((this.imageCount-1)*this.imageWidth);
-            this.index = this.imageCount-1;
-
-
-            this.indicate(this.index);
-            this.x = setInterval(() => {
-                temp -= this.speed * (this.imageCount-1);
-                if(temp<=this.left){
-                    clearInterval(this.x);
-                }
-                this.wrapper.style.left = temp + 'px';
-            }, 16 * this.transitionTime);
+        if(this.index<=0){
+            this.goToIndex(this.imageCount-1);
         }
         else{
-            let temp = this.left;
-            this.left += this.imageWidth;
-            this.index--;
-
-            this.indicate(this.index);
-
-            let x = setInterval(() => {
-                temp += this.speed;
-                if(temp>=this.left){
-                    clearInterval(x);
-                }
-                this.wrapper.style.left = temp + 'px';
-            }, 16 * this.transitionTime);
+            this.goToIndex(this.index-1);
         }
+        // if(this.left >= 0){
+        //     let temp = this.left;
+        //     this.left = -((this.imageCount-1)*this.imageWidth);
+        //     this.index = this.imageCount-1;
+
+
+        //     this.indicate(this.index);
+        //     this.x = setInterval(() => {
+        //         temp -= this.speed * (this.imageCount-1);
+        //         if(temp<=this.left){
+        //             clearInterval(this.x);
+        //         }
+        //         this.wrapper.style.left = temp + 'px';
+        //     }, 16 * this.transitionTime);
+        // }
+        // else{
+        //     let temp = this.left;
+        //     this.left += this.imageWidth;
+        //     this.index--;
+
+        //     this.indicate(this.index);
+
+        //     let x = setInterval(() => {
+        //         temp += this.speed;
+        //         if(temp>=this.left){
+        //             clearInterval(x);
+        //         }
+        //         this.wrapper.style.left = temp + 'px';
+        //     }, 16 * this.transitionTime);
+        // }
         
         // this.wrapper.style.left = this.left + 'px';
         console.log(this.index);
@@ -226,5 +244,5 @@ let c = new Carausel();
 c.init('carousel-1',2,4);
 
 
-let d = new Carausel();
-d.init('carousel-2',1,6);
+// let d = new Carausel();
+// d.init('carousel-2',1,6);
