@@ -1,11 +1,12 @@
 function Box() {
-    this.init = function(x,y,width,height) {
+    this.init = function(x,y,radius) {
         this.x = x;
         this.y = y;
         this.dirx = 1;
         this.diry = 1;
-        this.width = width || 20;
-        this.height = height || 20;
+        this.radius = radius;
+        this.width =  this.radius * 2;
+        this.height = this.radius * 2;
         this.box = document.createElement('div');
         this.box.style.width = this.width + 'px';
         this.box.style.height = this.height + 'px';
@@ -13,7 +14,7 @@ function Box() {
         this.box.style.left = this.x + 'px';
         this.box.style.top = this.y + 'px';
         this.box.style.backgroundColor = 'red';
-        // this.box.style.borderRadius = '50%';
+        this.box.style.borderRadius = this.radius +'px';
     }
     this.draw = function(gameField) {
         gameField.appendChild(this.box);
@@ -32,16 +33,10 @@ function Game() {
     this.balls = [];
     this.ballCount = 5;
     this.speed = 2;
-    this.dirx = [];
-    this.diry = [];
-    this.size = 30;
-    // this.ballPositions = [
-    //     {x:10, y:20},
-    //     {x:40, y:40},
-    //     {x:60, y:20},
-    //     {x:70, y:30},
-    //     {x:100, y:300}
-    // ];
+    this.radius = 15;
+    this.radii = [7,9,10,15,20];
+    this.size = this.radius*2;
+   
     this.ballPositions = [];
     this.init = function(){
         this.gameField = document.getElementById('root');
@@ -50,24 +45,26 @@ function Game() {
         // this.gameField.style.backgroundColor = 'red';
         console.log(this.gameField);
 
-        for(var i=0; i<this.ballCount; i++){
-            x = this.getRandomValue(this.fieldWidth-this.size,0);
-            y = this.getRandomValue(this.fieldHeight-this.size,0);
+        // for(var i=0; i<this.ballCount; i++){
+            
+        // }
+        while(this.ballPositions.length != this.ballCount){
+            let x = this.getRandomValue(this.fieldWidth-this.size,0);
+            let y = this.getRandomValue(this.fieldHeight-this.size,0);
+            
             this.ballPositions.push({'x':x, 'y':y});
-            this.dirx.push(1);
-            this.diry.push(1);
+               
+            
         }
         console.log(this.ballPositions, this.dirx);
 
         for (var i=0; i<this.ballCount; i++){
             var ball = new Box();
-            ball.init(this.ballPositions[i].x, this.ballPositions[i].y, 30, 30);
+            ball.init(this.ballPositions[i].x, this.ballPositions[i].y, this.radii[i]*2, this.radii[i]*2);
             ball.draw(this.gameField);
             this.balls.push(ball);
         }
-        // this.ball = new Box();
-        // this.ball.init(10, this.size);
-        // this.ball.draw(this.gameField);
+        
         this.update();
 
     }
@@ -89,10 +86,10 @@ function Game() {
     }
 
     this.detectBorderCollision = function(ind) {
-        if(this.balls[ind].x >= this.fieldWidth-this.size || this.balls[ind].x <=0){
+        if(this.balls[ind].x >= this.fieldWidth-this.balls[ind].width || this.balls[ind].x <=0){
             this.balls[ind].dirx *= -1;
         }
-        if(this.balls[ind].y >= this.fieldHeight-this.size || this.balls[ind].y <=0){
+        if(this.balls[ind].y >= this.fieldHeight-this.balls[ind].height || this.balls[ind].y <=0){
             this.balls[ind].diry *= -1;
         }
         
@@ -108,30 +105,24 @@ function Game() {
             //     rect1.x + rect1.width > rect2.x &&
             //     rect1.y < rect2.y + rect2.height &&
             //     rect1.y + rect1.height > rect2.y) {
-            if(b.x <= this.balls[i].x+ this.size &&
-                b.x + this.size >= this.balls[i].x &&
-                b.y <= this.balls[i].y + this.size &&
-                b.y + this.size >= this.balls[i].y
-            ){
-                if(Math.abs(b.x - this.balls[i].x) > Math.abs(b.y - this.balls[i].y)){
-                    this.balls[i].dirx *= -1;
+            if (b.x <= this.balls[i].x+ this.balls[i].width &&
+                b.x + b.width >= this.balls[i].x &&
+                b.y <= this.balls[i].y + this.balls[i].height &&
+                b.y + b.height >= this.balls[i].y) {
+
+                if (Math.abs(b.x - this.balls[i].x) > Math.abs(b.y - this.balls[i].y)){
+                    this.balls[ind].dirx *= -1;
                     
                 }
-                else{
-                    this.balls[i].diry *= -1;
+                else {
+                    this.balls[ind].diry *= -1;
                     // that.boxCollided = true;
                 }
 
 
-                // console.log('collisi');
-                // this.balls[i].dirx *= -1;
-                // this.balls[i].diry *= -1;
+                
             }
-            // if(this.balls[i].x > b.x  && this.balls[i].x < b.x+this.size && this.balls[i].y > b.y && this.balls[i].y < b.y+20){
-            //     console.log('collison');
-            //     this.dirx[ind] *= -1;
-            //     this.diry[ind] *= -1;
-            // }
+            
         }
     }
 
