@@ -30,11 +30,11 @@ function Game() {
     this.fieldWidth = 600;
     this.fieldHeight = 500;
     this.balls = [];
-    this.ballCount = 3;
+    this.ballCount = 5;
     this.speed = 2;
     this.dirx = [];
     this.diry = [];
-    this.size = 80;
+    this.size = 30;
     // this.ballPositions = [
     //     {x:10, y:20},
     //     {x:40, y:40},
@@ -61,7 +61,7 @@ function Game() {
 
         for (var i=0; i<this.ballCount; i++){
             var ball = new Box();
-            ball.init(this.ballPositions[i].x, this.ballPositions[i].y, 80, 80);
+            ball.init(this.ballPositions[i].x, this.ballPositions[i].y, 30, 30);
             ball.draw(this.gameField);
             this.balls.push(ball);
         }
@@ -75,11 +75,12 @@ function Game() {
     this.update = function() {
         let x = setInterval(() => {
             for(let i=0; i<this.balls.length; i++){
-                this.balls[i].x += this.speed * this.dirx[i];
-                this.balls[i].y += this.speed * this.diry[i];
-                this.balls[i].move();
+                
                 this.detectBorderCollision(i);
                 this.detectBallCollision(this.balls[i], i);
+                this.balls[i].x += this.speed * this.balls[i].dirx;
+                this.balls[i].y += this.speed * this.balls[i].diry;
+                this.balls[i].move();
                 // console.log('s');
             }
 
@@ -89,10 +90,10 @@ function Game() {
 
     this.detectBorderCollision = function(ind) {
         if(this.balls[ind].x >= this.fieldWidth-this.size || this.balls[ind].x <=0){
-            this.dirx[ind] *= -1;
+            this.balls[ind].dirx *= -1;
         }
         if(this.balls[ind].y >= this.fieldHeight-this.size || this.balls[ind].y <=0){
-            this.diry[ind] *= -1;
+            this.balls[ind].diry *= -1;
         }
         
     }
@@ -107,14 +108,24 @@ function Game() {
             //     rect1.x + rect1.width > rect2.x &&
             //     rect1.y < rect2.y + rect2.height &&
             //     rect1.y + rect1.height > rect2.y) {
-            if(b.x < this.balls[i].x+ this.size &&
-                b.x + this.size > this.balls[i].x &&
-                b.y < this.balls[i].y + this.size &&
-                b.y + this.size >this.balls[i].y
+            if(b.x <= this.balls[i].x+ this.size &&
+                b.x + this.size >= this.balls[i].x &&
+                b.y <= this.balls[i].y + this.size &&
+                b.y + this.size >= this.balls[i].y
             ){
-                console.log('collisi');
-                this.dirx[ind] *= -1;
-                this.diry[ind] *= -1;
+                if(Math.abs(b.x - this.balls[i].x) > Math.abs(b.y - this.balls[i].y)){
+                    this.balls[i].dirx *= -1;
+                    
+                }
+                else{
+                    this.balls[i].diry *= -1;
+                    // that.boxCollided = true;
+                }
+
+
+                // console.log('collisi');
+                // this.balls[i].dirx *= -1;
+                // this.balls[i].diry *= -1;
             }
             // if(this.balls[i].x > b.x  && this.balls[i].x < b.x+this.size && this.balls[i].y > b.y && this.balls[i].y < b.y+20){
             //     console.log('collison');
