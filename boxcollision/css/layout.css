@@ -1,0 +1,8 @@
+.field{
+    background-color: rgb(192, 184, 184);
+    border: 2px solid black;
+    margin: 0 auto;
+    margin-top: 10px;
+    position: relative;
+    /* border-radius: 50%; */
+}
