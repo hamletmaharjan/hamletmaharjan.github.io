@@ -33,13 +33,13 @@ function Game() {
     this.balls = [];
     this.ballCount = 5;
     this.speed = 2;
-    this.radius = 15;
+    this.radius = 20;
     this.radii = [7,9,10,15,20];
     this.size = this.radius*2;
    
     this.ballPositions = [];
     this.init = function(){
-        this.gameField = document.getElementById('root');
+        this.gameField = document.getElementById('container-1');
         this.gameField.style.width = this.fieldWidth + 'px';
         this.gameField.style.height = this.fieldHeight + 'px';
         // this.gameField.style.backgroundColor = 'red';
@@ -48,19 +48,51 @@ function Game() {
         // for(var i=0; i<this.ballCount; i++){
             
         // }
+        this.ballPositions.push({'x':10, 'y':15});
+        // let i=0;
         while(this.ballPositions.length != this.ballCount){
+            let counter = 0;
             let x = this.getRandomValue(this.fieldWidth-this.size,0);
             let y = this.getRandomValue(this.fieldHeight-this.size,0);
+            // this.ballPositions.push({'x':x, 'y':y});
+             // if (rect1.x < rect2.x + rect2.width &&
+            //     rect1.x + rect1.width > rect2.x &&
+            //     rect1.y < rect2.y + rect2.height &&
+            //     rect1.y + rect1.height > rect2.y) {
+            for(var i=0; i<this.ballPositions.length; i++){
+                if (x <= this.ballPositions[i].x+ this.radius*2 &&
+                    x + this.radius*2 >= this.ballPositions[i].x &&
+                    y <= this.ballPositions[i].y + this.radius*2 &&
+                    y + this.radius*2 >= this.ballPositions[i].y) {
+                        counter++;
+                    
+                }
+            }
+            if(counter ==0){
+                this.ballPositions.push({'x':x, 'y':y});
+            }
+            counter = 0;
+            console.log('ccc');
+            // if (x <= this.ballPositions[i].x+ this.radius*2 &&
+            //     x + this.radius*2 >= this.ballPositions[i].x &&
+            //     y <= this.ballPositions[i].y + this.radius*2 &&
+            //     y + this.radius*2 >= this.ballPositions[i].y) {
+            //         continue;
+            //     }
+            // else{
+            //     this.ballPositions.push({'x':x, 'y':y});
+            //     i++;
+            // }
             
-            this.ballPositions.push({'x':x, 'y':y});
+            
                
             
         }
-        console.log(this.ballPositions, this.dirx);
+        // console.log(this.ballPositions, this.dirx);
 
         for (var i=0; i<this.ballCount; i++){
             var ball = new Box();
-            ball.init(this.ballPositions[i].x, this.ballPositions[i].y, this.radii[i]*2, this.radii[i]*2);
+            ball.init(this.ballPositions[i].x, this.ballPositions[i].y, this.radius, this.radius);
             ball.draw(this.gameField);
             this.balls.push(ball);
         }
@@ -68,6 +100,8 @@ function Game() {
         this.update();
 
     }
+
+    
 
     this.update = function() {
         let x = setInterval(() => {
