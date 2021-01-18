@@ -79,7 +79,7 @@ function Game() {
                 this.balls[i].y += this.speed * this.diry[i];
                 this.balls[i].move();
                 this.detectBorderCollision(i);
-                // this.detectBallCollision(this.balls[i], i);
+                this.detectBallCollision(this.balls[i], i);
                 // console.log('s');
             }
 
@@ -113,8 +113,8 @@ function Game() {
                 b.y + this.size >this.balls[i].y
             ){
                 console.log('collisi');
-                // this.dirx[ind] *= -1;
-                // this.diry[ind] *= -1;
+                this.dirx[ind] *= -1;
+                this.diry[ind] *= -1;
             }
             // if(this.balls[i].x > b.x  && this.balls[i].x < b.x+this.size && this.balls[i].y > b.y && this.balls[i].y < b.y+20){
             //     console.log('collison');
