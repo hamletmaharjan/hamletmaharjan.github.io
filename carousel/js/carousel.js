@@ -102,7 +102,7 @@ function Carousel(){
                    
                 }
                 this.wrapper.style.left = temp + '%';
-            }, 16 * this.transitionTime);
+            }, 16.67 * this.transitionTime);
         }
         else{
             let x = setInterval(() => {
@@ -113,7 +113,7 @@ function Carousel(){
                     this.processing = false;
                 }
                 this.wrapper.style.left = temp + '%';
-            }, 16 * this.transitionTime);
+            }, 16.67 * this.transitionTime);
         }
     }
 
@@ -185,4 +185,4 @@ let c = new Carousel();
 c.init('carousel-1',1,3);
 
 let d = new Carousel();
-d.init('carousel-2',2,4);
+d.init('carousel-2',2,2);
