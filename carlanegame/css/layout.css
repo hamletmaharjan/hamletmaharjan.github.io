@@ -1,6 +1,6 @@
 .field{
     margin: 0 auto;
-    background-image: url('../images/lane.png');
+    /* background-image: url('../images/lane.png'); */
     background-size: contain;
     background-repeat: repeat-y;
     border: 2px solid black;
