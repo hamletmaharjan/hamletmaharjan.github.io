@@ -6,17 +6,19 @@ function Game() {
     this.balls = [];
     // this.ballCount = 5;
     this.speed = 2;
-    this.radius = 20;
+    // this.radius = 20;
     this.radii = [7,9,10,15,20];
-    this.size = this.radius*2;
+    
     this.colors = ['red','green','blue','orange','black'];
     this.ballPositions = [];
     
-    this.init = function(isAntGame, width, height, containerId, ballCount){
+    this.init = function(isAntGame, width, height, containerId, ballCount, radius){
         this.isAntGame = isAntGame;
         this.fieldWidth = width || 700;
         this.fieldHeight = height || 400;
         this.ballCount = ballCount || 5;
+        this.radius = radius || 20;
+        this.size = this.radius*2;
         // this.radius = this.getRandomValue(35,10);
         this.gameField = document.getElementById(containerId);
         this.gameField.style.width = this.fieldWidth + 'px';
@@ -148,14 +150,10 @@ function Game() {
     }
 }
 // console.log(Math.random());
+
+//isAntGame, width, height, containerId, ballCount
 var game = new Game();
-game.init(false, 700,400, 'container-1',15);
+game.init(false, 800,400, 'container-1',15,20);
 
-
-
-
-
-
-// console.log(Math.random());
 var g = new Game();
-g.init(true, 600,300, 'container-2');
+g.init(true, 600,200, 'container-2');
