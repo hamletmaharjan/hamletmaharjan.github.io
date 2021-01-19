@@ -1,12 +1,8 @@
 
 function Game() {
-
-    this.fieldWidth = 700;
-    this.fieldHeight = 400;
     this.balls = [];
-    // this.ballCount = 5;
     this.speed = 2;
-    // this.radius = 20;
+    
     this.radii = [7,9,10,15,20];
     
     this.colors = ['red','green','blue','orange','black'];
@@ -19,20 +15,15 @@ function Game() {
         this.ballCount = ballCount || 5;
         this.radius = radius || 20;
         this.size = this.radius*2;
-        // this.radius = this.getRandomValue(35,10);
+        
         this.gameField = document.getElementById(containerId);
         this.gameField.style.width = this.fieldWidth + 'px';
         this.gameField.style.height = this.fieldHeight + 'px';
-        // this.gameField.style.backgroundColor = 'red';
-        console.log(this.gameField);
-
-        // for(var i=0; i<this.ballCount; i++){
-            
-        // }
+        
         let initialx = this.getRandomValue(this.fieldWidth-this.size,0);
         let initialy = this.getRandomValue(this.fieldHeight-this.size,0);
         this.ballPositions.push({'x':initialx, 'y':initialy});
-        // let i=0;
+        
         while(this.ballPositions.length != this.ballCount){
             let counter = 0;
             let x = this.getRandomValue(this.fieldWidth-this.size,0);
@@ -51,36 +42,27 @@ function Game() {
                 this.ballPositions.push({'x':x, 'y':y});
             }
             counter = 0;
-            console.log('ccc');
-            
-            
+              
         }
-        // console.log(this.ballPositions, this.dirx);
-        if(this.isAntGame){
-            console.log('yes');
-            for (let i=0; i<this.ballCount; i++){
+    
+        if(this.isAntGame) {
+            for (let i=0; i<this.ballCount; i++) {
                 let ball = new Ant();
                 ball.init(this.ballPositions[i].x, this.ballPositions[i].y, this.radius);
                 ball.draw(this.gameField);
-                
                 this.balls.push(ball);
             }
 
         }
-        else{
-            console.log('no');
-            for (let i=0; i<this.ballCount; i++){
+        else {
+            for (let i=0; i<this.ballCount; i++) {
                 let ball = new Box();
                 ball.init(this.ballPositions[i].x, this.ballPositions[i].y, this.radius, this.colors[this.getRandomValue(5,0)],
                 this.getRandomValue(2,0.5));
                 ball.draw(this.gameField);
                 this.balls.push(ball);
             }
-
         }
-
-        
-        
         this.update();
 
     }
@@ -89,17 +71,13 @@ function Game() {
 
     this.update = function() {
         let x = setInterval(() => {
-            for(let i=0; i<this.balls.length; i++){
-                
+            for(let i=0; i<this.balls.length; i++){   
                 this.detectBorderCollision(i);
                 this.detectBallCollision(this.balls[i], i);
                 this.balls[i].x += this.balls[i].speed * this.balls[i].dirx;
                 this.balls[i].y += this.balls[i].speed * this.balls[i].diry;
                 this.balls[i].move();
-                // console.log('s');
             }
-
-            
         }, 16.67);
     }
 
@@ -109,20 +87,15 @@ function Game() {
         }
         if(this.balls[ind].y >= this.fieldHeight-this.balls[ind].height || this.balls[ind].y <=0){
             this.balls[ind].diry *= -1;
-        }
-        
+        }      
     }
 
     this.detectBallCollision = function(b,ind){
-        // console.log(b);
         for (var i=0; i<this.balls.length; i++){
             if(i==ind){
                 continue;
             }
-            // if (rect1.x < rect2.x + rect2.width &&
-            //     rect1.x + rect1.width > rect2.x &&
-            //     rect1.y < rect2.y + rect2.height &&
-            //     rect1.y + rect1.height > rect2.y) {
+            
             if (b.x <= this.balls[i].x+ this.balls[i].width &&
                 b.x + b.width >= this.balls[i].x &&
                 b.y <= this.balls[i].y + this.balls[i].height &&
@@ -134,11 +107,8 @@ function Game() {
                 }
                 else {
                     this.balls[ind].diry *= -1;
-                    // that.boxCollided = true;
+                   
                 }
-
-
-                
             }
             
         }
@@ -149,5 +119,3 @@ function Game() {
         return Math.round(val);
     }
 }
-// console.log(Math.random());
-
