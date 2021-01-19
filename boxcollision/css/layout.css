@@ -16,3 +16,8 @@ body{
 .ant:hover{
     cursor: pointer;
 }
+
+.stress{
+    float: right;
+    margin-right: 20px;
+}

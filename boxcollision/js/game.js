@@ -151,9 +151,3 @@ function Game() {
 }
 // console.log(Math.random());
 
-//isAntGame, width, height, containerId, ballCount
-var game = new Game();
-game.init(false, 800,400, 'container-1',15,20);
-
-var g = new Game();
-g.init(true, 600,200, 'container-2');
