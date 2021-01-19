@@ -22,6 +22,7 @@ function Player() {
         this.car.style.backgroundRepeat = 'no-repeat';
         // if(this.isPlayer){
         this.car.style.left = this.positions[this.index] + 'px';
+        this.x = this.positions[this.index];
         // }
         // else{
         //     this.car.style.left = this.positions[ind] + 'px';
@@ -108,12 +109,14 @@ function Game() {
     this.width = 300;
     this.height = 600;
     var dis = this;
+    this.backgroundy = 0;
     this.init = function(fieldId) {
         this.field = document.getElementById(fieldId);
         this.field.style.width = this.width + 'px';
         this.field.style.height = this.height + 'px';
         this.field.style.backgroundColor = 'red';
         this.field.style.backgroundImage = 'url("./images/lane.png")';
+        this.field.style.backgroundPositionY = this.backgroundy + 'px';
         // this.field.style.backgroundImage ='url("./images/lane.png") 0 / '+ this.width+'px ' + this.height+ 'px';
         this.player = new Player();
         this.player.init();
@@ -175,12 +178,12 @@ function Game() {
         });
     }
     this.update = function() {
-
+        this.speed = 1;
         this.gameLoop = setInterval(() => {
-           
-            // dis.field.style.backgroundPosition = '0px + 2px';
+            dis.backgroundy += 2 + this.speed;
+            dis.field.style.backgroundPositionY=  dis.backgroundy+ 'px';
             for(var i=0; i<this.enemies.length; i++) {
-                this.enemies[i].y += 5;
+                this.enemies[i].y += 1+ this.speed;
                 this.enemies[i].update();
                 
                 this.detectBallCollision(this.enemies[i]);
@@ -189,8 +192,10 @@ function Game() {
             // setTimeout(() => {
             //     this.createEnemy();
             // }, 5000);
+            this.speed+= 0.001;
+            // console.log(this.speed.toFixed(3));
             
-        }, 50);
+        }, 16);
         
     }
 
@@ -214,17 +219,18 @@ function Game() {
     }
 
     this.detectBorderCollision = function(enemy) {
-        if(enemy.y == this.height-enemy.height){
-            this.score++;
-            console.log(this.score);
-            this.scoreText.innerHTML = this.scoreBody + this.score;
+        // if(enemy.y == this.height-enemy.height){
             
-        }      
+            
+        // }      
         if(enemy.y >= this.height){
             console.log('border');
             
             this.enemies.shift();
             enemy.destroy();
+            this.score++;
+            console.log(this.score);
+            this.scoreText.innerHTML = this.scoreBody + this.score;
             this.createEnemy();
         }
     }
