@@ -6,3 +6,7 @@
     border: 2px solid black;
     position: relative;
 }
+
+#root{
+    overflow: hidden;
+}
