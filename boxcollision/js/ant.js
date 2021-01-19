@@ -6,7 +6,7 @@ function Ant() {
         this.dirx = 1;
         this.diry = 1;
         this.radius = radius;
-        this.speed = 2;
+        this.speed = 1;
         this.width =  this.radius * 2;
         this.height = this.radius * 2;
         this.box = document.createElement('div');

@@ -72,7 +72,7 @@ function Game() {
             for (let i=0; i<this.ballCount; i++){
                 let ball = new Box();
                 ball.init(this.ballPositions[i].x, this.ballPositions[i].y, this.radius, this.colors[this.getRandomValue(5,0)],
-                this.getRandomValue(4,1));
+                this.getRandomValue(2,0.5));
                 ball.draw(this.gameField);
                 this.balls.push(ball);
             }
@@ -100,7 +100,7 @@ function Game() {
             }
 
             
-        }, 50);
+        }, 16.67);
     }
 
     this.detectBorderCollision = function(ind) {

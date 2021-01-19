@@ -4,7 +4,7 @@ function Box() {
         this.y = y;
         this.dirx = 1;
         this.diry = 1;
-        this.speed =  speed || 2;
+        this.speed =  speed || 0.5;
         this.radius = radius;
         this.color = color || 'red';
         this.width =  this.radius * 2;
