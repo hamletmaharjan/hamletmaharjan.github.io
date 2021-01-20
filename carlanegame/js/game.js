@@ -124,7 +124,7 @@ function Game() {
         this.addListeners();
 
         // this.createEnemy();
-        let temp = [-50,-150,-400];
+        let temp = [-50,-200,-400];
 
         for(var i =0; i<3; i++){
             let enemy = new Enemy();
@@ -145,7 +145,7 @@ function Game() {
     this.createEnemy = function() {
         
         let enemy = new Enemy();
-        enemy.init(this.getRandomValue(2,0), -55);
+        enemy.init(this.getRandomValue(2,0), -110);
         enemy.draw(this.field);
         this.enemies.push(enemy);        
     }
