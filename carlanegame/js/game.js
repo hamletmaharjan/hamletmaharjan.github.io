@@ -123,7 +123,10 @@ function Game() {
     var dis = this;
     this.backgroundy = 0;
     this.restart = false;
+    
     this.init = function(fieldId) {
+        this.highScore = localStorage.getItem("xscore") || 0;
+        console.log(this.highScore);
         this.field = document.getElementById(fieldId);
         this.field.style.width = this.width + 'px';
         this.field.style.height = this.height + 'px';
@@ -175,7 +178,17 @@ function Game() {
         this.scoreText.style.right = '5px';
         this.scoreText.style.color = 'white';
         this.scoreText.style.textShadow = "2px 2px 5px black";
+
+        this.highScoreText = document.createElement('p');
+        this.highscoreBody = "High Score: "+ this.highScore;
+        this.highScoreText.innerHTML = this.highscoreBody;
+        this.highScoreText.style.position = 'absolute';
+        this.highScoreText.style.top = '20px';
+        this.highScoreText.style.right = '5px';
+        this.highScoreText.style.color = 'white';
+        this.highScoreText.style.textShadow = "2px 2px 5px black";
         this.field.appendChild(this.scoreText);
+        this.field.appendChild(this.highScoreText);
     }
 
     this.addListeners = function() {
@@ -232,6 +245,9 @@ function Game() {
 
             console.log('collision');
             clearInterval(dis.gameLoop);
+            if(this.score > this.highScore){
+                localStorage.setItem('xscore', this.score);
+            }
             this.createGameOverScreen();
             this.showGameOverScreen();
         }
@@ -291,6 +307,7 @@ function Game() {
         this.screen.style.backgroundImage = 'url("./images/cover-cut.jpg")';
         // this.screen.style.padding = '20px';
         this.screen.innerHTML = 'game over';
+
        
 
         var playAgainBtn = document.createElement('Button');
