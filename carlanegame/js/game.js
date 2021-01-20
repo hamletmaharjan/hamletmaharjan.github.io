@@ -1,3 +1,5 @@
+
+
 function Player() {
     
     this.width = 50;
@@ -21,8 +23,9 @@ function Player() {
         this.car.style.backgroundSize = 'contain';
         this.car.style.backgroundRepeat = 'no-repeat';
         // if(this.isPlayer){
-        this.car.style.left = this.positions[this.index] + 'px';
-        this.x = this.positions[this.index];
+        this.car.style.left = this.positions[1] + 'px';
+        this.x = this.positions[1];
+        this.index = 1;
         // }
         // else{
         //     this.car.style.left = this.positions[ind] + 'px';
@@ -70,6 +73,7 @@ function Enemy() {
     this.lanes = 3;
     this.y = 0;
     this.positions = [25, 125, 225];
+    this.backgroundImages = ['car-yellow', 'car-green', 'car-blue'];
 
     this.init = function(ind, y) {
         this.y = y || 0
@@ -77,7 +81,10 @@ function Enemy() {
         this.car.style.position = 'absolute';
         this.car.style.width = this.width + 'px';
         this.car.style.height = this.height + 'px';
-        this.car.style.backgroundImage = 'url("./images/car-yellow.png")';
+        let value = this.backgroundImages[this.getRandomValue(2,0)];
+        console.log(value);
+        // let img = backgroundImages[getRandomValue(2,0)];
+        this.car.style.backgroundImage = `url("./images/${value}.png")`;
         this.car.style.backgroundSize = 'contain';
         this.car.style.backgroundRepeat = 'no-repeat'; 
         this.car.style.left = this.positions[ind] + 'px';
@@ -98,6 +105,11 @@ function Enemy() {
         this.car.parentElement.removeChild(this.car);
     }
 
+    this.getRandomValue = function(max,min){
+        let val = Math.random() * (max - min) + min;
+        return Math.round(val);
+    }
+
 }
 
 
@@ -110,6 +122,7 @@ function Game() {
     this.height = 600;
     var dis = this;
     this.backgroundy = 0;
+    this.restart = false;
     this.init = function(fieldId) {
         this.field = document.getElementById(fieldId);
         this.field.style.width = this.width + 'px';
@@ -121,10 +134,13 @@ function Game() {
         this.player = new Player();
         this.player.init();
         this.player.draw(this.field);
-        this.addListeners();
+        if(!this.restart) {
+            this.addListeners();
+        }
+        
 
         // this.createEnemy();
-        let temp = [-50,-200,-400];
+        let temp = [-50,-300,-600];
 
         for(var i =0; i<3; i++){
             let enemy = new Enemy();
@@ -272,14 +288,14 @@ function Game() {
         this.screen.style.position = 'absolute';
         this.screen.style.lineHeight = this.height + 'px';
         this.screen.style.zIndex = '1';
-        this.screen.style.backgroundImage = 'url("./images/coverr.jpg")';
+        this.screen.style.backgroundImage = 'url("./images/cover-cut.jpg")';
         // this.screen.style.padding = '20px';
         this.screen.innerHTML = 'game over';
        
 
         var playAgainBtn = document.createElement('Button');
         playAgainBtn.innerHTML = "Play Again?";
-        // playAgainBtn.style.background ="white";
+        // playAgainBtn.style.background ="black";
         playAgainBtn.style.border = "none";
         playAgainBtn.style.cursor="pointer";
         
@@ -306,10 +322,11 @@ function Game() {
         while(this.enemies.length!=0){
             this.enemies.pop();
         }
-        this.player = null;
+        dis.player = null;
         this.field.innerHTML = '';
         this.field = null;
         this.score = 0;
+        this.restart = true;
         
         console.log(this.field);
         this.init('field-1');
