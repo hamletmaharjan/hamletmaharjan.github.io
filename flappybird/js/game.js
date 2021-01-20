@@ -122,6 +122,8 @@ function Obsticle() {
         // this.bottom = Math.random() * 112;
         this.pipe.style.left = this.left + 'px';
         this.pipe.style.top = this.y + 'px';
+        this.pipe.style.zIndex = "-1";
+        
         // this.pipe.style.backgroundColor = 'red';
         if(this.top){
             this.pipe.style.backgroundImage = 'url("./images/pipe-green-top.png")';
@@ -185,6 +187,7 @@ function Game() {
         this.field.style.backgroundRepeat = 'repeat-x';
         this.field.style.backgroundPosition = 'bottom';
         this.field.style.backgroundPositionX = this.bp + 'px';
+        this.field.style.zIndex = "0";
 
         // this.field.style.backgroundColor = 'green';
 
@@ -197,6 +200,7 @@ function Game() {
 
         this.addListeners();
         this.player.animate();
+        this.createScore();
 
         this.createStartScreen();
         // this.createGameOverScreen();
@@ -205,6 +209,14 @@ function Game() {
         
     }
 
+    this.createScore = function() {
+        this.scoreText = document.createElement('p');
+        this.scoreText.style.position = 'absolute';
+        this.scoreText.classList.add('score-text');
+        this.scoreText.innerHTML = this.score;
+
+        this.field.appendChild(this.scoreText);
+    }
 
     this.createStartScreen = function() {
         let dis = this;
@@ -213,7 +225,7 @@ function Game() {
         this.startScreen.style.width = '184px';
         this.startScreen.style.height = '267px';
         this.startScreen.classList.add('start-screen');
-        this.startScreen.style.left = '50px';
+        this.startScreen.style.left = '60px';
         this.field.appendChild(this.startScreen);
 
         this.startScreen.addEventListener('click', function() {
@@ -230,7 +242,7 @@ function Game() {
         this.overScreen.style.height = '267px';
         // this.overScreen.style.backgroundColor = 'red';
         this.overScreen.style.position = 'absolute';
-        this.overScreen.style.left = '50px';
+        this.overScreen.style.left = '60px';
         // this.overScreen.style.top = '100px';
         this.overScreen.classList.add('over-screen');
 
@@ -283,6 +295,8 @@ function Game() {
     }
 
     this.createNewObsitcle = function() {
+        this.score += 1;
+        this.scoreText.innerHTML = this.score;
         
         let obsitcle = new Obsticle();
         let temp = this.getRandomValue(350,150);
@@ -311,7 +325,7 @@ function Game() {
         this.gameLoop = setInterval(() => {
             this.player.y += 3;
             this.player.update();
-            this.bp -= 2;
+            this.bp -= 3;
             this.field.style.backgroundPositionX = this.bp + 'px';
 
             for (let i=0; i<this.obsitcles.length; i++){
@@ -333,7 +347,7 @@ function Game() {
     this.detectOutOfFrame = function(pipe) {
         if(pipe.x <= 0-pipe.width){
             pipe.destory();
-            this.score += 10
+            
             if(pipe.top){
                 if (this.obsitcles.length < 4)
                     this.createNewObsitcle();
@@ -363,12 +377,13 @@ function Game() {
             console.log('collision');
             clearInterval(this.gameLoop);
             this.player.stopAnimation();
+
+            if(this.score > this.highScore){
+                localStorage.setItem('flappyhigh', this.score);
+                this.highScore = this.score;
+            }
             this.createGameOverScreen();
-            // if(this.score > this.highScore){
-            //     localStorage.setItem('xscore', this.score);
-            // }
-            // this.createGameOverScreen();
-            // this.showGameOverScreen();
+            
         }
         
     }

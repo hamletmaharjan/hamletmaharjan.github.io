@@ -6,7 +6,8 @@
 .game-field{
     /* margin: 0 auto; */
     position: relative;
-    /* overflow: hidden; */
+    z-index: 0;
+    overflow: hidden;
 }
 
 .background{
@@ -65,4 +66,15 @@
 
 .play-button:hover {
     cursor: pointer;
+}
+
+.score-text {
+    text-align: center;
+    font-size:36px;
+    font-weight: bold;
+    color: white;
+    left: 47%;
+    top: 20px;
+    text-shadow: 2px 2px black;
+    z-index: 1;
 }
