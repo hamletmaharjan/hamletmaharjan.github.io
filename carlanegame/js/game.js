@@ -134,6 +134,8 @@ function Game() {
 
         }
         this.createScore();
+
+        
         this.createStartScreen();
         // this.update();
         
@@ -155,7 +157,8 @@ function Game() {
         this.scoreText.style.position = 'absolute';
         this.scoreText.style.top = '5px';
         this.scoreText.style.right = '5px';
-        this.scoreText.style.color = 'green';
+        this.scoreText.style.color = 'white';
+        this.scoreText.style.textShadow = "2px 2px 5px black";
         this.field.appendChild(this.scoreText);
     }
 
@@ -246,6 +249,8 @@ function Game() {
         this.startScreen.style.position = 'absolute';
         this.startScreen.style.lineHeight = this.height + 'px';
         this.startScreen.style.zIndex = '1';
+        this.startScreen.style.backgroundImage = 'url("./images/cool-cover.jpg")';
+        // this.startScreen.style.backgroundSize = "contain";
         // this.startScreen.style.padding = '20px';
         this.startScreen.innerHTML = 'Click Anywhere to Start';
        
@@ -263,22 +268,25 @@ function Game() {
         this.screen.style.display = 'none';
         this.screen.style.textAlign = 'center';
         this.screen.style.verticalAlign = 'center';
-        this.screen.style.backgroundColor = 'blue';
+        // this.screen.style.backgroundColor = '#69b578';
         this.screen.style.position = 'absolute';
         this.screen.style.lineHeight = this.height + 'px';
         this.screen.style.zIndex = '1';
+        this.screen.style.backgroundImage = 'url("./images/coverr.jpg")';
         // this.screen.style.padding = '20px';
         this.screen.innerHTML = 'game over';
+       
 
         var playAgainBtn = document.createElement('Button');
         playAgainBtn.innerHTML = "Play Again?";
-        playAgainBtn.style.background ="white";
+        // playAgainBtn.style.background ="white";
         playAgainBtn.style.border = "none";
         playAgainBtn.style.cursor="pointer";
-       
+        
         this.screen.appendChild(playAgainBtn);
         playAgainBtn.addEventListener('click', function(){
             dis.hideGameOverScreen();
+            dis.resetGame();
             // dis.init('field-1');
         });
         this.field.appendChild(this.screen);
@@ -288,6 +296,23 @@ function Game() {
     }
     this.hideGameOverScreen = function() {
         dis.screen.style.display = 'none';
+    }
+
+    this.resetGame = function() {
+        
+        // for(let i=0; i<this.enemies.length; i++){
+        //     this.enemies.pop();
+        // }
+        while(this.enemies.length!=0){
+            this.enemies.pop();
+        }
+        this.player = null;
+        this.field.innerHTML = '';
+        this.field = null;
+        this.score = 0;
+        
+        console.log(this.field);
+        this.init('field-1');
     }
 
 
