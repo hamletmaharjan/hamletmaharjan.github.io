@@ -60,6 +60,7 @@ function Game() {
         this.scoreText.style.right = '5px';
         this.scoreText.style.color = 'white';
         this.scoreText.style.textShadow = "2px 2px 5px black";
+        this.scoreText.classList.add('score-txt');
 
         this.highScoreText = document.createElement('p');
         this.highscoreBody = "High Score: "+ this.highScore;
@@ -69,6 +70,7 @@ function Game() {
         this.highScoreText.style.right = '5px';
         this.highScoreText.style.color = 'white';
         this.highScoreText.style.textShadow = "2px 2px 5px black";
+        this.highScoreText.classList.add('score-txt');
         this.field.appendChild(this.scoreText);
         this.field.appendChild(this.highScoreText);
     }
@@ -157,7 +159,13 @@ function Game() {
         this.startScreen.style.backgroundImage = 'url("./images/cool-cover.jpg")';
         // this.startScreen.style.backgroundSize = "contain";
         // this.startScreen.style.padding = '20px';
-        this.startScreen.innerHTML = 'Click Anywhere to Start';
+
+        var startText = document.createElement('p');
+        startText.innerHTML = 'Click anywhere to start';
+        startText.classList.add('start-text');
+        this.startScreen.appendChild(startText);
+
+        // this.startScreen.innerHTML = 'Click Anywhere to Start';
        
         this.field.appendChild(this.startScreen);
         this.startScreen.addEventListener('click', function(){
@@ -175,7 +183,7 @@ function Game() {
         this.screen.style.verticalAlign = 'center';
         // this.screen.style.backgroundColor = '#69b578';
         this.screen.style.position = 'absolute';
-        this.screen.style.lineHeight = this.height + 'px';
+        // this.screen.style.lineHeight = this.height + 'px';
         this.screen.style.zIndex = '1';
         this.screen.style.backgroundImage = 'url("./images/cover-cut.jpg")';
         // this.screen.style.padding = '20px';

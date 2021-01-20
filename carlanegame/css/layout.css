@@ -18,6 +18,17 @@ body{
     
 }
 
+.start-text {
+    /* font-family: "Lucida Console", "Courier New", monospace; */
+    font-size: 11px;
+    color: red;
+    font-weight: bold;
+}
+.score-txt{
+    font-size: 7px;
+}
+
+
 #root{
     overflow: hidden;
 }
