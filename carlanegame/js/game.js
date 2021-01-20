@@ -102,7 +102,7 @@ function Game() {
                 this.detectBorderCollision(this.enemies[i], i);
             }
             
-            this.speed+= 0.001;
+            this.speed+= 0.005;
             
         }, 16);
         
@@ -136,7 +136,7 @@ function Game() {
             this.enemies.shift();
             enemy.destroy();
             this.score++;
-            
+
             this.scoreText.innerHTML = this.scoreBody + this.score;
             this.createEnemy();
         }
@@ -153,6 +153,7 @@ function Game() {
         this.startScreen.style.position = 'absolute';
         this.startScreen.style.lineHeight = this.height + 'px';
         this.startScreen.style.zIndex = '1';
+        // this.startScreen.style.fontFamily = '"Lucida Console", "Courier New", monospace;';
         this.startScreen.style.backgroundImage = 'url("./images/cool-cover.jpg")';
         // this.startScreen.style.backgroundSize = "contain";
         // this.startScreen.style.padding = '20px';
@@ -180,8 +181,26 @@ function Game() {
         // this.screen.style.padding = '20px';
         this.screen.innerHTML = 'game over';
 
-       
+        this.overText = document.createElement('p');
 
+        this.overText.innerHTML = "Your Score: " + this.score;
+        this.overText.style.position = 'absolute';
+        this.overText.style.top = '40px';
+        this.overText.style.left = '20px';
+
+        this.overText.style.color = 'white';
+        this.overText.style.textShadow = "2px 2px 5px black";
+
+        // this.hscore.innerHTML = "High Score: " + this.highScore;
+        // this.hscore.style.position = 'absolute';
+        // this.hscore.style.top = '20px';
+        // this.hscore.style.left = '0px';
+
+        // this.hscore.style.color = 'white';
+        // this.hscore.style.textShadow = "2px 2px 5px black";
+
+        // this.screen.appendChild(this.hscore);
+        this.screen.appendChild(this.overText);
         var playAgainBtn = document.createElement('Button');
         playAgainBtn.innerHTML = "Play Again?";
         // playAgainBtn.style.background ="black";
