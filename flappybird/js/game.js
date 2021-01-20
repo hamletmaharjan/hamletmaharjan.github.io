@@ -177,6 +177,7 @@ function Game() {
     this.score = 0;
 
     this.init = function() {
+        this.highScore = localStorage.getItem('flappyhigh') || 0;
         this.field = document.getElementById('field-1');
         this.field.style.width = this.width + 'px';
         this.field.style.height = this.height + 'px';
@@ -191,16 +192,68 @@ function Game() {
         this.player.init();
         this.player.draw(this.field);
 
-        this.createInitialObsticles();
+        // this.createInitialObsticles();
         // console.log(this.obsitcles);
 
         this.addListeners();
         this.player.animate();
-        // this.pip.moveLeft();
-        this.update();
+
+        this.createStartScreen();
+        // this.createGameOverScreen();
+       
+        // this.update();
         
     }
 
+
+    this.createStartScreen = function() {
+        let dis = this;
+        this.startScreen = document.createElement('div');
+        this.startScreen.style.position = 'absolute';
+        this.startScreen.style.width = '184px';
+        this.startScreen.style.height = '267px';
+        this.startScreen.classList.add('start-screen');
+        this.startScreen.style.left = '50px';
+        this.field.appendChild(this.startScreen);
+
+        this.startScreen.addEventListener('click', function() {
+            dis.startScreen.style.display = 'none';
+            dis.createInitialObsticles();
+            dis.update();
+        });
+    }
+
+
+    this.createGameOverScreen = function() {
+        this.overScreen = document.createElement('div');
+        this.overScreen.style.width = '192px';
+        this.overScreen.style.height = '267px';
+        // this.overScreen.style.backgroundColor = 'red';
+        this.overScreen.style.position = 'absolute';
+        this.overScreen.style.left = '50px';
+        // this.overScreen.style.top = '100px';
+        this.overScreen.classList.add('over-screen');
+
+
+        this.yourScore = document.createElement('p');
+        this.yourScore.innerHTML = "Score : " + this.score;
+        this.yourScore.classList.add('your-score');
+        this.overScreen.append(this.yourScore);
+
+        this.bestScore = document.createElement('p');
+        this.bestScore.innerHTML = "Best : " + this.highScore;
+        this.bestScore.classList.add('best-score');
+        this.overScreen.append(this.bestScore);
+
+        this.playButton = document.createElement('div');
+        this.playButton.style.width = "150px";
+        this.playButton.style.height = "85px";
+        this.playButton.classList.add('play-button');
+        this.overScreen.appendChild(this.playButton);
+
+        this.field.appendChild(this.overScreen);
+        // this.
+    }
     this.createInitialObsticles = function() {
 
         let obsitcle = new Obsticle();
@@ -272,7 +325,7 @@ function Game() {
             
             // this.pip.x -= 2;
             // this.pip.update();
-        }, 100); 
+        }, 50); 
     }
 
     
@@ -310,6 +363,7 @@ function Game() {
             console.log('collision');
             clearInterval(this.gameLoop);
             this.player.stopAnimation();
+            this.createGameOverScreen();
             // if(this.score > this.highScore){
             //     localStorage.setItem('xscore', this.score);
             // }
