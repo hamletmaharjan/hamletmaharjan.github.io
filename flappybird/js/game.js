@@ -4,7 +4,7 @@ function Bird() {
     this.width = 34;
     this.height = 24;
     this.x = 72;
-    this.y = 232;
+    this.y = 250;
     this.index = 0;
     var dis = this;
     this.images = ['redbird-downflap', 'redbird-midflap', 'redbird-upflap', 'redbird-midflap'];
@@ -177,6 +177,9 @@ function Game() {
     this.obsitcles = [];
     this.checkTop = false;
     this.score = 0;
+    this.fallSpeed = 0.6;
+    this.fallRate = 1.04;
+    this.restart = false;
 
     this.init = function() {
         this.highScore = localStorage.getItem('flappyhigh') || 0;
@@ -198,7 +201,8 @@ function Game() {
         // this.createInitialObsticles();
         // console.log(this.obsitcles);
 
-        this.addListeners();
+        //listeners removed from here
+
         this.player.animate();
         this.createScore();
 
@@ -231,6 +235,9 @@ function Game() {
         this.startScreen.addEventListener('click', function() {
             dis.startScreen.style.display = 'none';
             dis.createInitialObsticles();
+            if(!dis.restart) {
+                dis.addListeners();
+            }
             dis.update();
         });
     }
@@ -263,9 +270,33 @@ function Game() {
         this.playButton.classList.add('play-button');
         this.overScreen.appendChild(this.playButton);
 
+        let dis = this;
+
+        this.playButton.addEventListener('click', function() {
+            console.log('click');
+            dis.overScreen.style.display = 'none';
+            dis.resetGame();
+
+        });
+
         this.field.appendChild(this.overScreen);
         // this.
     }
+
+
+    this.resetGame = function() {
+        while(this.obsitcles.length!=0){
+            this.obsitcles.pop();
+        }
+        this.player = null;
+        this.field.innerHTML = '';
+        this.field = null;
+        this.score = 0;
+        this.restart = true;
+        this.init();
+        
+    }
+
     this.createInitialObsticles = function() {
 
         let obsitcle = new Obsticle();
@@ -314,7 +345,8 @@ function Game() {
     this.addListeners = function() {
         let dis = this;
         document.addEventListener('click', function(e){
-            dis.player.y -= 30;
+            dis.player.y -= 40;
+            dis.fallSpeed = 0.5;
             dis.player.update();
             console.log('click');
         });
@@ -323,13 +355,14 @@ function Game() {
     this.update = function() {
         let dis = this;
         this.gameLoop = setInterval(() => {
-            this.player.y += 3;
+            this.player.y += this.fallSpeed;
+            this.fallSpeed *= this.fallRate;
             this.player.update();
-            this.bp -= 3;
+            this.bp -= 2;
             this.field.style.backgroundPositionX = this.bp + 'px';
 
             for (let i=0; i<this.obsitcles.length; i++){
-                dis.obsitcles[i].x -= 3;
+                dis.obsitcles[i].x -= 2;
                 dis.obsitcles[i].update();
                 this.detectBirdCollision(this.obsitcles[i]);
                 this.detectOutOfFrame(this.obsitcles[i]);
@@ -339,7 +372,7 @@ function Game() {
             
             // this.pip.x -= 2;
             // this.pip.update();
-        }, 50); 
+        }, 16); 
     }
 
     
@@ -364,7 +397,7 @@ function Game() {
             clearInterval(this.gameLoop);
             this.player.stopAnimation();
 
-            console.log(this.obsitcles);
+            this.createGameOverScreen();
         }      
     }
 
