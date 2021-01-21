@@ -186,10 +186,23 @@ function Game() {
         this.field = document.getElementById('field-1');
         this.field.style.width = this.width + 'px';
         this.field.style.height = this.height + 'px';
-        this.field.style.backgroundImage = 'url("./images/base.png")';
-        this.field.style.backgroundRepeat = 'repeat-x';
-        this.field.style.backgroundPosition = 'bottom';
-        this.field.style.backgroundPositionX = this.bp + 'px';
+        
+
+
+        this.lane = document.createElement('div');
+        this.lane.style.position = 'absolute';
+        this.lane.style.width = this.width + 'px';
+        this.lane.style.height = '112px';
+        this.lane.style.left = '0px';
+        this.lane.style.bottom = '0px';
+        // this.lane.style.backgroundColor = 'red';
+        this.lane.style.backgroundImage = 'url("./images/base.png")';
+        this.lane.style.backgroundRepeat = 'repeat-x';
+        this.lane.style.backgroundPosition = 'bottom';
+        this.lane.style.backgroundPositionX = this.bp + 'px';
+        this.lane.style.zIndex = '2';
+
+        this.field.appendChild(this.lane);
         // this.field.style.zIndex = "2";
 
         // this.field.style.backgroundColor = 'green';
@@ -359,7 +372,7 @@ function Game() {
             this.fallSpeed *= this.fallRate;
             this.player.update();
             this.bp -= 2;
-            this.field.style.backgroundPositionX = this.bp + 'px';
+            this.lane.style.backgroundPositionX = this.bp + 'px';
 
             for (let i=0; i<this.obsitcles.length; i++){
                 dis.obsitcles[i].x -= 2;
