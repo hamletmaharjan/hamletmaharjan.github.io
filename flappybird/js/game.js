@@ -9,9 +9,11 @@ function Game() {
     this.obsitcles = [];
     this.checkTop = false;
     this.score = 0;
-    this.fallSpeed = 0.6;
-    this.fallRate = 1.04;
+    this.fallSpeed = 0.8;
+    this.fallRate = 1.05;
     this.restart = false;
+    this.forwardSpeed = 2;
+    this.jumpHeight = 40;
 
     this.init = function() {
         this.highScore = localStorage.getItem('flappyhigh') || 0;
@@ -27,7 +29,7 @@ function Game() {
         this.lane.style.height = '112px';
         this.lane.style.left = '0px';
         this.lane.style.bottom = '0px';
-        // this.lane.style.backgroundColor = 'red';
+       
         this.lane.style.backgroundImage = 'url("./images/base.png")';
         this.lane.style.backgroundRepeat = 'repeat-x';
         this.lane.style.backgroundPosition = 'bottom';
@@ -35,16 +37,11 @@ function Game() {
         this.lane.style.zIndex = '2';
 
         this.field.appendChild(this.lane);
-        // this.field.style.zIndex = "2";
-
-        // this.field.style.backgroundColor = 'green';
 
         this.player = new Bird();
         this.player.init();
         this.player.draw(this.field);
 
-        // this.createInitialObsticles();
-        // console.log(this.obsitcles);
 
         //listeners removed from here
 
@@ -52,9 +49,7 @@ function Game() {
         this.createScore();
 
         this.createStartScreen();
-        // this.createGameOverScreen();
-       
-        // this.update();
+    
         
     }
 
@@ -92,10 +87,8 @@ function Game() {
         this.overScreen = document.createElement('div');
         this.overScreen.style.width = '192px';
         this.overScreen.style.height = '267px';
-        // this.overScreen.style.backgroundColor = 'red';
         this.overScreen.style.position = 'absolute';
         this.overScreen.style.left = '60px';
-        // this.overScreen.style.top = '100px';
         this.overScreen.classList.add('over-screen');
 
 
@@ -118,14 +111,14 @@ function Game() {
         let dis = this;
 
         this.playButton.addEventListener('click', function() {
-            console.log('click');
+            
             dis.overScreen.style.display = 'none';
             dis.resetGame();
 
         });
 
         this.field.appendChild(this.overScreen);
-        // this.
+       
     }
 
 
@@ -189,12 +182,13 @@ function Game() {
 
     this.addListeners = function() {
         let dis = this;
-        document.addEventListener('click', function(e){
-            dis.player.y -= 40;
+        this.field.addEventListener('click', function(e) {
+            dis.player.y -= dis.jumpHeight;
             dis.fallSpeed = 0.5;
             dis.player.update();
-            console.log('click');
         });
+
+       
     }
 
     this.update = function() {
@@ -203,11 +197,11 @@ function Game() {
             this.player.y += this.fallSpeed;
             this.fallSpeed *= this.fallRate;
             this.player.update();
-            this.bp -= 2;
+            this.bp -= this.forwardSpeed;
             this.lane.style.backgroundPositionX = this.bp + 'px';
 
             for (let i=0; i<this.obsitcles.length; i++){
-                dis.obsitcles[i].x -= 2;
+                dis.obsitcles[i].x -= this.forwardSpeed;
                 dis.obsitcles[i].update();
                 this.detectBirdCollision(this.obsitcles[i]);
                 this.detectOutOfFrame(this.obsitcles[i]);
@@ -215,8 +209,7 @@ function Game() {
 
             this.detectBorderCollision();
             
-            // this.pip.x -= 2;
-            // this.pip.update();
+            
         }, 16); 
     }
 
@@ -238,7 +231,7 @@ function Game() {
 
     this.detectBorderCollision = function() {
         if(this.player.y >= (this.height-this.groundHeight- this.player.height) || this.player.y <=0){
-            console.log('border collision');
+            
             clearInterval(this.gameLoop);
             this.player.stopAnimation();
 
@@ -252,7 +245,7 @@ function Game() {
             this.player.x + this.player.width >= enemy.x &&
             this.player.y <= enemy.y + enemy.height &&
             this.player.y + this.player.height >= enemy.y) {
-            console.log('collision');
+            
             clearInterval(this.gameLoop);
             this.player.stopAnimation();
 
