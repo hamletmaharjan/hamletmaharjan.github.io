@@ -122,7 +122,7 @@ function Obsticle() {
         // this.bottom = Math.random() * 112;
         this.pipe.style.left = this.left + 'px';
         this.pipe.style.top = this.y + 'px';
-        this.pipe.style.zIndex = "-1";
+        // this.pipe.style.zIndex = "-1";
         
         // this.pipe.style.backgroundColor = 'red';
         if(this.top){
@@ -190,7 +190,7 @@ function Game() {
         this.field.style.backgroundRepeat = 'repeat-x';
         this.field.style.backgroundPosition = 'bottom';
         this.field.style.backgroundPositionX = this.bp + 'px';
-        this.field.style.zIndex = "0";
+        // this.field.style.zIndex = "2";
 
         // this.field.style.backgroundColor = 'green';
 

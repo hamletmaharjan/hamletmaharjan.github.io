@@ -6,7 +6,7 @@
 .game-field{
     /* margin: 0 auto; */
     position: relative;
-    z-index: 0;
+    
     overflow: hidden;
 }
 
