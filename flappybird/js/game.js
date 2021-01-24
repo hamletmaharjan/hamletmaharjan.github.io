@@ -14,6 +14,7 @@ function Game() {
     this.restart = false;
     this.forwardSpeed = 2;
     this.jumpHeight = 40;
+    this.increased = false;
 
     this.init = function() {
         this.highScore = localStorage.getItem('flappyhigh') || 0;
@@ -135,6 +136,8 @@ function Game() {
         
     }
 
+
+    //Creates initial two obsticles
     this.createInitialObsticles = function() {
 
         let obsitcle = new Obsticle();
@@ -163,6 +166,7 @@ function Game() {
 
     }
 
+    //addes new obsticle
     this.createNewObsitcle = function() {
         this.score += 1;
         this.scoreText.innerHTML = this.score;
@@ -205,6 +209,7 @@ function Game() {
                 dis.obsitcles[i].update();
                 this.detectBirdCollision(this.obsitcles[i]);
                 this.detectOutOfFrame(this.obsitcles[i]);
+                this.detectBirdPass(this.obsitcles[i]);
             }
 
             this.detectBorderCollision();
@@ -213,8 +218,21 @@ function Game() {
         }, 16); 
     }
 
-    
+    this.detectBirdPass = function(obs) {
+        
+        if (this.player.x+this.player.width==obs.x+obs.width) {
+            // console.log('pass');
+            if(obs.top){
+                console.log('pass');
+               
+            }
+            
+            
+        }
+    }
 
+    
+    //detects if the pipes are out of frame
     this.detectOutOfFrame = function(pipe) {
         if(pipe.x <= 0-pipe.width){
             pipe.destory();
@@ -229,6 +247,7 @@ function Game() {
         }
     }
 
+    //checks collison of bird with the ground
     this.detectBorderCollision = function() {
         if(this.player.y >= (this.height-this.groundHeight- this.player.height) || this.player.y <=0){
             
@@ -239,6 +258,7 @@ function Game() {
         }      
     }
 
+    //detects bird collision with pipes
     this.detectBirdCollision = function(enemy) {
         
         if (this.player.x <= enemy.x+ enemy.width &&
