@@ -1,3 +1,9 @@
+getRandomValue = function(max,min){
+    let val = Math.random() * (max - min) + min;
+    return Math.round(val);
+}
+
+
 function Tile(canvas, x ,y) {
     this.x = x;
     this.y = y;
@@ -6,12 +12,40 @@ function Tile(canvas, x ,y) {
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
 
+    let ran = Math.random()*10;
+    this.hasSpring = (ran >= "9") ? true :false;
+    this.springX = getRandomValue(this.x, this.x+ this.width);
+
+    this.isBlue = (ran <= "2") ? true: false;
+
+    this.dx = 1;
+    this.img = tile;
+
+    this.init = function() {
+        if(this.isBlue){
+            this.img = tileBlue;
+        }
+    }
+
     this.draw = function() {
         // this.ctx.fillStyle = "green";
         // this.ctx.fillRect(this.x, this.y, this.width, this.height);
-        this.ctx.drawImage(tile,this.x,  this.y, this.width, this.height);
+        if(this.isBlue){
+            
+            this.x += this.dx;
+            if(this.x> 400-this.width || this.x<= 0){
+                this.dx*= -1;
+            }
+        }
+        
+        this.ctx.drawImage(this.img,this.x,  this.y, this.width, this.height);
+        if(this.hasSpring){
+            this.ctx.fillRect(this.springX, this.y-10, 10, 12);
+        }
         
     }
+
+    
 }
 
 function Game(canvasId) {
@@ -29,7 +63,7 @@ function Game(canvasId) {
 
     this.currentTile = 0;
 
-    this.jumpThreshold = 350;
+    this.jumpThreshold = 300;
     this.score = 0;
 
     this.init = function() {
@@ -67,6 +101,7 @@ function Game(canvasId) {
     this.createTiles = function() {
         for(var i=5; i>=0; i--){
             let t = new Tile(this.canvas, this.getRandomValue(0,300), i*100);
+            t.init();
             this.tiles.push(t);
         }
     }
@@ -84,7 +119,7 @@ function Game(canvasId) {
         
         // dis.player.update(dis.tiles);
         dis.playerUpdate();
-        dis.moveTiles();
+        
 
         dis.drawTopScore();
 
@@ -140,6 +175,9 @@ function Game(canvasId) {
         this.player.x += this.player.x_velocity;
         this.player.x_velocity *= 0.9;
 
+        this.moveTiles();
+
+
         this.player.draw();
     }
 
@@ -155,6 +193,14 @@ function Game(canvasId) {
                 this.player.y + this.player.height >= tiles[i].y){
 
                 if(this.player.falling){
+
+                    if(tiles[i].hasSpring) {
+                        this.player.setJumpspeed(-15);
+                        // this.player.velocity = this.player.jumpSpeed;
+                    }
+                    else{
+                        this.player.setJumpspeed(-10);
+                    }
                     this.player.velocity = this.player.jumpSpeed;
                     this.player.falling = false;
                     // console.log(tiles);
@@ -163,6 +209,7 @@ function Game(canvasId) {
                 }
             }
             
+           
         }
     }
 
@@ -170,19 +217,23 @@ function Game(canvasId) {
         if(this.player.y <= this.jumpThreshold) {
             for(let i=0; i<this.tiles.length; i++) {
                
+                // this.camravel = this.player.velocity;
                 this.tiles[i].y += 2;
+                // this.player.y += 2;
                 this.score += 0.1;
                 if(this.tiles[i].y > 700){
                    
                     this.tiles.shift();
                     
                     let t = new Tile(this.canvas, this.getRandomValue(0,300), -50);
+                    t.init();
                     this.tiles.push(t);
                     
                 }
                 
             }
         }
+        
     }
 
     // this.detectOutOfFrame = function() {
@@ -199,7 +250,7 @@ function Game(canvasId) {
     }
 }
 
-loadMedia=4;
+loadMedia=5;
 doodleRight = new Image();
 doodleRight.src = "./images/lik-right.png";
 doodleRight.addEventListener("load",loadCount,false);
@@ -211,6 +262,10 @@ doodleLeft.addEventListener("load",loadCount,false);
 tile = new Image();
 tile.src = "./images/tile.png";
 tile.addEventListener("load",loadCount,false);
+
+tileBlue = new Image();
+tileBlue.src = "./images/tile-blue.png";
+tileBlue.addEventListener("load",loadCount,false);
 
 topScore = new Image();
 topScore.src = "./images/top-score.png";

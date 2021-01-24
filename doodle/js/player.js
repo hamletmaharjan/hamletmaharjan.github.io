@@ -115,5 +115,9 @@ function Player(canvas, x ,y ,width, height) {
 
     }
 
+    this.setJumpspeed = function(value) {
+        this.jumpSpeed = value;
+    }
+
 
 }
