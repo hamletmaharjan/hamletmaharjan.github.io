@@ -1,14 +1,16 @@
 function Tile(canvas, x ,y) {
     this.x = x;
     this.y = y;
-    this.width = 80;
-    this.height = 10;
+    this.width = 60;
+    this.height = 15;
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
 
     this.draw = function() {
-        this.ctx.fillStyle = "green";
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        // this.ctx.fillStyle = "green";
+        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(tile,this.x,  this.y, this.width, this.height);
+        
     }
 }
 
@@ -28,16 +30,17 @@ function Game(canvasId) {
     this.currentTile = 0;
 
     this.jumpThreshold = 350;
+    this.score = 0;
 
     this.init = function() {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
 
         var background = document.getElementById('background');
-        this.ctx.drawImage(background,0,0,200,200);
+        this.ctx.drawImage(background,0,0,this.width,this.height);
 
 
-        this.player = new Player(this.canvas, 40,500,40,40);
+        this.player = new Player(this.canvas, 40,500,60,60);
         this.player.draw();
 
         this.tile = new Tile(this.canvas, 20,620);
@@ -48,6 +51,16 @@ function Game(canvasId) {
 
         this.player.addListeners();
         this.update();
+    }
+
+    this.drawTopScore = function() {
+        this.ctx.drawImage(topScore, 0,0, 320, 38,0,0, this.width, 38);
+        this.ctx.font = "24px Comic Sans MS";
+        this.ctx.fillStyle = "black";
+        // this.ctx.textAlign = "center";
+        this.ctx.fillText(this.score.toFixed(0),20,25);
+
+        this.ctx.drawImage(topScore, 472, 2, 12, 14, this.width-30, 7, 12, 14);
     }
 
 
@@ -72,6 +85,8 @@ function Game(canvasId) {
         // dis.player.update(dis.tiles);
         dis.playerUpdate();
         dis.moveTiles();
+
+        dis.drawTopScore();
 
         // console.log(dis.tiles.length);
         // dis.detectOutOfFrame();
@@ -142,7 +157,7 @@ function Game(canvasId) {
                 if(this.player.falling){
                     this.player.velocity = this.player.jumpSpeed;
                     this.player.falling = false;
-                    console.log(tiles);
+                    // console.log(tiles);
                     
                     
                 }
@@ -156,6 +171,7 @@ function Game(canvasId) {
             for(let i=0; i<this.tiles.length; i++) {
                
                 this.tiles[i].y += 2;
+                this.score += 0.1;
                 if(this.tiles[i].y > 700){
                    
                     this.tiles.shift();
@@ -169,13 +185,13 @@ function Game(canvasId) {
         }
     }
 
-    this.detectOutOfFrame = function() {
-        for(let i=0; i<this.tiles.length; i++) {
-            if(this.tiles[i].y > this.height){
-                this.tiles.shift();
-            }
-        }
-    }
+    // this.detectOutOfFrame = function() {
+    //     for(let i=0; i<this.tiles.length; i++) {
+    //         if(this.tiles[i].y > this.height){
+    //             this.tiles.shift();
+    //         }
+    //     }
+    // }
 
     this.getRandomValue = function(max,min){
         let val = Math.random() * (max - min) + min;
@@ -183,6 +199,31 @@ function Game(canvasId) {
     }
 }
 
+loadMedia=4;
+doodleRight = new Image();
+doodleRight.src = "./images/lik-right.png";
+doodleRight.addEventListener("load",loadCount,false);
+
+doodleLeft = new Image();
+doodleLeft.src = "./images/lik-left.png";
+doodleLeft.addEventListener("load",loadCount,false);
+
+tile = new Image();
+tile.src = "./images/tile.png";
+tile.addEventListener("load",loadCount,false);
+
+topScore = new Image();
+topScore.src = "./images/top-score.png";
+topScore.addEventListener("load",loadCount,false);
 
 var g = new Game('myGame');
-g.init();
+
+function loadCount(){
+    loadMedia--;
+    if(loadMedia==0){
+        g.init();
+    }
+        
+}
+
+// var g = new Game('myGame');

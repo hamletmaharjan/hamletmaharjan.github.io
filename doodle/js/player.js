@@ -21,13 +21,16 @@ function Player(canvas, x ,y ,width, height) {
 
     this.x_velocity = 0;
 
-    
+    this.img = doodleRight;
 
     var dis = this;
 
+
     this.draw = function() {
         this.ctx.fillStyle = "red";
-        this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+
     }
 
     this.update = function(tiles) {
@@ -96,10 +99,13 @@ function Player(canvas, x ,y ,width, height) {
         switch(e.keyCode) {
             case 37:
                 dis.left = key_state;
+                this.img = doodleLeft;
+                // console.log(this.img);
                 break;
 
             case 39:
                 dis.right = key_state;
+                this.img = doodleRight;
                 break;
 
             default:
