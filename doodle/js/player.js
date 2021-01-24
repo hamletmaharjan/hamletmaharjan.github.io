@@ -21,6 +21,8 @@ function Player(canvas, x ,y ,width, height) {
 
     this.x_velocity = 0;
 
+    this.currentTile = 0;
+
     var dis = this;
 
     this.draw = function() {
@@ -50,6 +52,13 @@ function Player(canvas, x ,y ,width, height) {
             this.x_velocity += 0.5;
         }
 
+        if(this.x <= 0-this.width){
+            this.x = 400;
+        }
+        else if(this.x>=400){
+            this.x = 0;
+        }
+
         this.x += this.x_velocity;
         this.x_velocity *= 0.9;
 
@@ -62,13 +71,14 @@ function Player(canvas, x ,y ,width, height) {
                 this.x + this.width >= tiles[i].x &&
                 this.y <= tiles[i].y + tiles[i].height &&
                 this.y + this.height >= tiles[i].y){
-                    if(this.falling){
-                        this.velocity = this.jumpSpeed;
-                        this.falling = false;
-                        console.log('collision');
-                    }
-                    
 
+                if(this.falling){
+                    this.velocity = this.jumpSpeed;
+                    this.falling = false;
+                    console.log('collision');
+                    
+                    
+                }
             }
             
         }
