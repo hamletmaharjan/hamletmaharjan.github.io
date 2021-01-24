@@ -21,7 +21,7 @@ function Player(canvas, x ,y ,width, height) {
 
     this.x_velocity = 0;
 
-    this.currentTile = 0;
+    
 
     var dis = this;
 

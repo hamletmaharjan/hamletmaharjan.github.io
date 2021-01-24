@@ -23,6 +23,12 @@ function Game(canvasId) {
     this.vx = 3;
     this.tiles = [];
     this.goingDown = true;
+
+
+    this.currentTile = 0;
+
+    this.jumpThreshold = 350;
+
     this.init = function() {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
@@ -44,22 +50,9 @@ function Game(canvasId) {
         this.update();
     }
 
-    this.addListeners = function() {
-        document.addEventListener('keydown', function(e) {
-            if(e.key == "ArrowLeft"){
-                // dis.vx -= 0.5;
-                dis.player.x -= dis.vx;
-            }
-            if(e.key == "ArrowRight"){
-                // dis.vx += 0.5;
-                dis.player.x += dis.vx;
-            }
-            // dis.player.x += dis.vx;
-        });
-    }
 
     this.createTiles = function() {
-        for(var i=0; i<6; i++){
+        for(var i=5; i>=0; i--){
             let t = new Tile(this.canvas, this.getRandomValue(0,300), i*100);
             this.tiles.push(t);
         }
@@ -75,11 +68,13 @@ function Game(canvasId) {
             dis.tiles[i].draw();
         }
 
-
         
+        // dis.player.update(dis.tiles);
+        dis.playerUpdate();
+        dis.moveTiles();
 
-        
-        dis.player.update(dis.tiles);
+        // console.log(dis.tiles.length);
+        // dis.detectOutOfFrame();
 
 
         // setInterval(() => {
@@ -98,35 +93,88 @@ function Game(canvasId) {
         //     dis.player.update(dis.tiles);
         // }, 50);
     }
+    this.playerUpdate = function() {
+        this.player.y += this.player.velocity;
+        if(this.player.falling) {
+            this.player.velocity+= 0.25;
+        }
+        else{
+            this.player.velocity+=0.25;
+            
+            if(this.player.velocity == 0){
+                this.player.falling = true;
+                this.player.velocity = this.player.gravity;
+            }
+        }
+        this.detectBorderCollision(this.tiles);
+
+        if(this.player.left) {
+            this.player.x_velocity -= 0.5;
+        }
+        if(this.player.right) {
+            this.player.x_velocity += 0.5;
+        }
+
+        if(this.player.x <= 0-this.player.width){
+            this.player.x = 400;
+        }
+        else if(this.player.x>=400){
+            this.player.x = 0;
+        }
+
+        this.player.x += this.player.x_velocity;
+        this.player.x_velocity *= 0.9;
+
+        this.player.draw();
+    }
 
     this.checkHeight = function() {
         
     }
 
-    this.detectBorderCollision = function() {
-        for(var i=0; i<this.tiles.length; i++){
-            if(this.player.x < this.tiles[i].x + this.tiles[i].width &&
-                this.player.x + this.player.width > this.tiles[i].x &&
-                this.player.y < this.tiles[i].y + this.tiles[i].height &&
-                this.player.y + this.player.height > this.tiles[i].y){
+    this.detectBorderCollision = function(tiles) {
+        for(let i=0; i<tiles.length; i++){
+            if(this.player.x <= tiles[i].x + tiles[i].width &&
+                this.player.x + this.player.width >= tiles[i].x &&
+                this.player.y <= tiles[i].y + tiles[i].height &&
+                this.player.y + this.player.height >= tiles[i].y){
 
-                // this.dy *= -1;
-
-                if(this.goingDown){
-                    this.player.y -= 200;
-                }
-                else{
-                    console.log('collision');
+                if(this.player.falling){
+                    this.player.velocity = this.player.jumpSpeed;
+                    this.player.falling = false;
+                    console.log(tiles);
+                    
+                    
                 }
             }
-            // else {
-            //         this.dy += 0.3;
-            //     }
+            
         }
-        
-        // else {
-        //     this.dy += 1;
-        // }
+    }
+
+    this.moveTiles = function() {
+        if(this.player.y <= this.jumpThreshold) {
+            for(let i=0; i<this.tiles.length; i++) {
+               
+                this.tiles[i].y += 2;
+                if(this.tiles[i].y > 700){
+                   
+                    this.tiles.shift();
+                    
+                    let t = new Tile(this.canvas, this.getRandomValue(0,300), -50);
+                    this.tiles.push(t);
+                    
+                }
+                
+            }
+        }
+    }
+
+    this.detectOutOfFrame = function() {
+        for(let i=0; i<this.tiles.length; i++) {
+            if(this.tiles[i].y > this.height){
+                this.tiles.shift();
+            }
+        }
     }
 
     this.getRandomValue = function(max,min){
