@@ -15,6 +15,14 @@ function Player(canvas, x ,y ,width, height) {
     // this.status = ['falling', 'jumping'];
     this.falling = true;
 
+    this.left = false;
+    this.right = false;
+    this.shoot = false;
+
+    this.x_velocity = 0;
+
+    var dis = this;
+
     this.draw = function() {
         this.ctx.fillStyle = "red";
         this.ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -34,6 +42,17 @@ function Player(canvas, x ,y ,width, height) {
             }
         }
         this.detectBorderCollision(tiles);
+
+        if(this.left) {
+            this.x_velocity -= 0.5;
+        }
+        if(this.right) {
+            this.x_velocity += 0.5;
+        }
+
+        this.x += this.x_velocity;
+        this.x_velocity *= 0.9;
+
         this.draw();
     }
 
@@ -53,6 +72,31 @@ function Player(canvas, x ,y ,width, height) {
             }
             
         }
+    }
+
+    this.addListeners = function() {
+        window.addEventListener("keydown", this.keyListener);
+        window.addEventListener("keyup", this.keyListener);
+    }
+
+    this.keyListener = function(e) {
+        // console.log(dis.left);
+        var key_state = (e.type == "keydown") ? true: false;
+
+        switch(e.keyCode) {
+            case 37:
+                dis.left = key_state;
+                break;
+
+            case 39:
+                dis.right = key_state;
+                break;
+
+            default:
+                console.log('invalid key');
+                break;
+        }
+
     }
 
 

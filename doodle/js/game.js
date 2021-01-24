@@ -31,14 +31,16 @@ function Game(canvasId) {
         this.ctx.drawImage(background,0,0,200,200);
 
 
-        this.player = new Player(this.canvas, 40,500,20,20);
+        this.player = new Player(this.canvas, 40,500,40,40);
         this.player.draw();
 
         this.tile = new Tile(this.canvas, 20,620);
         this.tiles.push(this.tile);
 
         this.createTiles();
-        this.addListeners();
+        // this.addListeners();
+
+        this.player.addListeners();
         this.update();
     }
 
