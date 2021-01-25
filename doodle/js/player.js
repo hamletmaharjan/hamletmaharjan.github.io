@@ -33,59 +33,59 @@ function Player(canvas, x ,y ,width, height) {
 
     }
 
-    this.update = function(tiles) {
-        this.y += this.velocity;
-        if(this.falling) {
-            this.velocity+= 0.25;
-        }
-        else{
-            this.velocity+=0.25;
-            console.log(this.velocity);
-            if(this.velocity == 0){
-                this.falling = true;
-                this.velocity = this.gravity;
-            }
-        }
-        this.detectBorderCollision(tiles);
+    // this.update = function(tiles) {
+    //     this.y += this.velocity;
+    //     if(this.falling) {
+    //         this.velocity+= 0.25;
+    //     }
+    //     else{
+    //         this.velocity+=0.25;
+    //         console.log(this.velocity);
+    //         if(this.velocity == 0){
+    //             this.falling = true;
+    //             this.velocity = this.gravity;
+    //         }
+    //     }
+    //     this.detectBorderCollision(tiles);
 
-        if(this.left) {
-            this.x_velocity -= 0.5;
-        }
-        if(this.right) {
-            this.x_velocity += 0.5;
-        }
+    //     if(this.left) {
+    //         this.x_velocity -= 0.5;
+    //     }
+    //     if(this.right) {
+    //         this.x_velocity += 0.5;
+    //     }
 
-        if(this.x <= 0-this.width){
-            this.x = 400;
-        }
-        else if(this.x>=400){
-            this.x = 0;
-        }
+    //     if(this.x <= 0-this.width){
+    //         this.x = 400;
+    //     }
+    //     else if(this.x>=400){
+    //         this.x = 0;
+    //     }
 
-        this.x += this.x_velocity;
-        this.x_velocity *= 0.9;
+    //     this.x += this.x_velocity;
+    //     this.x_velocity *= 0.9;
 
-        this.draw();
-    }
+    //     this.draw();
+    // }
 
-    this.detectBorderCollision = function(tiles) {
-        for(var i=0; i<tiles.length; i++){
-            if(this.x <= tiles[i].x + tiles[i].width &&
-                this.x + this.width >= tiles[i].x &&
-                this.y <= tiles[i].y + tiles[i].height &&
-                this.y + this.height >= tiles[i].y){
+    // this.detectBorderCollision = function(tiles) {
+    //     for(var i=0; i<tiles.length; i++){
+    //         if(this.x <= tiles[i].x + tiles[i].width &&
+    //             this.x + this.width >= tiles[i].x &&
+    //             this.y <= tiles[i].y + tiles[i].height &&
+    //             this.y + this.height >= tiles[i].y){
 
-                if(this.falling){
-                    this.velocity = this.jumpSpeed;
-                    this.falling = false;
-                    console.log('collision');
+    //             if(this.falling){
+    //                 this.velocity = this.jumpSpeed;
+    //                 this.falling = false;
+    //                 console.log('collision');
                     
                     
-                }
-            }
+    //             }
+    //         }
             
-        }
-    }
+    //     }
+    // }
 
     this.addListeners = function() {
         window.addEventListener("keydown", this.keyListener);
@@ -99,13 +99,13 @@ function Player(canvas, x ,y ,width, height) {
         switch(e.keyCode) {
             case 37:
                 dis.left = key_state;
-                this.img = doodleLeft;
+                dis.img = doodleLeft;
                 // console.log(this.img);
                 break;
 
             case 39:
                 dis.right = key_state;
-                this.img = doodleRight;
+                dis.img = doodleRight;
                 break;
 
             default:

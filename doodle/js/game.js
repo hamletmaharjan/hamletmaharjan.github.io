@@ -48,6 +48,19 @@ function Tile(canvas, x ,y) {
     
 }
 
+function Hole(canvas, x, y) {
+    this.x = x;
+    this.y = y;
+    this.width = 50;
+    this.height = 50;
+    this.canvas=canvas;
+    this.ctx=this.canvas.getContext("2d");
+
+    this.draw = function() {
+        this.ctx.drawImage(gameTiles, 233, 51, 68, 61, this.x, this.y, 68, 61);
+    }
+}
+
 function Game(canvasId) {
 
     this.canvas = document.getElementById(canvasId);
@@ -66,6 +79,8 @@ function Game(canvasId) {
     this.jumpThreshold = 300;
     this.score = 0;
 
+    this.hasHoles = false;
+
     this.init = function() {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
@@ -83,6 +98,9 @@ function Game(canvasId) {
         this.createTiles();
         // this.addListeners();
 
+        
+       
+
         this.player.addListeners();
         this.update();
     }
@@ -95,12 +113,20 @@ function Game(canvasId) {
         this.ctx.fillText(this.score.toFixed(0),20,25);
 
         this.ctx.drawImage(topScore, 472, 2, 12, 14, this.width-30, 7, 12, 14);
+
+
+        if(this.score > 0 && this.score.toFixed(0) % 500 == 0) {
+            console.log('hole');
+            this.hasHoles = true;
+            this.hole = new Hole(this.canvas, this.getRandomValue(0, this.width-50), -70);
+            
+        }
     }
 
 
     this.createTiles = function() {
         for(var i=5; i>=0; i--){
-            let t = new Tile(this.canvas, this.getRandomValue(0,300), i*100);
+            let t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), i*100);
             t.init();
             this.tiles.push(t);
         }
@@ -111,6 +137,10 @@ function Game(canvasId) {
         requestAnimationFrame(dis.update);
         dis.ctx.clearRect(0,0, this.width,this.height);
         dis.ctx.drawImage(background,0,0);
+
+        if(dis.hasHoles) {
+            dis.hole.draw();
+        }
 
         for(var i=0; i<dis.tiles.length; i++){
             dis.tiles[i].draw();
@@ -208,24 +238,42 @@ function Game(canvasId) {
                     
                 }
             }
-            
            
         }
+        if(this.hasHoles){
+            if(this.player.x <= this.hole.x + this.hole.width &&
+                this.player.x + this.player.width >= this.hole.x &&
+                this.player.y <= this.hole.y + this.hole.height &&
+                this.player.y + this.player.height >= this.hole.y){
+    
+                console.log('die');
+                
+            }
+
+        }
+        
     }
 
     this.moveTiles = function() {
         if(this.player.y <= this.jumpThreshold) {
+            if(this.hasHoles) {
+                this.hole.y += 2;
+            }
             for(let i=0; i<this.tiles.length; i++) {
                
                 // this.camravel = this.player.velocity;
                 this.tiles[i].y += 2;
                 // this.player.y += 2;
                 this.score += 0.1;
+
+                
+               
+
                 if(this.tiles[i].y > 700){
                    
                     this.tiles.shift();
                     
-                    let t = new Tile(this.canvas, this.getRandomValue(0,300), -50);
+                    let t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), -50);
                     t.init();
                     this.tiles.push(t);
                     
@@ -250,7 +298,7 @@ function Game(canvasId) {
     }
 }
 
-loadMedia=5;
+loadMedia=6;
 doodleRight = new Image();
 doodleRight.src = "./images/lik-right.png";
 doodleRight.addEventListener("load",loadCount,false);
@@ -270,6 +318,10 @@ tileBlue.addEventListener("load",loadCount,false);
 topScore = new Image();
 topScore.src = "./images/top-score.png";
 topScore.addEventListener("load",loadCount,false);
+
+gameTiles = new Image();
+gameTiles.src = "./images/game-tiles.png";
+gameTiles.addEventListener("load",loadCount,false);
 
 var g = new Game('myGame');
 
