@@ -1,8 +1,3 @@
-getRandomValue = function(max,min){
-    let val = Math.random() * (max - min) + min;
-    return Math.round(val);
-}
-
 
 function Tile(canvas, x ,y) {
     this.x = x;
@@ -20,6 +15,8 @@ function Tile(canvas, x ,y) {
 
     this.dx = 1;
     this.img = tile;
+
+    this.dumy = 0;
 
     this.init = function() {
         if(this.isBlue){
@@ -80,6 +77,7 @@ function Game(canvasId) {
     this.score = 0;
 
     this.hasHoles = false;
+    this.hasMonsters = false;
 
     this.init = function() {
         this.canvas.width = this.width;
@@ -121,6 +119,13 @@ function Game(canvasId) {
             this.hole = new Hole(this.canvas, this.getRandomValue(0, this.width-50), -70);
             
         }
+
+        if(this.score > 0 && this.score.toFixed(0) % 400 == 0) {
+            console.log('monster');
+            this.hasMonsters = true;
+            this.monster = new Monster(this.canvas, this.getRandomValue(0, this.width-158), -50);
+            
+        }
     }
 
 
@@ -140,6 +145,9 @@ function Game(canvasId) {
 
         if(dis.hasHoles) {
             dis.hole.draw();
+        }
+        if(dis.hasMonsters) {
+            dis.monster.draw();
         }
 
         for(var i=0; i<dis.tiles.length; i++){
@@ -174,7 +182,8 @@ function Game(canvasId) {
         // }, 50);
     }
     this.playerUpdate = function() {
-        this.player.y += this.player.velocity;
+        if(!(this.player.velocity<= 0 && this.player.y < 300))
+            this.player.y += this.player.velocity;
         if(this.player.falling) {
             this.player.velocity+= 0.25;
         }
@@ -204,6 +213,15 @@ function Game(canvasId) {
 
         this.player.x += this.player.x_velocity;
         this.player.x_velocity *= 0.9;
+
+        // if(this.player.y <= this.jumpThreshold) {
+        //     this.momentum = Math.abs(this.player.velocity);
+        //     this.player.velocity = 0;
+        //     // this.player.y++;
+        //     // this.player.falling = true;
+        //     //     this.player.velocity = this.player.gravity;
+        //     // console.log(this.momentum);
+        // }
 
         this.moveTiles();
 
@@ -256,13 +274,41 @@ function Game(canvasId) {
 
     this.moveTiles = function() {
         if(this.player.y <= this.jumpThreshold) {
+            diff = this.jumpThreshold- this.player.y;
             if(this.hasHoles) {
-                this.hole.y += 2;
+                // this.hole.y += 2;
+                if(this.player.velocity<= 0 && this.player.y < 300){
+                    this.hole.y -= this.player.velocity;
+                }
+            }
+            if(this.hasMonsters) {
+                // this.monster.y += 2;
+                if(this.player.velocity<= 0 && this.player.y < 300){
+                    this.monster.y -= this.player.velocity;
+                }
             }
             for(let i=0; i<this.tiles.length; i++) {
                
                 // this.camravel = this.player.velocity;
-                this.tiles[i].y += 2;
+                // this.tiles[i].y += 2;
+                
+                // this.tiles[i].y += this.momentum;
+               
+                // this.momentum -= 0.25;
+                // this.momentum *= 0.9;
+                // console.log(this.momentum);
+                
+                // if(this.momentum == 0){
+
+                //     this.player.falling = true;
+                //     this.player.velocity = this.player.gravity;
+                // }
+                    
+                if(this.player.velocity<= 0 && this.player.y < 300){
+                    this.tiles[i].y -= this.player.velocity;
+                }
+                
+                
                 // this.player.y += 2;
                 this.score += 0.1;
 
