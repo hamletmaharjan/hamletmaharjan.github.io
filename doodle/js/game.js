@@ -190,96 +190,96 @@ function Game(canvasId) {
         //     dis.player.update(dis.tiles);
         // }, 50);
     }
-    this.playerUpdate = function() {
-        if(!(this.player.velocity<= 0 && this.player.y < 300))
-            this.player.y += this.player.velocity;
-        if(this.player.falling) {
-            this.player.velocity+= 0.25;
-        }
-        else{
-            this.player.velocity+=0.25;
+    // this.playerUpdate = function() {
+    //     if(!(this.player.velocity<= 0 && this.player.y < 300))
+    //         this.player.y += this.player.velocity;
+    //     if(this.player.falling) {
+    //         this.player.velocity+= 0.25;
+    //     }
+    //     else{
+    //         this.player.velocity+=0.25;
             
-            if(this.player.velocity == 0){
-                this.player.falling = true;
-                this.player.velocity = this.player.gravity;
-            }
-        }
-        this.detectBorderCollision(this.tiles);
+    //         if(this.player.velocity == 0){
+    //             this.player.falling = true;
+    //             this.player.velocity = this.player.gravity;
+    //         }
+    //     }
+    //     this.detectBorderCollision(this.tiles);
 
-        if(this.player.left) {
-            this.player.x_velocity -= 0.5;
-        }
-        if(this.player.right) {
-            this.player.x_velocity += 0.5;
-        }
+    //     if(this.player.left) {
+    //         this.player.x_velocity -= 0.5;
+    //     }
+    //     if(this.player.right) {
+    //         this.player.x_velocity += 0.5;
+    //     }
 
-        if(this.player.x <= 0-this.player.width){
-            this.player.x = 400;
-        }
-        else if(this.player.x>=400){
-            this.player.x = 0;
-        }
+    //     if(this.player.x <= 0-this.player.width){
+    //         this.player.x = 400;
+    //     }
+    //     else if(this.player.x>=400){
+    //         this.player.x = 0;
+    //     }
 
-        this.player.x += this.player.x_velocity;
-        this.player.x_velocity *= 0.9;
+    //     this.player.x += this.player.x_velocity;
+    //     this.player.x_velocity *= 0.9;
 
-        // if(this.player.y <= this.jumpThreshold) {
-        //     this.momentum = Math.abs(this.player.velocity);
-        //     this.player.velocity = 0;
-        //     // this.player.y++;
-        //     // this.player.falling = true;
-        //     //     this.player.velocity = this.player.gravity;
-        //     // console.log(this.momentum);
-        // }
+    //     // if(this.player.y <= this.jumpThreshold) {
+    //     //     this.momentum = Math.abs(this.player.velocity);
+    //     //     this.player.velocity = 0;
+    //     //     // this.player.y++;
+    //     //     // this.player.falling = true;
+    //     //     //     this.player.velocity = this.player.gravity;
+    //     //     // console.log(this.momentum);
+    //     // }
 
-        this.moveTiles();
+    //     this.moveTiles();
 
 
-        this.player.draw();
-    }
+    //     this.player.draw();
+    // }
 
     this.checkHeight = function() {
         
     }
 
-    this.detectBorderCollision = function(tiles) {
-        for(let i=0; i<tiles.length; i++){
-            if(this.player.x <= tiles[i].x + tiles[i].width &&
-                this.player.x + this.player.width >= tiles[i].x &&
-                this.player.y <= tiles[i].y + tiles[i].height &&
-                this.player.y + this.player.height >= tiles[i].y){
+    // this.detectBorderCollision = function(tiles) {
+    //     for(let i=0; i<tiles.length; i++){
+    //         if(this.player.x <= tiles[i].x + tiles[i].width &&
+    //             this.player.x + this.player.width >= tiles[i].x &&
+    //             this.player.y <= tiles[i].y + tiles[i].height &&
+    //             this.player.y + this.player.height >= tiles[i].y){
 
-                if(this.player.falling){
+    //             if(this.player.falling){
 
-                    if(tiles[i].hasSpring) {
-                        this.player.setJumpspeed(-15);
-                        // this.player.velocity = this.player.jumpSpeed;
-                    }
-                    else{
-                        this.player.setJumpspeed(-10);
-                    }
-                    this.player.velocity = this.player.jumpSpeed;
-                    this.player.falling = false;
-                    // console.log(tiles);
+    //                 if(tiles[i].hasSpring) {
+    //                     this.player.setJumpspeed(-15);
+    //                     // this.player.velocity = this.player.jumpSpeed;
+    //                 }
+    //                 else{
+    //                     this.player.setJumpspeed(-10);
+    //                 }
+    //                 this.player.velocity = this.player.jumpSpeed;
+    //                 this.player.falling = false;
+    //                 // console.log(tiles);
                     
                     
-                }
-            }
+    //             }
+    //         }
            
-        }
-        if(this.hasHoles){
-            if(this.player.x <= this.hole.x + this.hole.width &&
-                this.player.x + this.player.width >= this.hole.x &&
-                this.player.y <= this.hole.y + this.hole.height &&
-                this.player.y + this.player.height >= this.hole.y){
+    //     }
+    //     if(this.hasHoles){
+    //         if(this.player.x <= this.hole.x + this.hole.width &&
+    //             this.player.x + this.player.width >= this.hole.x &&
+    //             this.player.y <= this.hole.y + this.hole.height &&
+    //             this.player.y + this.player.height >= this.hole.y){
     
-                console.log('die');
+    //             console.log('die');
                 
-            }
+    //         }
 
-        }
+    //     }
         
-    }
+    // }
 
     this.moveTiles = function() {
         if(this.player.y <= this.jumpThreshold) {
@@ -337,6 +337,14 @@ function Game(canvasId) {
             }
         }
         
+    }
+
+    this.createGameOverScreen = function() {
+        this.ctx.font = "24px Comic Sans MS";
+        this.ctx.fillStyle = "black";
+        // this.ctx.textAlign = "center";
+        this.ctx.fillText("game Over",(this.width/2)-50,this.height/2);
+        cancelAnimationFrame(this.reqId);
     }
 
     // this.detectOutOfFrame = function() {

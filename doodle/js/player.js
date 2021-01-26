@@ -119,16 +119,20 @@ function Player(canvas, x ,y ,width, height) {
                 this.y + this.height >= tiles[i].y){
 
                 if(this.falling){
+                    if(this.y + this.height <= tiles[i].y+ tiles[i].height){
+                        if(tiles[i].hasSpring) {
+                            this.setJumpspeed(-15);
+                            // this.velocity = this.jumpSpeed;
+                        }
+                        else{
+                            this.setJumpspeed(-10);
+                        }
+                        this.velocity = this.jumpSpeed;
+                        this.falling = false;
 
-                    if(tiles[i].hasSpring) {
-                        this.setJumpspeed(-15);
-                        // this.velocity = this.jumpSpeed;
                     }
-                    else{
-                        this.setJumpspeed(-10);
-                    }
-                    this.velocity = this.jumpSpeed;
-                    this.falling = false;
+
+                    
                     // console.log(tiles);        
                     
                 }
