@@ -139,7 +139,8 @@ function Game(canvasId) {
 
 
     this.update = function() {
-        requestAnimationFrame(dis.update);
+        dis.reqId = requestAnimationFrame(dis.update);
+        // console.log(dis.reqId);
         dis.ctx.clearRect(0,0, this.width,this.height);
         dis.ctx.drawImage(background,0,0);
 
@@ -155,8 +156,16 @@ function Game(canvasId) {
         }
 
         
-        // dis.player.update(dis.tiles);
-        dis.playerUpdate();
+        dis.player.update(dis.tiles);
+        dis.moveTiles();
+        if(dis.hasHoles){
+            if(dis.player.detectHolesCollision(dis.hole)) {
+                dis.createGameOverScreen();
+            }
+
+        }
+        
+        // dis.playerUpdate();
         
 
         dis.drawTopScore();
@@ -344,7 +353,7 @@ function Game(canvasId) {
     }
 }
 
-loadMedia=6;
+loadMedia=7;
 doodleRight = new Image();
 doodleRight.src = "./images/lik-right.png";
 doodleRight.addEventListener("load",loadCount,false);
@@ -352,6 +361,10 @@ doodleRight.addEventListener("load",loadCount,false);
 doodleLeft = new Image();
 doodleLeft.src = "./images/lik-left.png";
 doodleLeft.addEventListener("load",loadCount,false);
+
+doodleShoot = new Image();
+doodleShoot.src = "./images/lik-shoot.png";
+doodleShoot.addEventListener("load",loadCount,false);
 
 tile = new Image();
 tile.src = "./images/tile.png";

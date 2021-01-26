@@ -22,8 +22,15 @@ function Player(canvas, x ,y ,width, height) {
     this.x_velocity = 0;
 
     this.img = doodleRight;
+    
+    this.animating = false;
+
+    this.frameCounter = 0;
+    this.bullets = [];
 
     var dis = this;
+
+    
 
 
     this.draw = function() {
@@ -33,59 +40,126 @@ function Player(canvas, x ,y ,width, height) {
 
     }
 
-    // this.update = function(tiles) {
-    //     this.y += this.velocity;
-    //     if(this.falling) {
-    //         this.velocity+= 0.25;
-    //     }
-    //     else{
-    //         this.velocity+=0.25;
-    //         console.log(this.velocity);
-    //         if(this.velocity == 0){
-    //             this.falling = true;
-    //             this.velocity = this.gravity;
-    //         }
-    //     }
-    //     this.detectBorderCollision(tiles);
-
-    //     if(this.left) {
-    //         this.x_velocity -= 0.5;
-    //     }
-    //     if(this.right) {
-    //         this.x_velocity += 0.5;
-    //     }
-
-    //     if(this.x <= 0-this.width){
-    //         this.x = 400;
-    //     }
-    //     else if(this.x>=400){
-    //         this.x = 0;
-    //     }
-
-    //     this.x += this.x_velocity;
-    //     this.x_velocity *= 0.9;
-
-    //     this.draw();
-    // }
-
-    // this.detectBorderCollision = function(tiles) {
-    //     for(var i=0; i<tiles.length; i++){
-    //         if(this.x <= tiles[i].x + tiles[i].width &&
-    //             this.x + this.width >= tiles[i].x &&
-    //             this.y <= tiles[i].y + tiles[i].height &&
-    //             this.y + this.height >= tiles[i].y){
-
-    //             if(this.falling){
-    //                 this.velocity = this.jumpSpeed;
-    //                 this.falling = false;
-    //                 console.log('collision');
-                    
-                    
-    //             }
-    //         }
+    this.update = function(tiles, monster) {
+        // console.log(monster);
+        if(!(this.velocity<= 0 && this.y < 300))
+            this.y += this.velocity;
+        if(this.falling) {
+            this.velocity+= 0.25;
+        }
+        else{
+            this.velocity+=0.25;
             
-    //     }
-    // }
+            if(this.velocity == 0){
+                this.falling = true;
+                this.velocity = this.gravity;
+            }
+        }
+        this.detectTilesCollision(tiles);
+
+        if(this.left) {
+            this.x_velocity -= 0.5;
+        }
+        if(this.right) {
+            this.x_velocity += 0.5;
+        }
+
+        if(this.x <= 0-this.width){
+            this.x = 400;
+        }
+        else if(this.x>=400){
+            this.x = 0;
+        }
+
+        this.x += this.x_velocity;
+        this.x_velocity *= 0.9;
+
+
+        // this.moveTiles();
+
+        if(this.animating) {
+            if(this.frameCounter<=20) {
+                this.frameCounter++;
+            }
+            else{
+                this.animating = false;
+                this.frameCounter = 0;
+                this.img = this.previousImg;
+            }
+        }
+       
+
+
+        this.draw();
+        if(this.bullets.length!=0){
+            // console.log('cull');
+            for(let i=0; i<this.bullets.length; i++) {
+                this.bullets[i].update();
+
+                if(this.bullets[i].detectBorderCollision()) {
+                    this.bullets.shift();
+                    console.log(this.bullets.length);
+                }
+                // if(monster) {
+                //     if(this.bullets[i].detectCollision(monster)) {
+                //         console.log('dead');
+                //     }
+                // }
+                
+            }
+            
+        }
+    }
+
+    this.detectTilesCollision = function(tiles) {
+        for(let i=0; i<tiles.length; i++){
+            if(this.x <= tiles[i].x + tiles[i].width &&
+                this.x + this.width >= tiles[i].x &&
+                this.y <= tiles[i].y + tiles[i].height &&
+                this.y + this.height >= tiles[i].y){
+
+                if(this.falling){
+
+                    if(tiles[i].hasSpring) {
+                        this.setJumpspeed(-15);
+                        // this.velocity = this.jumpSpeed;
+                    }
+                    else{
+                        this.setJumpspeed(-10);
+                    }
+                    this.velocity = this.jumpSpeed;
+                    this.falling = false;
+                    // console.log(tiles);        
+                    
+                }
+            }
+           
+        }
+    }
+
+    this.detectHolesCollision = function(hole) {
+        if(this.x <= hole.x + hole.width &&
+            this.x + this.width >= hole.x &&
+            this.y <= hole.y + hole.height &&
+            this.y + this.height >= hole.y){
+            // console.log('die');
+            // this.createGameOverScreen();
+            return true;
+            
+        }
+    }
+
+    this.detectEnemyCollision = function(enemy) {
+        if(this.x <= enemy.x + enemy.width &&
+            this.x + this.width >= enemy.x &&
+            this.y <= enemy.y + enemy.height &&
+            this.y + this.height >= enemy.y){
+            console.log('enemy collison');
+            // this.createGameOverScreen();
+            // return true;
+            
+        }
+    }
 
     this.addListeners = function() {
         window.addEventListener("keydown", this.keyListener);
@@ -106,6 +180,22 @@ function Player(canvas, x ,y ,width, height) {
             case 39:
                 dis.right = key_state;
                 dis.img = doodleRight;
+                break;
+            
+            case 32:
+                if(key_state){
+                    let bullet = new Bullet(dis.canvas, dis);
+                    dis.bullets.push(bullet);
+                    // if(dis.img == doodleShoot){
+
+                    // }
+                    dis.previousImg = dis.img;
+                    dis.img = doodleShoot;
+                    dis.animating = true;
+                    console.log(bullet);
+
+                }
+                
                 break;
 
             default:
