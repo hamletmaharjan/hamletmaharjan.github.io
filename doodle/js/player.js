@@ -133,6 +133,7 @@ function Player(canvas, x ,y ,width, height) {
                     if(this.y + this.height <= tiles[i].y+ tiles[i].height){
                         if(tiles[i].hasSpring) {
                             this.setJumpspeed(-15);
+                            tiles[i].inflateSpring(116, 28);
                             // this.velocity = this.jumpSpeed;
                         }
                         else{
@@ -171,7 +172,13 @@ function Player(canvas, x ,y ,width, height) {
             this.y + this.height >= enemy.y){
             // console.log('enemy collison');
             // this.createGameOverScreen();
-            return true;
+            if(!this.falling){
+                return "collided";
+            }
+            else{
+                return "jumped";
+            }
+            
             
         }
     }

@@ -18,6 +18,11 @@ function Tile(canvas, x ,y) {
 
     this.dumy = 0;
 
+    this.springSx = 403;
+    this.springSy = 100;
+    this.springWidth = 19;
+    this.springHeight = 12;
+    this.diff = 5;
     this.init = function() {
         if(this.isBlue){
             this.img = tileBlue;
@@ -37,9 +42,16 @@ function Tile(canvas, x ,y) {
         
         this.ctx.drawImage(this.img,this.x,  this.y, this.width, this.height);
         if(this.hasSpring){
-            this.ctx.fillRect(this.springX, this.y-10, 10, 12);
+            this.ctx.drawImage(gameTiles, this.springSx, this.springSy, 19, 12, this.springX, this.y-this.diff, this.springWidth, this.springHeight );
+            // this.ctx.fillRect(this.springX, this.y-10, 10, 12);
         }
         
+    }
+
+    this.inflateSpring = function(sy, h) {  
+        this.springSy = sy;
+        this.diff += h - this.springHeight ;
+        this.springHeight = h;
     }
 
     
@@ -164,9 +176,17 @@ function Game(canvasId) {
         }
         if(dis.hasMonsters) {
             dis.monster.draw();
-            if(dis.player.detectEnemyCollision(dis.monster)){
+            if(dis.player.detectEnemyCollision(dis.monster) == "collided"){
                 dis.createGameOverScreen();
-            };
+            }
+            else if(dis.player.detectEnemyCollision(dis.monster) == "jumped") {
+                dis.player.setJumpspeed(-10);
+                dis.player.velocity = dis.player.jumpSpeed;
+                dis.player.falling = false;
+                dis.monster = null;
+                dis.hasMonsters = false;
+                
+            }
             if(dis.player.detectBulletCollisionWithMonster(dis.monster)){
                 console.log('enemy die');
                 dis.monster = null;
