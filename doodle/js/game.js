@@ -1,78 +1,8 @@
 
-function Tile(canvas, x ,y) {
-    this.x = x;
-    this.y = y;
-    this.width = 60;
-    this.height = 15;
-    this.canvas=canvas;
-    this.ctx=this.canvas.getContext("2d");
 
-    let ran = Math.random()*10;
-    this.hasSpring = (ran >= "9") ? true :false;
-    this.springX = getRandomValue(this.x, this.x+ this.width);
-
-    this.isBlue = (ran <= "2") ? true: false;
-
-    this.dx = 1;
-    this.img = tile;
-
-    this.dumy = 0;
-
-    this.springSx = 403;
-    this.springSy = 100;
-    this.springWidth = 19;
-    this.springHeight = 12;
-    this.diff = 5;
-    this.init = function() {
-        if(this.isBlue){
-            this.img = tileBlue;
-        }
-    }
-
-    this.draw = function() {
-        // this.ctx.fillStyle = "green";
-        // this.ctx.fillRect(this.x, this.y, this.width, this.height);
-        if(this.isBlue){
-            
-            this.x += this.dx;
-            if(this.x> 400-this.width || this.x<= 0){
-                this.dx*= -1;
-            }
-        }
-        
-        this.ctx.drawImage(this.img,this.x,  this.y, this.width, this.height);
-        if(this.hasSpring){
-            this.ctx.drawImage(gameTiles, this.springSx, this.springSy, 19, 12, this.springX, this.y-this.diff, this.springWidth, this.springHeight );
-            // this.ctx.fillRect(this.springX, this.y-10, 10, 12);
-        }
-        
-    }
-
-    this.inflateSpring = function(sy, h) {  
-        this.springSy = sy;
-        this.diff += h - this.springHeight ;
-        this.springHeight = h;
-    }
-
-    
-}
-
-function Hole(canvas, x, y) {
-    this.x = x;
-    this.y = y;
-    this.width = 50;
-    this.height = 50;
-    this.canvas=canvas;
-    this.ctx=this.canvas.getContext("2d");
-
-    this.draw = function() {
-        this.ctx.drawImage(gameTiles, 233, 51, 68, 61, this.x, this.y, 68, 61);
-    }
-}
-
-function Game(canvasId) {
-
-    this.canvas = document.getElementById(canvasId);
+function Game(canvas) {
+    this.canvas = canvas;
+    // this.canvas = document.getElementById(canvasId);
     this.ctx = this.canvas.getContext('2d');
     this.width = 400;
     this.height = 657;
@@ -390,43 +320,16 @@ function Game(canvasId) {
     }
 }
 
-loadMedia=7;
-doodleRight = new Image();
-doodleRight.src = "./images/lik-right.png";
-doodleRight.addEventListener("load",loadCount,false);
 
-doodleLeft = new Image();
-doodleLeft.src = "./images/lik-left.png";
-doodleLeft.addEventListener("load",loadCount,false);
 
-doodleShoot = new Image();
-doodleShoot.src = "./images/lik-shoot.png";
-doodleShoot.addEventListener("load",loadCount,false);
+// var g = new Game(canvas);
 
-tile = new Image();
-tile.src = "./images/tile.png";
-tile.addEventListener("load",loadCount,false);
-
-tileBlue = new Image();
-tileBlue.src = "./images/tile-blue.png";
-tileBlue.addEventListener("load",loadCount,false);
-
-topScore = new Image();
-topScore.src = "./images/top-score.png";
-topScore.addEventListener("load",loadCount,false);
-
-gameTiles = new Image();
-gameTiles.src = "./images/game-tiles.png";
-gameTiles.addEventListener("load",loadCount,false);
-
-var g = new Game('myGame');
-
-function loadCount(){
-    loadMedia--;
-    if(loadMedia==0){
-        g.init();
-    }
+// function loadCount(){
+//     loadMedia--;
+//     // if(loadMedia==0){
+//     //     g.init();
+//     // }
         
-}
+// }
 
 // var g = new Game('myGame');
