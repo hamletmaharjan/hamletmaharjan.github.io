@@ -147,9 +147,7 @@ function Game(canvasId) {
         if(dis.hasHoles) {
             dis.hole.draw();
         }
-        if(dis.hasMonsters) {
-            dis.monster.draw();
-        }
+        
 
         for(var i=0; i<dis.tiles.length; i++){
             dis.tiles[i].draw();
@@ -163,6 +161,17 @@ function Game(canvasId) {
                 dis.createGameOverScreen();
             }
 
+        }
+        if(dis.hasMonsters) {
+            dis.monster.draw();
+            if(dis.player.detectEnemyCollision(dis.monster)){
+                dis.createGameOverScreen();
+            };
+            if(dis.player.detectBulletCollisionWithMonster(dis.monster)){
+                console.log('enemy die');
+                dis.monster = null;
+                dis.hasMonsters = false;
+            }
         }
         
         // dis.playerUpdate();

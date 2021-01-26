@@ -98,7 +98,7 @@ function Player(canvas, x ,y ,width, height) {
 
                 if(this.bullets[i].detectBorderCollision()) {
                     this.bullets.shift();
-                    console.log(this.bullets.length);
+                    // console.log(this.bullets.length);
                 }
                 // if(monster) {
                 //     if(this.bullets[i].detectCollision(monster)) {
@@ -108,6 +108,17 @@ function Player(canvas, x ,y ,width, height) {
                 
             }
             
+        }
+    }
+
+    this.detectBulletCollisionWithMonster = function(monster) {
+        if(this.bullets.length!=0){
+            for(let i=0; i<this.bullets.length; i++) {
+                if(this.bullets[i].detectCollision(monster)){
+                    return true;
+                };
+            }
+
         }
     }
 
@@ -158,9 +169,9 @@ function Player(canvas, x ,y ,width, height) {
             this.x + this.width >= enemy.x &&
             this.y <= enemy.y + enemy.height &&
             this.y + this.height >= enemy.y){
-            console.log('enemy collison');
+            // console.log('enemy collison');
             // this.createGameOverScreen();
-            // return true;
+            return true;
             
         }
     }
@@ -196,7 +207,7 @@ function Player(canvas, x ,y ,width, height) {
                     dis.previousImg = dis.img;
                     dis.img = doodleShoot;
                     dis.animating = true;
-                    console.log(bullet);
+                    // console.log(bullet);
 
                 }
                 
