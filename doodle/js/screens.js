@@ -23,7 +23,7 @@ function Screen(canvas) {
     }
 }
 
-loadMedia = 11;
+loadMedia = 13;
 doodleRight = new Image();
 doodleRight.src = "./images/lik-right.png";
 doodleRight.addEventListener("load",loadCount,false);
@@ -47,6 +47,16 @@ doodleLeftSpring.addEventListener("load",loadCount,false);
 doodleShootSpring = new Image();
 doodleShootSpring.src = "./images/lik-shoot-spring.png";
 doodleShootSpring.addEventListener("load",loadCount,false);
+
+
+doodleLeftJetpack = new Image();
+doodleLeftJetpack.src = "./images/lik-left-jetpack.png";
+doodleLeftJetpack.addEventListener("load",loadCount,false);
+
+
+doodleRightJetpack = new Image();
+doodleRightJetpack.src = "./images/lik-right-jetpack.png";
+doodleRightJetpack.addEventListener("load",loadCount,false);
 
 tile = new Image();
 tile.src = "./images/tile.png";

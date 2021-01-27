@@ -34,9 +34,12 @@ function Player(canvas, x ,y ,width, height) {
     this.acceleration = 0.25;
 
     this.propellerFrameCounter = 0;
-    this.propellerFrames = [[]];
+    // this.propellerFrames = [[]];
     this.propellerWidth = 29;
     this.propellerHeight = 27;
+
+
+    // this.jetpackFrame
 
 
     var dis = this;
@@ -158,6 +161,20 @@ function Player(canvas, x ,y ,width, height) {
                             this.hasPickup = true;
                             this.pickupType = "propellerHat";
                         }
+                        else if(tiles[i].pickup.choosen == "jetpack") {
+                            this.setJumpspeed(-20);
+                            this.velocity = this.jumpSpeed;
+                            this.falling = false;
+                            this.acceleration = 0.10;
+                            this.hasPickup = true;
+                            this.pickupType = "jetpack";
+                            if(this.left){
+                                this.img = doodleLeftJetpack;
+                            }
+                            else{
+                                this.img = doodleRightJetpack;
+                            }
+                        }
                     }
 
                 }
@@ -234,7 +251,7 @@ function Player(canvas, x ,y ,width, height) {
             // this.createGameOverScreen();
             if(!this.falling){
                 if(this.hasPickup){
-                    if(this.pickupType == "propellerHat"){
+                    if(this.pickupType == "propellerHat" || this.pickupType == "jetpack"){
                         return "jumped";
                     }
                 }
@@ -264,6 +281,9 @@ function Player(canvas, x ,y ,width, height) {
                     if(dis.pickupType == "springShoe") {
                         dis.img = doodleLeftSpring;
                     }
+                    else if(dis.pickupType == "jetpack") {
+                        dis.img = doodleLeftJetpack;
+                    }
                     else{
                         dis.img = doodleLeft;
                     }
@@ -281,6 +301,9 @@ function Player(canvas, x ,y ,width, height) {
                     if(dis.pickupType == "springShoe") {
                         dis.img = doodleRightSpring;
                     }
+                    else if(dis.pickupType == "jetpack") {
+                        dis.img = doodleRightJetpack;
+                    }
                     else{
                         dis.img = doodleRight;
                     }
@@ -293,19 +316,22 @@ function Player(canvas, x ,y ,width, height) {
             
             case 32:
                 if(key_state){
-                    let bullet = new Bullet(dis.canvas, dis);
-                    dis.bullets.push(bullet);
+                    
                     // if(dis.img == doodleShoot){
 
                     // }
                     dis.previousImg = dis.img;
                     if(dis.hasPickup){
                         if(dis.pickupType == "springShoe") {
+                            let bullet = new Bullet(dis.canvas, dis);
+                            dis.bullets.push(bullet);
                             dis.img = doodleShootSpring;
                         }
                         
                     }
                     else{
+                        let bullet = new Bullet(dis.canvas, dis);
+                        dis.bullets.push(bullet);
                         dis.img = doodleShoot;
                     }
                     
