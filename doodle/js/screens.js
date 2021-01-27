@@ -13,6 +13,9 @@ function Screen(canvas) {
         // var background = document.getElementById('background');
         this.ctx.drawImage(startScreen,0,0,this.width,this.height);
 
+        this.pickup = new Pickup(canvas, 21,10);
+        this.pickup.draw();
+
         canvas.addEventListener('click', function(event) {
             dis.g = new Game(dis.canvas);
             dis.g.init();

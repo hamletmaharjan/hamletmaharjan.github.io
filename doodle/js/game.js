@@ -33,6 +33,7 @@ function Game(canvas) {
         this.player.draw();
 
         this.tile = new Tile(this.canvas, 20,620);
+        this.tile.init();
         this.tiles.push(this.tile);
 
         this.createTiles();

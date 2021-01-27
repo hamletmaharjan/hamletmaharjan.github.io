@@ -1,4 +1,5 @@
 
+
 function Tile(canvas, x ,y) {
     this.x = x;
     this.y = y;
@@ -7,11 +8,14 @@ function Tile(canvas, x ,y) {
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
 
-    let ran = Math.random()*10;
+    let ran = parseInt(Math.random()*10);
     this.hasSpring = (ran >= "9") ? true :false;
     this.springX = getRandomValue(this.x, this.x+ this.width);
 
     this.isBlue = (ran <= "2") ? true: false;
+
+
+    this.hasPickup = (ran == 5) ? true: false;
 
     this.dx = 1;
     this.img = tile;
@@ -23,10 +27,17 @@ function Tile(canvas, x ,y) {
     this.springWidth = 19;
     this.springHeight = 12;
     this.diff = 5;
+
+    var dis = this;
     this.init = function() {
         if(this.isBlue){
             this.img = tileBlue;
         }
+        if(this.hasPickup){
+            this.pickup = new Pickup(this.canvas, this.x, this.y);
+        }
+        
+        
     }
 
     this.draw = function() {
@@ -45,6 +56,11 @@ function Tile(canvas, x ,y) {
             this.ctx.drawImage(gameTiles, this.springSx, this.springSy, 19, 12, this.springX, this.y-this.diff, this.springWidth, this.springHeight );
             // this.ctx.fillRect(this.springX, this.y-10, 10, 12);
         }
+
+        if(this.hasPickup) {
+            this.pickup.update(this.y);
+        }
+        
         
     }
 
