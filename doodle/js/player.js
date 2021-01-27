@@ -73,6 +73,14 @@ function Player(canvas, x ,y ,width, height) {
             if(this.velocity >= 0){
                 if(this.pickupType!="springShoe")
                     this.hasPickup = false;
+                if(this.pickupType == "jetpack") {
+                    if(this.left) {
+                        this.img = doodleLeft;
+                    }
+                    else{
+                        this.img = doodleRight;
+                    }
+                }
                 this.falling = true;
                 this.velocity = this.gravity;
             }
