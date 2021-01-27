@@ -144,10 +144,10 @@ function Player(canvas, x ,y ,width, height) {
     this.detectBulletCollisionWithMonster = function(monster) {
         if(this.bullets.length!=0){
             for(let i=0; i<this.bullets.length; i++) {
-                // if(this.bullets[i].detectCollision(monster)){
-                //     return true;
-                // };
-                return monster.detectCollisionWithBullet(this.bullets[i]);
+                if(this.bullets[i].detectCollision(monster)){
+                    return true;
+                };
+                // return monster.detectCollisionWithBullet(this.bullets[i]);
             }
 
         }
