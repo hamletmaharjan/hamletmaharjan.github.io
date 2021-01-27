@@ -20,16 +20,16 @@ function Bullet(canvas, player) {
         this.draw();
     }
 
-    this.detectCollision = function(enemy) {
-        if(this.x <= enemy.x + enemy.width &&
-            this.x + this.width >= enemy.x &&
-            this.y <= enemy.y + enemy.height &&
-            this.y + this.height >= enemy.y){
-            return true;
-            // console.log('enemy dissapear');
+    // this.detectCollision = function(enemy) {
+    //     if(this.x <= enemy.x + enemy.width &&
+    //         this.x + this.width >= enemy.x &&
+    //         this.y <= enemy.y + enemy.height &&
+    //         this.y + this.height >= enemy.y){
+    //         return true;
+    //         // console.log('enemy dissapear');
             
-        }
-    }
+    //     }
+    // }
 
     this.detectBorderCollision = function() {
         if(this.y <= 0) {

@@ -144,9 +144,10 @@ function Player(canvas, x ,y ,width, height) {
     this.detectBulletCollisionWithMonster = function(monster) {
         if(this.bullets.length!=0){
             for(let i=0; i<this.bullets.length; i++) {
-                if(this.bullets[i].detectCollision(monster)){
-                    return true;
-                };
+                // if(this.bullets[i].detectCollision(monster)){
+                //     return true;
+                // };
+                return monster.detectCollisionWithBullet(this.bullets[i]);
             }
 
         }
@@ -250,28 +251,28 @@ function Player(canvas, x ,y ,width, height) {
         }
     }
 
-    this.detectEnemyCollision = function(enemy) {
-        if(this.x <= enemy.x + enemy.width &&
-            this.x + this.width >= enemy.x &&
-            this.y <= enemy.y + enemy.height &&
-            this.y + this.height >= enemy.y){
-            // console.log('enemy collison');
-            // this.createGameOverScreen();
-            if(!this.falling){
-                if(this.hasPickup){
-                    if(this.pickupType == "propellerHat" || this.pickupType == "jetpack"){
-                        return "jumped";
-                    }
-                }
-                return "collided";
-            }
-            else{
-                return "jumped";
-            }
+    // this.detectEnemyCollision = function(enemy) {
+    //     if(this.x <= enemy.x + enemy.width &&
+    //         this.x + this.width >= enemy.x &&
+    //         this.y <= enemy.y + enemy.height &&
+    //         this.y + this.height >= enemy.y){
+    //         // console.log('enemy collison');
+    //         // this.createGameOverScreen();
+    //         if(!this.falling){
+    //             if(this.hasPickup){
+    //                 if(this.pickupType == "propellerHat" || this.pickupType == "jetpack"){
+    //                     return "jumped";
+    //                 }
+    //             }
+    //             return "collided";
+    //         }
+    //         else{
+    //             return "jumped";
+    //         }
             
             
-        }
-    }
+    //     }
+    // }
 
     this.addListeners = function() {
         window.addEventListener("keydown", this.keyListener);

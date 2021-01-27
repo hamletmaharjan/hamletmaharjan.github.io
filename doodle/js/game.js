@@ -63,11 +63,12 @@ function Game(canvas) {
             
         }
 
-        if(this.score > 0 && this.score.toFixed(0) % 400 == 0) {
-            console.log('monster');
+        if(this.score > 0 && this.score.toFixed(0) % 100 == 0) {
+            // console.log('monster');
             this.hasMonsters = true;
+            this.score++;
             this.monster = new Monster(this.canvas, this.getRandomValue(0, this.width-158), -50);
-            
+            console.log(this.monster.choosen);
         }
     }
 
@@ -107,10 +108,10 @@ function Game(canvas) {
         }
         if(dis.hasMonsters) {
             dis.monster.draw();
-            if(dis.player.detectEnemyCollision(dis.monster) == "collided"){
+            if(dis.monster.detectCollision(dis.player) == "collided"){
                 dis.createGameOverScreen();
             }
-            else if(dis.player.detectEnemyCollision(dis.monster) == "jumped") {
+            else if(dis.monster.detectCollision(dis.player) == "jumped") {
                 dis.player.setJumpspeed(-10);
                 dis.player.velocity = dis.player.jumpSpeed;
                 dis.player.falling = false;
