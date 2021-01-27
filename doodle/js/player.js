@@ -28,6 +28,8 @@ function Player(canvas, x ,y ,width, height) {
     this.frameCounter = 0;
     this.bullets = [];
 
+    this.hasPickup = false;
+    this.pickupType = "";
     var dis = this;
 
     
@@ -136,11 +138,36 @@ function Player(canvas, x ,y ,width, height) {
                             tiles[i].inflateSpring(116, 28);
                             // this.velocity = this.jumpSpeed;
                         }
+                        else if(tiles[i].hasPickup) {
+                            if(tiles[i].pickup.choosen == "springShoe") {
+                                console.log('spring');
+                                this.hasPickup = true;
+                                this.pickupType = "springShoe";
+                                this.springJumpCounter = 5;
+                                this.setJumpspeed(-15);
+                                if(this.left){
+                                    this.img = doodleLeftSpring;
+                                }
+                                else{
+                                    this.img = doodleRightSpring;
+                                }
+                            }
+                        }
+                        else if(this.hasPickup) {
+                            if(this.pickupType == "springShoe"){
+                                this.setJumpspeed(-15);
+                            }
+                        }
                         else{
                             this.setJumpspeed(-10);
                         }
                         this.velocity = this.jumpSpeed;
                         this.falling = false;
+
+                        if(this.springJumpCounter == 0){
+                            this.hasPickup = false;
+                        }
+                        this.springJumpCounter--;
 
                     }
 
@@ -195,13 +222,30 @@ function Player(canvas, x ,y ,width, height) {
         switch(e.keyCode) {
             case 37:
                 dis.left = key_state;
-                dis.img = doodleLeft;
+                if(dis.hasPickup){
+                    if(dis.pickupType == "springShoe") {
+                        dis.img = doodleLeftSpring;
+                    }
+                }
+                else{
+                    dis.img = doodleLeft;
+                }
+                
                 // console.log(this.img);
                 break;
 
             case 39:
                 dis.right = key_state;
-                dis.img = doodleRight;
+                if(dis.hasPickup){
+                    if(dis.pickupType == "springShoe") {
+                        dis.img = doodleRightSpring;
+                    }
+                    
+                }
+                else{
+                    dis.img = doodleRight;
+                }
+                
                 break;
             
             case 32:
@@ -212,7 +256,16 @@ function Player(canvas, x ,y ,width, height) {
 
                     // }
                     dis.previousImg = dis.img;
-                    dis.img = doodleShoot;
+                    if(dis.hasPickup){
+                        if(dis.pickupType == "springShoe") {
+                            dis.img = doodleShootSpring;
+                        }
+                        
+                    }
+                    else{
+                        dis.img = doodleShoot;
+                    }
+                    
                     dis.animating = true;
                     // console.log(bullet);
 
