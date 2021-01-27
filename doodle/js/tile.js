@@ -10,7 +10,7 @@ function Tile(canvas, x ,y) {
 
     let ran = parseInt(Math.random()*10);
     this.hasSpring = (ran >= "9") ? true :false;
-    this.springX = getRandomValue(this.x, this.x+ this.width);
+    this.springX = getRandomValue(this.x, this.x+ this.width-19);
 
     this.isBlue = (ran <= "2") ? true: false;
 

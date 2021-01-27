@@ -23,9 +23,9 @@ function Pickup(canvas, x, y) {
             height: 37
         },
         propellerHat : {
-            sx: 224,
-            sy: 282,
-            width: 24,
+            sx: 332,
+            sy: 236,
+            width: 30,
             height: 18
         },
     }
@@ -47,5 +47,14 @@ function Pickup(canvas, x, y) {
     this.update = function(y) {
         this.y = y;
         this.draw();
+    }
+
+    this.detectCollision = function(player) {
+        if(player.x <= this.pickups[this.choosen].x +10 + this.pickups[this.choosen].width &&
+            player.x + this.width >= this.pickups[this.choosen].x + 10 &&
+            player.y <= this.pickups[this.choosen].y + this.pickups[this.choosen].height &&
+            player.y + this.height >= this.pickups[this.choosen].y){
+                return true;
+        }
     }
 }

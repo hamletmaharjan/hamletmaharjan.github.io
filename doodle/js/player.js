@@ -30,6 +30,15 @@ function Player(canvas, x ,y ,width, height) {
 
     this.hasPickup = false;
     this.pickupType = "";
+
+    this.acceleration = 0.25;
+
+    this.propellerFrameCounter = 0;
+    this.propellerFrames = [[]];
+    this.propellerWidth = 29;
+    this.propellerHeight = 27;
+
+
     var dis = this;
 
     
@@ -40,6 +49,12 @@ function Player(canvas, x ,y ,width, height) {
         // this.ctx.fillRect(this.x, this.y, this.width, this.height);
         this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
 
+        if(this.hasPickup) {
+            if(this.pickupType == "propellerHat") {
+                this.ctx.drawImage(gameTiles,671, 38, 32, 19, this.x+15, this.y, 32, 19);
+            }
+        }
+
     }
 
     this.update = function(tiles, monster) {
@@ -47,12 +62,14 @@ function Player(canvas, x ,y ,width, height) {
         if(!(this.velocity<= 0 && this.y < 300))
             this.y += this.velocity;
         if(this.falling) {
-            this.velocity+= 0.25;
+            this.velocity+= this.acceleration;
         }
         else{
-            this.velocity+=0.25;
+            this.velocity+= this.acceleration;
             
-            if(this.velocity == 0){
+            if(this.velocity >= 0){
+                if(this.pickupType!="springShoe")
+                    this.hasPickup = false;
                 this.falling = true;
                 this.velocity = this.gravity;
             }
@@ -130,6 +147,21 @@ function Player(canvas, x ,y ,width, height) {
                 this.x + this.width >= tiles[i].x &&
                 this.y <= tiles[i].y + tiles[i].height &&
                 this.y + this.height >= tiles[i].y){
+                
+                if(!this.hasPickup){
+                    if(tiles[i].hasPickup) {
+                        if(tiles[i].pickup.choosen == "propellerHat") {
+                            this.setJumpspeed(-15);
+                            this.velocity = this.jumpSpeed;
+                            this.falling = false;
+                            this.acceleration = 0.10;
+                            this.hasPickup = true;
+                            this.pickupType = "propellerHat";
+                        }
+                    }
+
+                }
+                
 
                 if(this.falling){
                     if(this.y + this.height <= tiles[i].y+ tiles[i].height){
@@ -163,6 +195,7 @@ function Player(canvas, x ,y ,width, height) {
                         }
                         this.velocity = this.jumpSpeed;
                         this.falling = false;
+                        this.acceleration = 0.25;
 
                         if(this.springJumpCounter == 0){
                             this.hasPickup = false;
@@ -200,6 +233,11 @@ function Player(canvas, x ,y ,width, height) {
             // console.log('enemy collison');
             // this.createGameOverScreen();
             if(!this.falling){
+                if(this.hasPickup){
+                    if(this.pickupType == "propellerHat"){
+                        return "jumped";
+                    }
+                }
                 return "collided";
             }
             else{
@@ -226,6 +264,9 @@ function Player(canvas, x ,y ,width, height) {
                     if(dis.pickupType == "springShoe") {
                         dis.img = doodleLeftSpring;
                     }
+                    else{
+                        dis.img = doodleLeft;
+                    }
                 }
                 else{
                     dis.img = doodleLeft;
@@ -240,7 +281,9 @@ function Player(canvas, x ,y ,width, height) {
                     if(dis.pickupType == "springShoe") {
                         dis.img = doodleRightSpring;
                     }
-                    
+                    else{
+                        dis.img = doodleRight;
+                    }
                 }
                 else{
                     dis.img = doodleRight;
