@@ -1,4 +1,4 @@
-
+var gameState = "start";
 
 function Screen(canvas) {
     this.canvas = canvas;
@@ -7,7 +7,7 @@ function Screen(canvas) {
     this.height = 657;
     var dis = this;
 
-    this.createStartScreen = function() {
+    this.init = function() {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         // var background = document.getElementById('background');
@@ -16,10 +16,28 @@ function Screen(canvas) {
         this.pickup = new Pickup(canvas, 21,10);
         this.pickup.draw();
 
-        canvas.addEventListener('click', function(event) {
-            dis.g = new Game(dis.canvas);
-            dis.g.init();
-          });
+        this.g = new Game(dis.canvas);
+
+        this.createStartScreen();
+
+    }
+
+    this.createStartScreen = function() {
+        
+
+        canvas.addEventListener('click', function(e) {
+            console.log(e);
+            if(gameState == "start"){
+                if(e.offsetX >= 69 && e.offsetX <= 194 && e.offsetY <= 222 && e.offsetY >= 183) {
+                    dis.g.init();
+                }
+                else if(e.offsetX >= 104 && e.offsetX<= 232 && e.offsetY >= 266 && e.offsetY <= 310) {
+                    console.log("controls");
+                }
+            }
+            
+            
+        });
     }
 }
 
@@ -81,7 +99,7 @@ startScreen.addEventListener("load",loadCount,false);
 function loadCount(){
     loadMedia--;
     if(loadMedia==0){
-        screen.createStartScreen();
+        screen.init();
     }
         
 }

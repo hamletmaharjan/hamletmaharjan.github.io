@@ -142,6 +142,12 @@ function Player(canvas, x ,y ,width, height) {
         }
     }
 
+    this.detectOutOfFrame = function(value) {
+        if(this.y >= value) {
+            return true;
+        }
+    }
+
     this.detectBulletCollisionWithMonster = function(monster) {
         if(this.bullets.length!=0){
             for(let i=0; i<this.bullets.length; i++) {
@@ -170,6 +176,8 @@ function Player(canvas, x ,y ,width, height) {
                             this.acceleration = 0.10;
                             this.hasPickup = true;
                             this.pickupType = "propellerHat";
+
+                            propellerSound.play();
                         }
                         else if(tiles[i].pickup.choosen == "jetpack") {
                             this.setJumpspeed(-20);
@@ -184,6 +192,8 @@ function Player(canvas, x ,y ,width, height) {
                             else{
                                 this.img = doodleRightJetpack;
                             }
+
+                            jetpackSound.play();
                         }
                     }
 
@@ -195,6 +205,7 @@ function Player(canvas, x ,y ,width, height) {
                         if(tiles[i].hasSpring) {
                             this.setJumpspeed(-15);
                             tiles[i].inflateSpring(116, 28);
+                            springShoeSound.play();
                             // this.velocity = this.jumpSpeed;
                         }
                         else if(tiles[i].hasPickup) {
@@ -210,15 +221,18 @@ function Player(canvas, x ,y ,width, height) {
                                 else{
                                     this.img = doodleRightSpring;
                                 }
+                                springShoeSound.play();
                             }
                         }
                         else if(this.hasPickup) {
                             if(this.pickupType == "springShoe"){
                                 this.setJumpspeed(-15);
+                                springShoeSound.play();
                             }
                         }
                         else{
                             this.setJumpspeed(-10);
+                            jumpSound.play();
                         }
                         this.velocity = this.jumpSpeed;
                         this.falling = false;
@@ -336,6 +350,7 @@ function Player(canvas, x ,y ,width, height) {
                             let bullet = new Bullet(dis.canvas, dis);
                             dis.bullets.push(bullet);
                             dis.img = doodleShootSpring;
+                            bulletSound.play();
                         }
                         
                     }
@@ -343,6 +358,7 @@ function Player(canvas, x ,y ,width, height) {
                         let bullet = new Bullet(dis.canvas, dis);
                         dis.bullets.push(bullet);
                         dis.img = doodleShoot;
+                        bulletSound.play();
                     }
                     
                     dis.animating = true;
