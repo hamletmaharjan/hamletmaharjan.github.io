@@ -49,7 +49,7 @@ function Monster(canvas, x, y) {
             if(!player.falling){
                 if(player.hasPickup){
                     if(player.pickupType == "propellerHat" || player.pickupType == "jetpack"){
-                        return "jumped";
+                        return "shredded";
                     }
                 }
                 return "collided";

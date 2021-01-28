@@ -71,6 +71,7 @@ function Player(canvas, x ,y ,width, height) {
             this.velocity+= this.acceleration;
             
             if(this.velocity >= 0){
+                this.acceleration = 0.25;
                 if(this.pickupType!="springShoe")
                     this.hasPickup = false;
                 if(this.pickupType == "jetpack") {

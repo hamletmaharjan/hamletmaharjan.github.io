@@ -63,7 +63,7 @@ function Game(canvas) {
             
         }
 
-        if(this.score > 0 && this.score.toFixed(0) % 100 == 0) {
+        if(this.score > 0 && this.score.toFixed(0) % 400 == 0) {
             // console.log('monster');
             this.hasMonsters = true;
             this.score++;
@@ -118,6 +118,10 @@ function Game(canvas) {
                 dis.monster = null;
                 dis.hasMonsters = false;
                 
+            }
+            else if(dis.monster.detectCollision(dis.player) == "shredded") {
+                dis.monster = null;
+                dis.hasMonsters = false;
             }
             if(dis.player.detectBulletCollisionWithMonster(dis.monster)){
                 console.log('enemy die');

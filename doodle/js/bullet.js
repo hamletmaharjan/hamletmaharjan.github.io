@@ -27,9 +27,9 @@ function Bullet(canvas, player) {
         //     this.y + this.height >= enemy.y){
 
         if(this.x <= monster.x + monster.monsters[monster.choosen].width &&
-            this.x + this.width >= this.x &&
+            this.x + this.width >= monster.x &&
             this.y <= monster.y + monster.monsters[monster.choosen].height &&
-            this.y + this.height >= this.y){
+            this.y + this.height >= monster.y){
             return true;
             // console.log('enemy dissapear');
             
