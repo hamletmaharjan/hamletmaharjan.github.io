@@ -58,6 +58,10 @@ function Player(canvas, x ,y ,width, height) {
             if(this.pickupType == "propellerHat") {
                 this.ctx.drawImage(gameTiles,671, 38, 32, 19, this.x+15, this.y, 32, 19);
             }
+            else if(this.pickupType == "shield") {
+                this.ctx.drawImage(doodleShield, this.x, this.y, this.width+10,this.height+15);
+                // this.ctx.fillRect(this.x, this.y, 10,10);
+            }
             
         }
 
@@ -78,7 +82,7 @@ function Player(canvas, x ,y ,width, height) {
                 this.width = this.trueWidth;
                 this.height = this.trueHeight;
                 if(this.hasPickup){
-                    if(this.pickupType != "springShoe") {
+                    if(this.pickupType != "springShoe" && this.pickupType!= "shield") {
                         this.hasPickup = false;
                     }  
                     // if(this.hasPickup){
@@ -223,39 +227,59 @@ function Player(canvas, x ,y ,width, height) {
 
                 if(this.falling){
                     if(this.y + this.height <= tiles[i].y+ tiles[i].height){
-                        
-                        if(tiles[i].hasSpring) {
-                            this.setJumpspeed(-15);
-                            tiles[i].inflateSpring(116, 28);
-                            springShoeSound.play();
-                            // this.velocity = this.jumpSpeed;
-                        }
-                        else if(tiles[i].hasPickup) {
-                            if(tiles[i].pickup.choosen == "springShoe") {
-                                console.log('spring');
-                                this.hasPickup = true;
-                                this.pickupType = "springShoe";
-                                this.springJumpCounter = 5;
+                        if(this.hasPickup){
+                            if(tiles[i].hasSpring) {
                                 this.setJumpspeed(-15);
-                                if(this.left){
-                                    this.img = doodleLeftSpring;
-                                }
-                                else{
-                                    this.img = doodleRightSpring;
-                                }
+                                tiles[i].inflateSpring(116, 28);
+                                springShoeSound.play();
+                                // this.velocity = this.jumpSpeed;
+                            }
+                            else if(this.pickupType == "springShoe"){
+                                this.setJumpspeed(-15);
                                 springShoeSound.play();
                             }
-                        }
-                        else if(this.hasPickup) {
-                            if(this.pickupType == "springShoe"){
-                                this.setJumpspeed(-15);
-                                springShoeSound.play();
+                            else{
+                                this.setJumpspeed(-10);
+                                jumpSound.play();
                             }
                         }
                         else{
-                            this.setJumpspeed(-10);
-                            jumpSound.play();
+                            if(tiles[i].hasSpring) {
+                                this.setJumpspeed(-15);
+                                tiles[i].inflateSpring(116, 28);
+                                springShoeSound.play();
+                                // this.velocity = this.jumpSpeed;
+                            }
+                            else if(tiles[i].hasPickup) {
+                                if(tiles[i].pickup.choosen == "springShoe") {
+                                    console.log('spring');
+                                    this.hasPickup = true;
+                                    this.pickupType = "springShoe";
+                                    this.springJumpCounter = 5;
+                                    this.setJumpspeed(-15);
+                                    if(this.left){
+                                        this.img = doodleLeftSpring;
+                                    }
+                                    else{
+                                        this.img = doodleRightSpring;
+                                    }
+                                    springShoeSound.play();
+                                }
+                                else if(tiles[i].pickup.choosen == "shield") {
+                                    this.hasPickup = true;
+                                    this.pickupType = "shield";
+                                    this.shieldCounter = 3;
+                                    jumpSound.play();
+                                }
+                            }
+                            
+                            else{
+                                this.setJumpspeed(-10);
+                                jumpSound.play();
+                            }
+
                         }
+                        
                         this.velocity = this.jumpSpeed;
                         this.falling = false;
                         this.acceleration = 0.25;
@@ -265,7 +289,14 @@ function Player(canvas, x ,y ,width, height) {
                         }
                         
                         this.springJumpCounter--;
+
+                        if(this.shieldCounter == 0){
+                            this.hasPickup = false;
+                        }
+                        
+                        this.shieldCounter--;
                        
+                        
 
                         if(tiles[i].isWhite) {
                             let temp = 657-tiles[i].y;

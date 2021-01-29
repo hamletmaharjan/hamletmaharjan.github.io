@@ -48,8 +48,11 @@ function Monster(canvas, x, y) {
             // player.createGameOverScreen();
             if(!player.falling){
                 if(player.hasPickup){
-                    if(player.pickupType == "propellerHat" || player.pickupType == "jetpack"){
+                    if(player.pickupType == "propellerHat" || player.pickupType == "jetpack" || player.pickupType == "rocket"){
                         return "shredded";
+                    }
+                    else if(player.pickupType == "shield"){
+                        return "nothing";
                     }
                 }
                 return "collided";
