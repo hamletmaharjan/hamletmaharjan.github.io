@@ -20,6 +20,7 @@ function Game(canvas) {
 
     this.hasHoles = false;
     this.hasMonsters = false;
+    this.reset = false;
 
     this.init = function() {
         gameState = "playing";
@@ -41,9 +42,10 @@ function Game(canvas) {
         // this.addListeners();
 
         
-       
-
+        
         this.player.addListeners();
+        
+        
         this.update();
     }
 
@@ -185,20 +187,7 @@ function Game(canvas) {
             }
             for(let i=0; i<this.tiles.length; i++) {
                
-                // this.camravel = this.player.velocity;
-                // this.tiles[i].y += 2;
-                
-                // this.tiles[i].y += this.momentum;
                
-                // this.momentum -= 0.25;
-                // this.momentum *= 0.9;
-                // console.log(this.momentum);
-                
-                // if(this.momentum == 0){
-
-                //     this.player.falling = true;
-                //     this.player.velocity = this.player.gravity;
-                // }
                     
                 if(this.player.velocity<= 0 && this.player.y < 300){
                     this.tiles[i].y -= this.player.velocity;
@@ -227,6 +216,7 @@ function Game(canvas) {
     }
 
     this.createGameOverScreen = function() {
+        gameState = "gameover";
         this.ctx.drawImage(background,0,0,this.width,this.height);
         this.ctx.font = "24px Comic Sans MS";
         this.ctx.fillStyle = "black";
@@ -235,6 +225,11 @@ function Game(canvas) {
         cancelAnimationFrame(this.reqId);
 
         this.ctx.fillText("Your Score: "+ this.score.toFixed(0), (this.width/2)-50, this.height/2+50);
+
+        this.ctx.drawImage(gameTiles , 724, 48, 110, 41, 150, 450, 110, 41);
+        this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 150, 500, 110, 41);
+        
+
         propellerSound.stop();
         jetpackSound.stop();
         monsterSound.stop();
@@ -245,10 +240,30 @@ function Game(canvas) {
        
         this.ctx.drawImage(background,0,0,this.width,this.height);
         this.ctx.fillText("Paused",(this.width/2)-50,this.height/2);
+
+        this.ctx.drawImage(gameTiles , 724, 0, 110, 41, 200, 500, 110, 41);
     
         
     }
 
+    this.resetGame = function() {
+        
+
+    
+
+        this.player = null;
+
+        this.tile = null;
+        this.score = 0;
+
+        this.hasHoles = false;
+        this.hasMonsters = false;
+        this.reset = true;
+        this.goingDown = true;
+        this.tiles = [];
+        this.init();
+
+    }
     // this.detectOutOfFrame = function() {
     //     for(let i=0; i<this.tiles.length; i++) {
     //         if(this.tiles[i].y > this.height){

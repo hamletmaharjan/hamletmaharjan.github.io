@@ -8,21 +8,21 @@ function Screen(canvas) {
     var dis = this;
 
     this.init = function() {
+        this.createMainMenu();
+         this.g = new Game(dis.canvas);
+
+        this.addListeners();
+
+    }
+
+    this.createMainMenu = function() {
         this.canvas.width = this.width;
         this.canvas.height = this.height;
         // var background = document.getElementById('background');
         this.ctx.drawImage(startScreen,0,0,this.width,this.height);
-
-        this.pickup = new Pickup(canvas, 21,10);
-        this.pickup.draw();
-
-        this.g = new Game(dis.canvas);
-
-        this.createStartScreen();
-
     }
 
-    this.createStartScreen = function() {
+    this.addListeners = function() {
         
 
         canvas.addEventListener('click', function(e) {
@@ -36,9 +36,12 @@ function Screen(canvas) {
                 }
             }
             if(gameState == "paused") {
-                dis.g.update();
-                console.log('ss')
-                gameState = "playing";
+                if(e.offsetX >= 200 && e.offsetX <= 610 && e.offsetY >= 500 && e.offsetY <= 541){
+                    dis.g.update();
+                    console.log('ss')
+                    gameState = "playing";
+                }
+               
             }  
             if(gameState == "playing"){
                 if(e.offsetX >= 373 && e.offsetX <= 382 && e.offsetY >= 6 && e.offsetY <= 20) {
@@ -46,7 +49,16 @@ function Screen(canvas) {
                     dis.g.createPauseScreen();
                     gameState = "paused";
                 }
-
+            }
+            if(gameState == "gameover") {
+                if(e.offsetX >= 150 && e.offsetX <= 260 && e.offsetY >= 450 && e.offsetY <= 491) {
+                    console.log("play again");
+                    dis.g.resetGame();
+                }
+                else if (e.offsetX >= 150 && e.offsetX <= 260 && e.offsetY >= 500 && e.offsetY <= 541) {
+                    console.log("menu");
+                    dis.createMainMenu();
+                }
             }
                      
         });
