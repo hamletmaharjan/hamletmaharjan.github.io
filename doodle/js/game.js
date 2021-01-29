@@ -227,14 +227,26 @@ function Game(canvas) {
     }
 
     this.createGameOverScreen = function() {
+        this.ctx.drawImage(background,0,0,this.width,this.height);
         this.ctx.font = "24px Comic Sans MS";
         this.ctx.fillStyle = "black";
         // this.ctx.textAlign = "center";
         this.ctx.fillText("game Over",(this.width/2)-50,this.height/2);
         cancelAnimationFrame(this.reqId);
+
+        this.ctx.fillText("Your Score: "+ this.score.toFixed(0), (this.width/2)-50, this.height/2+50);
         propellerSound.stop();
         jetpackSound.stop();
         monsterSound.stop();
+    }
+
+    this.createPauseScreen = function() {
+        cancelAnimationFrame(this.reqId);
+       
+        this.ctx.drawImage(background,0,0,this.width,this.height);
+        this.ctx.fillText("Paused",(this.width/2)-50,this.height/2);
+    
+        
     }
 
     // this.detectOutOfFrame = function() {

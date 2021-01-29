@@ -35,10 +35,24 @@ function Screen(canvas) {
                     console.log("controls");
                 }
             }
-            
-            
+            if(gameState == "paused") {
+                dis.g.update();
+                console.log('ss')
+                gameState = "playing";
+            }  
+            if(gameState == "playing"){
+                if(e.offsetX >= 373 && e.offsetX <= 382 && e.offsetY >= 6 && e.offsetY <= 20) {
+                    console.log("pause");
+                    dis.g.createPauseScreen();
+                    gameState = "paused";
+                }
+
+            }
+                     
         });
     }
+
+   
 }
 
 loadMedia = 13;
