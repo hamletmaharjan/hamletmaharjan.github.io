@@ -10,6 +10,7 @@ function Tile(canvas, x ,y) {
 
     let ran = parseInt(Math.random()*20);
     this.hasSpring = (ran >= 18) ? true :false;
+    this.hasTrampoline = (ran == 15) ? true:false;
     this.springX = getRandomValue(this.x, this.x+ this.width-19);
 
     this.isBlue = (ran <= 3) ? true: false;
@@ -69,6 +70,9 @@ function Tile(canvas, x ,y) {
         if(this.hasSpring){
             this.ctx.drawImage(gameTiles, this.springSx, this.springSy, 19, 12, this.springX, this.y-this.diff, this.springWidth, this.springHeight );
             // this.ctx.fillRect(this.springX, this.y-10, 10, 12);
+        }
+        else if(this.hasTrampoline) {
+            this.ctx.drawImage(gameTiles, 187,97, 39, 15, this.x+10,this.y-10, 39,15);
         }
 
         if(this.hasPickup) {

@@ -21,3 +21,5 @@ var jetpackSound = new Sound("./audio/jetpack1.mp3", false);
 var bulletSound = new Sound("./audio/pucanje.mp3", false);
 var propellerSound = new Sound("./audio/propeller1.mp3", false);
 var monsterSound = new Sound("./audio/monsterblizu.mp3", false);
+var trampolineSound = new Sound("./audio/trampoline.mp3", false);
+var rocketSound = new Sound("./audio/rocket.mp3", false);

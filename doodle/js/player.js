@@ -47,12 +47,25 @@ function Player(canvas, x ,y ,width, height) {
     var dis = this;
 
     
-
+    this.angle = 0;
 
     this.draw = function() {
         this.ctx.fillStyle = "red";
         // this.ctx.fillRect(this.x, this.y, this.width, this.height);
-        this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        // this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        if(this.isRotating){
+            this.angle += 6 * Math.PI / 180;
+            this.ctx.save();
+            this.ctx.translate(this.x+25, this.y);        
+            this.ctx.rotate(this.angle);
+        
+            this.ctx.drawImage(this.img,this.width / -2, this.height / -2, this.width, this.height);        
+            this.ctx.restore(); 
+        }
+        else{
+            this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        }
+        
 
         if(this.hasPickup) {
             if(this.pickupType == "propellerHat") {
@@ -78,6 +91,7 @@ function Player(canvas, x ,y ,width, height) {
             this.velocity+= this.acceleration;
             
             if(this.velocity >= 0){
+                this.isRotating = false;
                 this.acceleration = 0.25;
                 this.width = this.trueWidth;
                 this.height = this.trueHeight;
@@ -189,7 +203,7 @@ function Player(canvas, x ,y ,width, height) {
                             this.acceleration = 0.10;
                             this.hasPickup = true;
                             this.pickupType = "propellerHat";
-
+                            this.isRotating = false;
                             propellerSound.play();
                         }
                         else if(tiles[i].pickup.choosen == "jetpack") {
@@ -205,11 +219,11 @@ function Player(canvas, x ,y ,width, height) {
                             else{
                                 this.img = doodleRightJetpack;
                             }
-
+                            this.isRotating = false;
                             jetpackSound.play();
                         }
                         else if(tiles[i].pickup.choosen == "rocket") {
-                            this.setJumpspeed(-25);
+                            this.setJumpspeed(-30);
                             this.velocity = this.jumpSpeed;
                             this.falling = false;
                             this.acceleration = 0.10;
@@ -218,6 +232,9 @@ function Player(canvas, x ,y ,width, height) {
                             this.img = doodleRocket;
                             this.width = 72;
                             this.height = 129;
+                            rocketSound.play();
+
+                            this.isRotating = false;
                             
                         }
                     }
@@ -240,6 +257,7 @@ function Player(canvas, x ,y ,width, height) {
                             }
                             else{
                                 this.setJumpspeed(-10);
+                                
                                 jumpSound.play();
                             }
                         }
@@ -249,6 +267,13 @@ function Player(canvas, x ,y ,width, height) {
                                 tiles[i].inflateSpring(116, 28);
                                 springShoeSound.play();
                                 // this.velocity = this.jumpSpeed;
+                            }
+                            else if(tiles[i].hasTrampoline) {
+                                this.isRotating = true;
+                                this.setJumpspeed(-15);
+                                this.angle= 0;
+                                
+                                trampolineSound.play();
                             }
                             else if(tiles[i].hasPickup) {
                                 if(tiles[i].pickup.choosen == "springShoe") {
