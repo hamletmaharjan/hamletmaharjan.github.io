@@ -1,5 +1,5 @@
 var gameState = "start";
-
+var restart = false;
 function Screen(canvas) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext('2d');
@@ -29,7 +29,14 @@ function Screen(canvas) {
             console.log(e);
             if(gameState == "start"){
                 if(e.offsetX >= 69 && e.offsetX <= 194 && e.offsetY <= 222 && e.offsetY >= 183) {
-                    dis.g.init();
+                    if(restart){
+                        dis.g.resetGame();
+                    }
+                    else{
+                        dis.g.init();
+                    }
+                    
+                    
                 }
                 else if(e.offsetX >= 104 && e.offsetX<= 232 && e.offsetY >= 266 && e.offsetY <= 310) {
                     console.log("controls");
@@ -58,6 +65,8 @@ function Screen(canvas) {
                 else if (e.offsetX >= 150 && e.offsetX <= 260 && e.offsetY >= 500 && e.offsetY <= 541) {
                     console.log("menu");
                     dis.createMainMenu();
+                    gameState = "start";
+                    restart = true;
                 }
             }
                      
