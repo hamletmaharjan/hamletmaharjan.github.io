@@ -58,6 +58,7 @@ function Player(canvas, x ,y ,width, height) {
             if(this.pickupType == "propellerHat") {
                 this.ctx.drawImage(gameTiles,671, 38, 32, 19, this.x+15, this.y, 32, 19);
             }
+            
         }
 
     }
@@ -77,7 +78,7 @@ function Player(canvas, x ,y ,width, height) {
                 this.width = this.trueWidth;
                 this.height = this.trueHeight;
                 if(this.hasPickup){
-                    if(this.pickupType!="springShoe"){
+                    if(this.pickupType != "springShoe") {
                         this.hasPickup = false;
                     }  
                     // if(this.hasPickup){
@@ -107,7 +108,7 @@ function Player(canvas, x ,y ,width, height) {
             this.x = 400;
         }
         else if(this.x>=400){
-            this.x = 0;
+            this.x = -this.width;
         }
 
         this.x += this.x_velocity;
@@ -262,11 +263,18 @@ function Player(canvas, x ,y ,width, height) {
                         if(this.springJumpCounter == 0){
                             this.hasPickup = false;
                         }
+                        
                         this.springJumpCounter--;
+                       
 
-                        // if(tiles[i].isWhite) {
-                        //     tiles.splice(i,1);
-                        // }
+                        if(tiles[i].isWhite) {
+                            let temp = 657-tiles[i].y;
+                            let t = new Tile(this.canvas, getRandomValue(0,360), -temp-50);
+                            tiles.splice(i,1);
+                            
+                            t.init();
+                            tiles.push(t);
+                        }
 
                     }
 

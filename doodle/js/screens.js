@@ -76,7 +76,7 @@ function Screen(canvas) {
    
 }
 
-loadMedia = 13;
+loadMedia = 14;
 doodleRight = new Image();
 doodleRight.src = "./images/lik-right.png";
 doodleRight.addEventListener("load",loadCount,false);
@@ -114,6 +114,10 @@ doodleRightJetpack.addEventListener("load",loadCount,false);
 doodleRocket = new Image();
 doodleRocket.src = "./images/lik-rocket.png";
 doodleRocket.addEventListener("load",loadCount,false);
+
+doodleShield = new Image();
+doodleShield.src = "./images/circle.png";
+doodleShield.addEventListener("load",loadCount,false);
 
 
 tile = new Image();

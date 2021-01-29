@@ -200,9 +200,9 @@ function Game(canvas) {
                 
                
 
-                if(this.tiles[i].y > 700){
+                if(this.tiles[i].y > this.height){
                    
-                    this.tiles.shift();
+                    this.tiles.splice(i,1);
                     
                     let t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), -50);
                     t.init();

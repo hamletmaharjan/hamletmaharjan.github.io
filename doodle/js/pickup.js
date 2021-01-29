@@ -33,10 +33,16 @@ function Pickup(canvas, x, y) {
             sy: 118,
             width: 58,
             height: 80
+        },
+        shield: {
+            sx: 234,
+            sy: 308,
+            width: 35,
+            height: 32
         }
     }
-    let options = ['springShoe', 'jetpack', 'propellerHat', "rocket"];
-    let random = parseInt(Math.random() * 4);
+    let options = ['springShoe', 'jetpack', 'propellerHat', "rocket", "shield"];
+    let random = parseInt(Math.random() * 5);
     this.choosen = options[random];
 
     this.test = function() {
