@@ -1,6 +1,12 @@
+body {
+    background-image: url("../images/wallpaper.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 canvas {
     margin: 0 auto;
-    display: block;    
+    display: block;   
+    box-shadow: 0 0 10px 2px; 
 }
 
 img{
