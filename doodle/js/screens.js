@@ -111,13 +111,18 @@ doodleRightJetpack = new Image();
 doodleRightJetpack.src = "./images/lik-right-jetpack.png";
 doodleRightJetpack.addEventListener("load",loadCount,false);
 
+doodleRocket = new Image();
+doodleRocket.src = "./images/lik-rocket.png";
+doodleRocket.addEventListener("load",loadCount,false);
+
+
 tile = new Image();
 tile.src = "./images/tile.png";
 tile.addEventListener("load",loadCount,false);
 
-tileBlue = new Image();
-tileBlue.src = "./images/tile-blue.png";
-tileBlue.addEventListener("load",loadCount,false);
+// tileBlue = new Image();
+// tileBlue.src = "./images/tile-blue.png";
+// tileBlue.addEventListener("load",loadCount,false);
 
 topScore = new Image();
 topScore.src = "./images/top-score.png";

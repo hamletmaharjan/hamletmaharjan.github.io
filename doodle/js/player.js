@@ -3,6 +3,8 @@ function Player(canvas, x ,y ,width, height) {
     this.y = y;
     this.width = width;
     this.height = height;
+    this.trueWidth = width;
+    this.trueHeight = height;
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
 
@@ -72,16 +74,22 @@ function Player(canvas, x ,y ,width, height) {
             
             if(this.velocity >= 0){
                 this.acceleration = 0.25;
-                if(this.pickupType!="springShoe")
-                    this.hasPickup = false;
-                if(this.pickupType == "jetpack") {
-                    if(this.left) {
-                        this.img = doodleLeft;
-                    }
-                    else{
-                        this.img = doodleRight;
-                    }
+                this.width = this.trueWidth;
+                this.height = this.trueHeight;
+                if(this.hasPickup){
+                    if(this.pickupType!="springShoe"){
+                        this.hasPickup = false;
+                    }  
+                    // if(this.hasPickup){
+                        if(this.pickupType == "jetpack" || this.pickupType == "rocket") {
+                            this.img = doodleRight;
+                            this.hasPickup = false;
+                        }
+                    // }
+
                 }
+                
+                
                 this.falling = true;
                 this.velocity = this.gravity;
             }
@@ -195,6 +203,18 @@ function Player(canvas, x ,y ,width, height) {
 
                             jetpackSound.play();
                         }
+                        else if(tiles[i].pickup.choosen == "rocket") {
+                            this.setJumpspeed(-25);
+                            this.velocity = this.jumpSpeed;
+                            this.falling = false;
+                            this.acceleration = 0.10;
+                            this.hasPickup = true;
+                            this.pickupType = "rocket";
+                            this.img = doodleRocket;
+                            this.width = 72;
+                            this.height = 129;
+                            
+                        }
                     }
 
                 }
@@ -202,6 +222,7 @@ function Player(canvas, x ,y ,width, height) {
 
                 if(this.falling){
                     if(this.y + this.height <= tiles[i].y+ tiles[i].height){
+                        
                         if(tiles[i].hasSpring) {
                             this.setJumpspeed(-15);
                             tiles[i].inflateSpring(116, 28);
@@ -242,6 +263,10 @@ function Player(canvas, x ,y ,width, height) {
                             this.hasPickup = false;
                         }
                         this.springJumpCounter--;
+
+                        // if(tiles[i].isWhite) {
+                        //     tiles.splice(i,1);
+                        // }
 
                     }
 
@@ -308,6 +333,9 @@ function Player(canvas, x ,y ,width, height) {
                     else if(dis.pickupType == "jetpack") {
                         dis.img = doodleLeftJetpack;
                     }
+                    else if(dis.pickupType == "rocket") {
+                        dis.img = doodleRocket;
+                    }
                     else{
                         dis.img = doodleLeft;
                     }
@@ -327,6 +355,9 @@ function Player(canvas, x ,y ,width, height) {
                     }
                     else if(dis.pickupType == "jetpack") {
                         dis.img = doodleRightJetpack;
+                    }
+                    else if(dis.pickupType == "rocket") {
+                        dis.img = doodleRocket;
                     }
                     else{
                         dis.img = doodleRight;
