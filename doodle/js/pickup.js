@@ -44,7 +44,7 @@ function Pickup(canvas, x, y) {
     let options = ['springShoe', 'jetpack', 'propellerHat', "rocket", "shield"];
     let random = parseInt(Math.random() * 5);
     this.choosen = options[random];
-    // this.choosen = "shield";
+    // this.choosen = "rocket";
 
     this.test = function() {
         console.log('test');

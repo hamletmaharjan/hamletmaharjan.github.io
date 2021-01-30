@@ -251,6 +251,13 @@ function Player(canvas, x ,y ,width, height) {
                                 springShoeSound.play();
                                 // this.velocity = this.jumpSpeed;
                             }
+                            else if(tiles[i].hasTrampoline) {
+                                this.isRotating = true;
+                                this.setJumpspeed(-15);
+                                this.angle= 0;
+                                
+                                trampolineSound.play();
+                            }
                             else if(this.pickupType == "springShoe"){
                                 this.setJumpspeed(-15);
                                 springShoeSound.play();
@@ -350,6 +357,11 @@ function Player(canvas, x ,y ,width, height) {
             this.y + this.height >= hole.y){
             // console.log('die');
             // this.createGameOverScreen();
+            if(this.hasPickup){
+                if(this.pickupType == "rocket" || this.pickupType == "jetpack") {
+                    return false;
+                }
+            }
             return true;
             
         }
@@ -446,6 +458,15 @@ function Player(canvas, x ,y ,width, height) {
                             dis.bullets.push(bullet);
                             dis.img = doodleShootSpring;
                             bulletSound.play();
+                        }
+                        else if(dis.pickupType == "shield") {
+                            let bullet = new Bullet(dis.canvas, dis);
+                            dis.bullets.push(bullet);
+                            dis.img = doodleShoot;
+                            bulletSound.play();
+                        }
+                        else{
+                            console.log("cant fire");
                         }
                         
                     }

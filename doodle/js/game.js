@@ -175,13 +175,13 @@ function Game(canvas) {
             diff = this.jumpThreshold- this.player.y;
             if(this.hasHoles) {
                 // this.hole.y += 2;
-                if(this.player.velocity<= 0 && this.player.y < 300){
+                if(this.player.velocity<= 0 ){
                     this.hole.y -= this.player.velocity;
                 }
             }
             if(this.hasMonsters) {
                 // this.monster.y += 2;
-                if(this.player.velocity<= 0 && this.player.y < 300){
+                if(this.player.velocity<= 0 ){
                     this.monster.y -= this.player.velocity;
                 }
             }
@@ -189,7 +189,7 @@ function Game(canvas) {
                
                
                     
-                if(this.player.velocity<= 0 && this.player.y < 300){
+                if(this.player.velocity<= 0 ){
                     this.tiles[i].y -= this.player.velocity;
                 }
                 
@@ -237,8 +237,14 @@ function Game(canvas) {
 
     this.createPauseScreen = function() {
         cancelAnimationFrame(this.reqId);
+        
        
         this.ctx.drawImage(background,0,0,this.width,this.height);
+        this.ctx.drawImage(topScore, 0,0, 320, 38,0,0, this.width, 38);
+        this.ctx.font = "24px Comic Sans MS";
+        this.ctx.fillStyle = "black";
+        // this.ctx.textAlign = "center";
+        this.ctx.fillText(this.score.toFixed(0),20,25);
         this.ctx.fillText("Paused",(this.width/2)-50,this.height/2);
 
         this.ctx.drawImage(gameTiles , 724, 0, 110, 41, 200, 500, 110, 41);
