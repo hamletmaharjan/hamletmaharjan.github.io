@@ -28,7 +28,13 @@ function Tile(canvas, x ,y) {
     this.springSy = 100;
     this.springWidth = 19;
     this.springHeight = 12;
-    this.diff = 5;
+    this.springDiff = 5;
+
+    this.trampolineSx = 187;
+    this.trampolineSy = 97;
+    this.trampolineWidth = 39;
+    this.trampolineHeight = 15;
+    this.trampolineDiff = 10;
 
     this.sy =0;
 
@@ -68,11 +74,11 @@ function Tile(canvas, x ,y) {
         
         this.ctx.drawImage(gameTiles,0, this.sy, this.width, this.height,this.x,  this.y, this.width, this.height);
         if(this.hasSpring){
-            this.ctx.drawImage(gameTiles, this.springSx, this.springSy, 19, 12, this.springX, this.y-this.diff, this.springWidth, this.springHeight );
+            this.ctx.drawImage(gameTiles, this.springSx, this.springSy, 19, 12, this.springX, this.y-this.springDiff, this.springWidth, this.springHeight );
             // this.ctx.fillRect(this.springX, this.y-10, 10, 12);
         }
         else if(this.hasTrampoline) {
-            this.ctx.drawImage(gameTiles, 187,97, 39, 15, this.x+10,this.y-10, 39,15);
+            this.ctx.drawImage(gameTiles, this.trampolineSx,this.trampolineSy, this.trampolineWidth, this.trampolineHeight, this.x+10,this.y-this.trampolineDiff, 39,15);
         }
 
         if(this.hasPickup) {
@@ -82,10 +88,17 @@ function Tile(canvas, x ,y) {
         
     }
 
-    this.inflateSpring = function(sy, h) {  
-        this.springSy = sy;
-        this.diff += h - this.springHeight ;
+    this.inflateSpring = function(top, h) {  
+        this.springSy = top;
+        this.springDiff += h - this.springHeight ;
         this.springHeight = h;
+    }
+
+    this.inflateTrampoline = function(left, top, h) {
+        this.trampolineSx = left;
+        this.trampolineSy = top;
+        this.trampolineDiff += h - this.trampolineHeight ;
+        this.trampolineHeight = h;
     }
 
     

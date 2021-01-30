@@ -21,6 +21,8 @@ function Game(canvas) {
     this.hasHoles = false;
     this.hasMonsters = false;
     this.reset = false;
+    
+    // this.boundaryBottom = 757;
 
     this.init = function() {
         gameState = "playing";
@@ -278,13 +280,7 @@ function Game(canvas) {
         this.init();
 
     }
-    // this.detectOutOfFrame = function() {
-    //     for(let i=0; i<this.tiles.length; i++) {
-    //         if(this.tiles[i].y > this.height){
-    //             this.tiles.shift();
-    //         }
-    //     }
-    // }
+   
 
     this.getRandomValue = function(max,min){
         let val = Math.random() * (max - min) + min;
@@ -293,15 +289,3 @@ function Game(canvas) {
 }
 
 
-
-// var g = new Game(canvas);
-
-// function loadCount(){
-//     loadMedia--;
-//     // if(loadMedia==0){
-//     //     g.init();
-//     // }
-        
-// }
-
-// var g = new Game('myGame');

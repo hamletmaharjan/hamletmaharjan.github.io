@@ -78,13 +78,4 @@ function Monster(canvas, x, y) {
         return false;
     }
 
-    // this.detectCollisionWithBullet = function(bullet) {
-    //     if(bullet.x <= this.x + this.monsters[this.choosen].width &&
-    //         bullet.x + bullet.width >= this.x &&
-    //         bullet.y <= this.y + this.monsters[this.choosen].height &&
-    //         bullet.y + bullet.height >= this.y){
-    //             return true;
-    //     }
-
-    // }
 }

@@ -179,6 +179,7 @@ function Player(canvas, x ,y ,width, height) {
         if(this.bullets.length!=0){
             for(let i=0; i<this.bullets.length; i++) {
                 if(this.bullets[i].detectCollision(monster)){
+                    this.bullets.shift();
                     return true;
                 };
                 // return monster.detectCollisionWithBullet(this.bullets[i]);
@@ -255,6 +256,8 @@ function Player(canvas, x ,y ,width, height) {
                                 this.isRotating = true;
                                 this.setJumpspeed(-15);
                                 this.angle= 0;
+
+                                tiles[i].inflateTrampoline(148,93, 19);
                                 
                                 trampolineSound.play();
                             }
@@ -280,6 +283,8 @@ function Player(canvas, x ,y ,width, height) {
                                 this.setJumpspeed(-15);
                                 this.angle= 0;
                                 
+                                tiles[i].inflateTrampoline(148,93, 19);
+
                                 trampolineSound.play();
                             }
                             else if(tiles[i].hasPickup) {
@@ -367,28 +372,7 @@ function Player(canvas, x ,y ,width, height) {
         }
     }
 
-    // this.detectEnemyCollision = function(enemy) {
-    //     if(this.x <= enemy.x + enemy.width &&
-    //         this.x + this.width >= enemy.x &&
-    //         this.y <= enemy.y + enemy.height &&
-    //         this.y + this.height >= enemy.y){
-    //         // console.log('enemy collison');
-    //         // this.createGameOverScreen();
-    //         if(!this.falling){
-    //             if(this.hasPickup){
-    //                 if(this.pickupType == "propellerHat" || this.pickupType == "jetpack"){
-    //                     return "jumped";
-    //                 }
-    //             }
-    //             return "collided";
-    //         }
-    //         else{
-    //             return "jumped";
-    //         }
-            
-            
-    //     }
-    // }
+    
 
     this.addListeners = function() {
         window.addEventListener("keydown", this.keyListener);
