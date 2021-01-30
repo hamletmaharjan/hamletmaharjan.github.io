@@ -56,7 +56,7 @@ function Player(canvas, x ,y ,width, height) {
         if(this.isRotating){
             this.angle += 6 * Math.PI / 180;
             this.ctx.save();
-            this.ctx.translate(this.x+25, this.y);        
+            this.ctx.translate(this.x+25, this.y+ 25);        
             this.ctx.rotate(this.angle);
         
             this.ctx.drawImage(this.img,this.width / -2, this.height / -2, this.width, this.height);        

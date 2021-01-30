@@ -7,10 +7,12 @@ function Bullet(canvas, player) {
     this.speed = 10;
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
+    this.sx = 653;
+    this.sy = 0;
 
     this.draw = function() {
         // this.ctx.clearRect(0,0, 500,500);
-        this.ctx.drawImage(gameTiles,653, 0,10, 10, this.x-5, this.y, 10, 10);
+        this.ctx.drawImage(gameTiles,this.sx, this.sy,this.width, this.height, this.x-5, this.y, this.width, this.height);
         // this.ctx.stroke();
     }
 
