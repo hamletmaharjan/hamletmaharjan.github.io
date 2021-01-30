@@ -72,7 +72,7 @@ function Player(canvas, x ,y ,width, height) {
                 this.ctx.drawImage(gameTiles,671, 38, 32, 19, this.x+15, this.y, 32, 19);
             }
             else if(this.pickupType == "shield") {
-                this.ctx.drawImage(doodleShield, this.x, this.y, this.width+10,this.height+15);
+                this.ctx.drawImage(doodleShield, this.x-5, this.y, this.width+10,this.height+15);
                 // this.ctx.fillRect(this.x, this.y, 10,10);
             }
             
