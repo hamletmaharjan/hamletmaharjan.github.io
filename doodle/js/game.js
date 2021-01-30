@@ -105,6 +105,7 @@ function Game(canvas) {
         dis.player.update(dis.tiles);
         if(dis.player.detectOutOfFrame(dis.height)){
             dis.createGameOverScreen();
+            fallingSound.play();
         }
         dis.moveTiles();
         if(dis.hasHoles){
@@ -137,6 +138,13 @@ function Game(canvas) {
                 console.log('enemy die');
                 dis.monster = null;
                 dis.hasMonsters = false;
+                monsterSound.stop();
+            }
+            
+        }
+
+        if(dis.hasMonsters) {
+            if(dis.monster.detectOutOfFrame()) {
                 monsterSound.stop();
             }
         }

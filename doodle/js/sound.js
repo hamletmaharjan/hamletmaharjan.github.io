@@ -23,3 +23,4 @@ var propellerSound = new Sound("./audio/propeller1.mp3", false);
 var monsterSound = new Sound("./audio/monsterblizu.mp3", false);
 var trampolineSound = new Sound("./audio/trampoline.mp3", false);
 var rocketSound = new Sound("./audio/rocket.mp3", false);
+var fallingSound = new Sound("./audio/pada.mp3", false);

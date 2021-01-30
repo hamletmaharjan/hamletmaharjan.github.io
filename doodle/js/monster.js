@@ -71,6 +71,13 @@ function Monster(canvas, x, y) {
         }
     }
 
+    this.detectOutOfFrame = function() {
+        if(this.y>=657) {
+            return true;
+        }
+        return false;
+    }
+
     // this.detectCollisionWithBullet = function(bullet) {
     //     if(bullet.x <= this.x + this.monsters[this.choosen].width &&
     //         bullet.x + bullet.width >= this.x &&
