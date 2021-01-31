@@ -30,6 +30,7 @@ function Game(canvas) {
 
     this.init = function() {
         gameState = "playing";
+        this.highScore = localStorage.getItem('doodleHigh') || 0;
         this.canvas.width = this.width;
         this.canvas.height = this.height;
 
@@ -119,7 +120,7 @@ function Game(canvas) {
             dis.createGameOverScreen();
             fallingSound.play();
         }
-        dis.moveTiles();
+        dis.moveDown();
         if(dis.hasHoles){
             if(dis.player.detectHolesCollision(dis.hole)) {
                 // cancelAnimationFrame(dis.reqId);
@@ -196,7 +197,7 @@ function Game(canvas) {
 
 
 
-    this.moveTiles = function() {
+    this.moveDown = function() {
         if(this.player.y <= this.jumpThreshold) {
             diff = this.jumpThreshold- this.player.y;
             if(this.hasHoles) {
@@ -243,17 +244,21 @@ function Game(canvas) {
 
     this.createGameOverScreen = function() {
         gameState = "gameover";
+        cancelAnimationFrame(this.reqId);
         this.ctx.drawImage(background,0,0,this.width,this.height);
         this.ctx.font = "24px Comic Sans MS";
         this.ctx.fillStyle = "black";
         // this.ctx.textAlign = "center";
-        this.ctx.fillText("game Over",(this.width/2)-50,this.height/2);
-        cancelAnimationFrame(this.reqId);
-
-        this.ctx.fillText("Your Score: "+ this.score.toFixed(0), (this.width/2)-50, this.height/2+50);
+        if(parseInt(this.score)> this.highScore) {
+            this.highScore = parseInt(this.score);
+            localStorage.setItem('doodleHigh', this.highScore);
+        }
+        this.ctx.fillText("game Over",100,250);
+        this.ctx.fillText("Your Score: "+ this.score.toFixed(0), 100, 300);
+        this.ctx.fillText("Best Score: "+ this.highScore, 100, 350);
 
         this.ctx.drawImage(gameTiles , 724, 48, 110, 41, 150, 450, 110, 41);
-        this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 150, 500, 110, 41);
+        this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 150, 520, 110, 41);
         
 
         propellerSound.stop();

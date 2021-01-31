@@ -80,7 +80,7 @@ function Player(canvas, x ,y) {
 
     }
 
-    this.update = function(tiles, monster) {
+    this.update = function(tiles) {
         // console.log(monster);
         if(!(this.velocity<= 0 && this.y < 300))
             this.y += this.velocity;
@@ -190,11 +190,7 @@ function Player(canvas, x ,y) {
 
     this.detectTilesCollision = function(tiles) {
         for(let i=0; i<tiles.length; i++){
-            if(this.x <= tiles[i].x + tiles[i].width &&
-                this.x + this.width >= tiles[i].x &&
-                this.y <= tiles[i].y + tiles[i].height &&
-                this.y + this.height >= tiles[i].y){
-                
+            if(detectRectCollision(this, tiles[i])){     
                 if(!this.hasPickup){
                     if(tiles[i].hasPickup) {
                         if(tiles[i].pickup.choosen == "propellerHat") {
@@ -247,10 +243,22 @@ function Player(canvas, x ,y) {
                     if(this.y + this.height <= tiles[i].y+ tiles[i].height){
                         if(this.hasPickup){
                             if(tiles[i].hasSpring) {
-                                this.setJumpspeed(-15);
-                                tiles[i].inflateSpring(116, 28);
-                                springShoeSound.play();
-                                // this.velocity = this.jumpSpeed;
+                                if(this.x <= tiles[i].springX + tiles[i].springWidth &&
+                                    this.x + this.width >= tiles[i].springX){
+                                        this.setJumpspeed(-15);
+                                        tiles[i].inflateSpring(116, 28);
+                                        springShoeSound.play();
+                                        // this.velocity = this.jumpSpeed;
+                                }
+                                else if (this.pickupType == "springShoe"){
+                                    this.setJumpspeed(-15);
+                                    springShoeSound.play();
+                                }
+                                else{
+                                    this.setJumpspeed(-10);
+                                    jumpSound.play();
+                                }
+                               
                             }
                             else if(tiles[i].hasTrampoline) {
                                 this.isRotating = true;
@@ -273,10 +281,17 @@ function Player(canvas, x ,y) {
                         }
                         else{
                             if(tiles[i].hasSpring) {
-                                this.setJumpspeed(-15);
-                                tiles[i].inflateSpring(116, 28);
-                                springShoeSound.play();
-                                // this.velocity = this.jumpSpeed;
+                                if(this.x <= tiles[i].springX + tiles[i].springWidth &&
+                                    this.x + this.width >= tiles[i].springX){
+                                    this.setJumpspeed(-15);
+                                    tiles[i].inflateSpring(116, 28);
+                                    springShoeSound.play();
+                                    // this.velocity = this.jumpSpeed;
+                                }
+                                else{
+                                    this.setJumpspeed(-10);
+                                    jumpSound.play();
+                                }
                             }
                             else if(tiles[i].hasTrampoline) {
                                 this.isRotating = true;
@@ -356,12 +371,7 @@ function Player(canvas, x ,y) {
     }
 
     this.detectHolesCollision = function(hole) {
-        if(this.x <= hole.x + hole.width &&
-            this.x + this.width >= hole.x &&
-            this.y <= hole.y + hole.height &&
-            this.y + this.height >= hole.y){
-            // console.log('die');
-            // this.createGameOverScreen();
+        if(detectRectCollision(this, hole)){
             if(this.hasPickup){
                 if(this.pickupType == "rocket" || this.pickupType == "jetpack") {
                     return false;

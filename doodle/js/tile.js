@@ -9,8 +9,8 @@ function Tile(canvas, x ,y, frequency) {
     this.ctx=this.canvas.getContext("2d");
     this.frequency = frequency
 
-    let ran = parseInt(Math.random()*this.frequency);
-    this.hasSpring = (ran == 18) ? true :false;
+    let ran = parseInt(Math.random()*20);
+    this.hasSpring = (ran >= 18) ? true :false;
     this.hasTrampoline = (ran == 15) ? true:false;
     this.springX = getRandomValue(this.x, this.x+ this.width-19);
 

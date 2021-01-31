@@ -63,8 +63,8 @@ function Pickup(canvas, x, y) {
     }
 
     this.detectCollision = function(player) {
-        if(player.x <= this.pickups[this.choosen].x +10 + this.pickups[this.choosen].width &&
-            player.x + this.width >= this.pickups[this.choosen].x + 10 &&
+        if(player.x <= this.pickups[this.choosen].x + this.pickups[this.choosen].width &&
+            player.x + this.width >= this.pickups[this.choosen].x &&
             player.y <= this.pickups[this.choosen].y + this.pickups[this.choosen].height &&
             player.y + this.height >= this.pickups[this.choosen].y){
                 return true;

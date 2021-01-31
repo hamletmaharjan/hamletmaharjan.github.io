@@ -23,11 +23,6 @@ function Bullet(canvas, player) {
     }
 
     this.detectCollision = function(monster) {
-        // if(this.x <= enemy.x + enemy.width &&
-        //     this.x + this.width >= enemy.x &&
-        //     this.y <= enemy.y + enemy.height &&
-        //     this.y + this.height >= enemy.y){
-
         if(this.x <= monster.x + monster.monsters[monster.choosen].width &&
             this.x + this.width >= monster.x &&
             this.y <= monster.y + monster.monsters[monster.choosen].height &&
