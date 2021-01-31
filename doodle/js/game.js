@@ -122,8 +122,8 @@ function Game(canvas) {
         dis.moveTiles();
         if(dis.hasHoles){
             if(dis.player.detectHolesCollision(dis.hole)) {
-                cancelAnimationFrame(dis.reqId);
-                // dis.createGameOverScreen();
+                // cancelAnimationFrame(dis.reqId);
+                dis.createGameOverScreen();
             }
 
         }
