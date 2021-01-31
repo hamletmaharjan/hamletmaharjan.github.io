@@ -1,10 +1,10 @@
-function Player(canvas, x ,y ,width, height) {
+function Player(canvas, x ,y) {
     this.x = x;
     this.y = y;
-    this.width = width;
-    this.height = height;
-    this.trueWidth = width;
-    this.trueHeight = height;
+    this.width = 60;
+    this.height = 60;
+    this.trueWidth = 60;
+    this.trueHeight = 60;
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
 

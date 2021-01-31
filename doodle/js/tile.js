@@ -1,15 +1,16 @@
 
 
-function Tile(canvas, x ,y) {
+function Tile(canvas, x ,y, frequency) {
     this.x = x;
     this.y = y;
     this.width = 58;
     this.height = 16;
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
+    this.frequency = frequency
 
-    let ran = parseInt(Math.random()*20);
-    this.hasSpring = (ran >= 18) ? true :false;
+    let ran = parseInt(Math.random()*this.frequency);
+    this.hasSpring = (ran == 18) ? true :false;
     this.hasTrampoline = (ran == 15) ? true:false;
     this.springX = getRandomValue(this.x, this.x+ this.width-19);
 
@@ -17,7 +18,7 @@ function Tile(canvas, x ,y) {
     this.isWhite = (ran == 10) ? true: false;
 
 
-    this.hasPickup = (ran == 7) ? true: false;
+    this.hasPickup = (ran == 16) ? true: false;
 
     this.dx = 1;
     this.img = tile;

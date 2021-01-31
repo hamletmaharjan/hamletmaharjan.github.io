@@ -10,6 +10,8 @@ function Monster(canvas, x, y) {
     this.moveX = x + 20;
     this.dx = 2;
 
+    this.collisionThreshold = 10;
+
     this.monsters = {
         small : {
             sx: 147,
@@ -66,6 +68,9 @@ function Monster(canvas, x, y) {
                 return "collided";
             }
             else{
+                if(player.y + player.height <= this.monsters[this.choosen].y+ this.monsters[this.choosen].height){
+                    return "jumped";
+                }
                 return "jumped";
             } 
         }

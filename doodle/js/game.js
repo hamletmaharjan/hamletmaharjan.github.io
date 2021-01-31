@@ -21,6 +21,10 @@ function Game(canvas) {
     this.hasHoles = false;
     this.hasMonsters = false;
     this.reset = false;
+
+    this.hitsCount = 0;
+    this.pickupFrequency = 25;
+    this.monsterSpawnHeight = 400;
     
     // this.boundaryBottom = 757;
 
@@ -33,10 +37,10 @@ function Game(canvas) {
         this.ctx.drawImage(background,0,0,this.width,this.height);
 
 
-        this.player = new Player(this.canvas, 40,500,60,60);
+        this.player = new Player(this.canvas, 40,500);
         this.player.draw();
 
-        this.tile = new Tile(this.canvas, 20,620);
+        this.tile = new Tile(this.canvas, 20,620, this.pickupFrequency);
         this.tile.init();
         this.tiles.push(this.tile);
 
@@ -65,23 +69,29 @@ function Game(canvas) {
             console.log('hole');
             this.hasHoles = true;
             this.hole = new Hole(this.canvas, this.getRandomValue(0, this.width-50), -70);
+            this.pickupFrequency+=5;
             
         }
 
-        if(this.score > 0 && this.score.toFixed(0) % 400 == 0) {
+        if(this.score > 0 && this.score.toFixed(0) % this.monsterSpawnHeight == 0) {
             // console.log('monster');
             this.hasMonsters = true;
             this.score++;
             this.monster = new Monster(this.canvas, this.getRandomValue(0, this.width-158), -50);
+            this.counter = 0;
             monsterSound.play();
             console.log(this.monster.choosen);
+            if(this.monsterSpawnHeight >= 250) {
+                this.monsterSpawnHeight -= 20;
+            }
+            this.hitsCount++;
         }
     }
 
 
     this.createTiles = function() {
         for(var i=5; i>=0; i--){
-            let t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), i*100);
+            let t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), i*100, this.pickupFrequency);
             t.init();
             this.tiles.push(t);
         }
@@ -112,13 +122,15 @@ function Game(canvas) {
         dis.moveTiles();
         if(dis.hasHoles){
             if(dis.player.detectHolesCollision(dis.hole)) {
-                dis.createGameOverScreen();
+                cancelAnimationFrame(dis.reqId);
+                // dis.createGameOverScreen();
             }
 
         }
         if(dis.hasMonsters) {
             dis.monster.draw();
             if(dis.monster.detectCollision(dis.player) == "collided"){
+                // cancelAnimationFrame(dis.reqId);
                 dis.createGameOverScreen();
             }
             else if(dis.monster.detectCollision(dis.player) == "jumped") {
@@ -137,10 +149,14 @@ function Game(canvas) {
                 monsterSound.stop();
             }
             if(dis.player.detectBulletCollisionWithMonster(dis.monster)){
-                console.log('enemy die');
-                dis.monster = null;
-                dis.hasMonsters = false;
-                monsterSound.stop();
+                dis.counter++;
+                if(dis.counter >= dis.hitsCount) {
+                    console.log('enemy die');
+                    dis.monster = null;
+                    dis.hasMonsters = false;
+                    monsterSound.stop();
+                }
+                
             }
             
         }
@@ -214,7 +230,7 @@ function Game(canvas) {
                    
                     this.tiles.splice(i,1);
                     
-                    let t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), -50);
+                    let t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), -50, this.pickupFrequency);
                     t.init();
                     this.tiles.push(t);
                     
@@ -277,6 +293,7 @@ function Game(canvas) {
         this.reset = true;
         this.goingDown = true;
         this.tiles = [];
+        this.hitsCount = 0;
         this.init();
 
     }
