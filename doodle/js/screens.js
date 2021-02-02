@@ -33,6 +33,47 @@ function Screen(canvas) {
         this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 200, 500, 110, 41);
     }
 
+    this.createOptions = function() {
+        gameState = "options";
+        this.ctx.drawImage(background,0,0,this.width,this.height);
+        this.ctx.font = "20px Comic Sans MS";
+        this.ctx.fillStyle = "black";
+        // this.ctx.textAlign = "center";
+        this.ctx.fillText("Directional Shooting",50,200);
+        if(directionalShooting == "on") {
+            this.ctx.fillStyle = "black";
+            this.ctx.fillText("OFF",120,225);
+            this.ctx.fillStyle = "green";
+            this.ctx.fillText("ON", 170, 225);
+
+        }
+        else {
+            this.ctx.fillStyle = "green";
+            this.ctx.fillText("OFF",120,225);
+            this.ctx.fillStyle = "black";
+            this.ctx.fillText("ON", 170, 225);
+        }
+        
+
+        this.ctx.fillStyle = "black";
+        this.ctx.fillText("Sounds",200,300);
+        if(sounds == "on") {
+            this.ctx.fillStyle = "black";
+            this.ctx.fillText("OFF",200,325);
+            this.ctx.fillStyle = "green";
+            this.ctx.fillText("ON", 250, 325);
+        }
+        else {
+            this.ctx.fillStyle = "green";
+            this.ctx.fillText("OFF",200,325);
+            this.ctx.fillStyle = "black";
+            this.ctx.fillText("ON", 250, 325);
+        }
+       
+
+        this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 200, 500, 110, 41);
+    }
+
     this.addListeners = function() {
         
 
@@ -52,6 +93,9 @@ function Screen(canvas) {
                 else if(e.offsetX >= 104 && e.offsetX<= 232 && e.offsetY >= 266 && e.offsetY <= 310) {
                     console.log("controls");
                     dis.createControls();
+                }
+                else if(e.offsetX >= 342 && e.offsetX<= 378 && e.offsetY >= 524 && e.offsetY <= 556) {
+                    dis.createOptions();
                 }
             }
             if(gameState == "paused") {
@@ -83,6 +127,25 @@ function Screen(canvas) {
             }
             if(gameState == "controls") {
                 if(e.offsetX >= 200 && e.offsetX <= 610 && e.offsetY >= 500 && e.offsetY <= 541){
+                    console.log("menu");
+                    dis.createMainMenu();
+                    gameState = "start";
+                }
+            }
+            if(gameState == "options") {
+                if(e.offsetX >= 251 && e.offsetX <= 284 && e.offsetY >= 310 && e.offsetY <= 324) {
+                    console.log("sound on");
+                    sounds = "on";
+                    localStorage.setItem("sounds" , "on");
+                    dis.createOptions();
+                }
+                else if (e.offsetX >= 201 && e.offsetX <= 240 && e.offsetY >= 309 && e.offsetY <= 323) {
+                    console.log("sound off");
+                    sounds = "off";
+                    localStorage.setItem("sounds" , "off");
+                    dis.createOptions();
+                }
+                else if(e.offsetX >= 200 && e.offsetX <= 610 && e.offsetY >= 500 && e.offsetY <= 541){
                     console.log("menu");
                     dis.createMainMenu();
                     gameState = "start";

@@ -7,7 +7,10 @@ function Sound(src, loop) {
     this.sound.loop = loop || false;
     document.body.appendChild(this.sound);
     this.play = function(){
-      this.sound.play();
+      if(sounds == "on") {
+        this.sound.play();
+      }
+      
     }
     this.stop = function(){
       this.sound.pause();
