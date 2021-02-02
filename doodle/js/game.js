@@ -280,6 +280,8 @@ function Game(canvas) {
 
         this.ctx.drawImage(gameTiles , 724, 48, 110, 41, 150, 450, 110, 41);
         this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 150, 520, 110, 41);
+
+        window.removeEventListener("mousedown", this.player.clickListener);
         
 
         propellerSound.stop();

@@ -145,6 +145,18 @@ function Screen(canvas) {
                     localStorage.setItem("sounds" , "off");
                     dis.createOptions();
                 }
+                else if(e.offsetX >= 118 && e.offsetX <= 159 && e.offsetY >= 209 && e.offsetY <= 227){
+                    console.log("ds off");
+                    directionalShooting = "off";
+                    localStorage.setItem("directionalShooting", "off");
+                    dis.createOptions();
+                }
+                else if(e.offsetX >= 172 && e.offsetX <= 203 && e.offsetY >= 209 && e.offsetY <= 227){
+                    console.log("ds on");
+                    directionalShooting = "on";
+                    localStorage.setItem("directionalShooting", "on");
+                    dis.createOptions();
+                }
                 else if(e.offsetX >= 200 && e.offsetX <= 610 && e.offsetY >= 500 && e.offsetY <= 541){
                     console.log("menu");
                     dis.createMainMenu();

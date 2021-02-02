@@ -1,4 +1,4 @@
-function Bullet(canvas, player) {
+function Bullet(canvas, player, dx, dy) {
     this.x = Math.floor(player.x + player.width / 2);
     this.y = player.y;
     this.width = 10;
@@ -9,6 +9,8 @@ function Bullet(canvas, player) {
     this.ctx=this.canvas.getContext("2d");
     this.sx = 653;
     this.sy = 0;
+    this.dx = dx || 0;
+    this.dy = dy || -1;
 
     this.draw = function() {
         // this.ctx.clearRect(0,0, 500,500);
@@ -18,7 +20,8 @@ function Bullet(canvas, player) {
 
 
     this.update = function() {
-        this.y -= this.speed;
+        this.x += this.dx * this.speed;
+        this.y += this.dy * this.speed;
         this.draw();
     }
 

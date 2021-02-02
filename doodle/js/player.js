@@ -387,11 +387,34 @@ function Player(canvas, x ,y) {
     this.addListeners = function() {
         window.addEventListener("keydown", this.keyListener);
         window.addEventListener("keyup", this.keyListener);
+        if(directionalShooting == "on" && gameState == "playing") {
+            window.addEventListener("mousedown", this.clickListener);
+        }
+        
+    }
+
+    this.clickListener = function(e) {
+        // console.log(e);
+        // let mouse_state = (e.type == "mousedown") ? true: false;
+        // const angle = Math.atan2(e.clientY - dis.y, e.clientX - dis.x);
+        // let dx = Math.cos(angle);
+        // let dy = Math.sin(angle);
+        var dx = (e.offsetX - dis.x);
+        var dy = (e.offsetY - dis.y);
+        var mag = Math.sqrt(dx * dx + dy * dy);
+        var vx = (dx / mag);
+        var vy = (dy / mag);
+        console.log(dx,dy);
+        let bullet = new Bullet(dis.canvas, dis, vx, vy);
+        dis.bullets.push(bullet);
+        dis.img = doodleShoot;
+        bulletSound.play();
+
     }
 
     this.keyListener = function(e) {
         // console.log(dis.left);
-        var key_state = (e.type == "keydown") ? true: false;
+        let key_state = (e.type == "keydown") ? true: false;
 
         switch(e.keyCode) {
             case 37:
