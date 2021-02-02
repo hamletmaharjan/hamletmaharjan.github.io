@@ -80,6 +80,7 @@ function Game(canvas) {
             this.hasMonsters = true;
             this.score++;
             this.monster = new Monster(this.canvas, this.getRandomValue(0, this.width-158), -50);
+            this.monster.init();
             this.counter = 0;
             monsterSound.play();
             console.log(this.monster.choosen);

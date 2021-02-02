@@ -9,6 +9,8 @@ function Monster(canvas, x, y) {
     this.originalX = x;
     this.moveX = x + 20;
     this.dx = 2;
+    this.dy = 1;
+    this.frameCounter = 0;
 
     this.collisionThreshold = 10;
 
@@ -31,17 +33,58 @@ function Monster(canvas, x, y) {
             width: 158,
             height: 45
         },
+        awkwardMover : {
+            sx: 64,
+            sy: 187,
+            width: 38,
+            height: 49
+        },
+        awkwardMoverFlip : {
+            sx: 104,
+            sy: 187,
+            width: 38,
+            height: 49
+        }
     }
-    let options = ['small', 'spider', 'flyingtwins'];
-    let random = parseInt(Math.random() * 3);
+
+    let options = ['small', 'spider', 'flyingtwins', 'awkwardMover'];
+    let random = parseInt(Math.random() * 4);
     this.choosen = options[random];
-    // this.choosen = "spider";
+    // this.choosen = "awkwardMover";
+
+    this.init = function() {
+        if(this.choosen == "awkwardMover") {
+            this.moveX = canvasWidth - this.monsters[this.choosen].width;
+            this.originalX = 0;
+            this.dx = 1;
+        }
+    }
 
     this.draw = function() {
         // this.ctx.drawImage(gameTiles, 147, 0, 158, 45, this.x, this.y, this.width, this.height);
         this.x += this.dx;
         if(this.x>= this.moveX || this.x<= this.originalX){
             this.dx*= -1;
+            if(this.choosen == "awkwardMover" || this.choosen == "awkwardMoverFlip"){
+                if(this.choosen == "awkwardMover") {
+                    this.choosen = "awkwardMoverFlip";
+                }
+                else {
+                    this.choosen = "awkwardMover";
+                }
+            }
+            
+        }
+        if(this.choosen == "awkwardMover" || this.choosen == "awkwardMoverFlip") {
+            if(this.frameCounter <= 10) {
+                this.y += this.dy;
+            }
+            else if(this.frameCounter > 10) {
+                
+                this.dy *= -1;
+                this.frameCounter = 0;
+            }
+            this.frameCounter++;
         }
         this.ctx.drawImage(gameTiles, this.monsters[this.choosen].sx, this.monsters[this.choosen].sy,
             this.monsters[this.choosen].width, this.monsters[this.choosen].height, 
