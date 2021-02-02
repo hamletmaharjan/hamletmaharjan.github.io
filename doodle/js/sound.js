@@ -12,6 +12,13 @@ function Sound(src, loop) {
     this.stop = function(){
       this.sound.pause();
     }
+    this.pause = function() {
+      this.sound.pause();
+    }
+    this.resume = function() {
+      this.sound.resume();
+      console.log("resume sound");
+    }
 }
 
 
@@ -24,3 +31,4 @@ var monsterSound = new Sound("./audio/monsterblizu.mp3", false);
 var trampolineSound = new Sound("./audio/trampoline.mp3", false);
 var rocketSound = new Sound("./audio/rocket.mp3", false);
 var fallingSound = new Sound("./audio/pada.mp3", false);
+var woodenTileSound = new Sound("./audio/lomise.mp3", false);

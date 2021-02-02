@@ -10,6 +10,7 @@ function Game(canvas) {
     this.dy = 2;
     this.vx = 3;
     this.tiles = [];
+    this.woodenTiles = [];
     this.goingDown = true;
 
 
@@ -96,6 +97,15 @@ function Game(canvas) {
             t.init();
             this.tiles.push(t);
         }
+
+        for(var i=2; i>=-5; i--){
+            let t = new WoodenTile(this.canvas, getRandomValue(0, this.width-60), (i*200) + 40);
+            this.woodenTiles.push(t);
+
+        }
+        // t = new WoodenTile(this.canvas, getRandomValue(0, this.width-60), 250);
+        // this.woodenTiles.push(t);
+        
     }
 
 
@@ -112,6 +122,14 @@ function Game(canvas) {
 
         for(var i=0; i<dis.tiles.length; i++){
             dis.tiles[i].draw();
+        }
+        for(let i=0; i<dis.woodenTiles.length; i++) {
+            dis.woodenTiles[i].update(dis.player);
+        }
+        for(let i=0; i<dis.woodenTiles.length; i++) {
+            if(dis.woodenTiles[i].detectOutOfBorder()) {
+                dis.woodenTiles.shift();
+            }
         }
 
         
@@ -212,10 +230,13 @@ function Game(canvas) {
                     this.monster.y -= this.player.velocity;
                 }
             }
+            for(let i=0; i<this.woodenTiles.length; i++) {
+                if(this.player.velocity<= 0 ){
+                    this.woodenTiles[i].y -= this.player.velocity;
+                }
+            }
+            
             for(let i=0; i<this.tiles.length; i++) {
-               
-               
-                    
                 if(this.player.velocity<= 0 ){
                     this.tiles[i].y -= this.player.velocity;
                 }
@@ -268,7 +289,10 @@ function Game(canvas) {
 
     this.createPauseScreen = function() {
         cancelAnimationFrame(this.reqId);
-        
+        rocketSound.pause();
+        propellerSound.pause();
+        jetpackSound.pause(); 
+        monsterSound.pause();
        
         this.ctx.drawImage(background,0,0,this.width,this.height);
         this.ctx.drawImage(topScore, 0,0, 320, 38,0,0, this.width, 38);
@@ -299,6 +323,7 @@ function Game(canvas) {
         this.goingDown = true;
         this.tiles = [];
         this.hitsCount = 0;
+        this.woodenTiles = [];
         this.init();
 
     }
