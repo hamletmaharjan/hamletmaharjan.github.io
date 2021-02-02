@@ -22,6 +22,17 @@ function Screen(canvas) {
         this.ctx.drawImage(startScreen,0,0,this.width,this.height);
     }
 
+    this.createControls = function() {
+        gameState = "controls";
+        this.ctx.drawImage(background,0,0,this.width,this.height);
+        this.ctx.font = "20px Comic Sans MS";
+        this.ctx.fillStyle = "black";
+        // this.ctx.textAlign = "center";
+        this.ctx.fillText("Press arrow keys to move left and right",10,300);
+        this.ctx.fillText("Space key to shoot",100,350);
+        this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 200, 500, 110, 41);
+    }
+
     this.addListeners = function() {
         
 
@@ -40,6 +51,7 @@ function Screen(canvas) {
                 }
                 else if(e.offsetX >= 104 && e.offsetX<= 232 && e.offsetY >= 266 && e.offsetY <= 310) {
                     console.log("controls");
+                    dis.createControls();
                 }
             }
             if(gameState == "paused") {
@@ -69,6 +81,14 @@ function Screen(canvas) {
                     restart = true;
                 }
             }
+            if(gameState == "controls") {
+                if(e.offsetX >= 200 && e.offsetX <= 610 && e.offsetY >= 500 && e.offsetY <= 541){
+                    console.log("menu");
+                    dis.createMainMenu();
+                    gameState = "start";
+                }
+            }
+            
                      
         });
     }
