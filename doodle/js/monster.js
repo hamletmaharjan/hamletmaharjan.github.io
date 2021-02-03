@@ -5,13 +5,11 @@ function Monster(canvas, x, y) {
     this.height = 45;
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
-
     this.originalX = x;
     this.moveX = x + 20;
     this.dx = 2;
     this.dy = 1;
     this.frameCounter = 0;
-
     this.collisionThreshold = 10;
 
     this.monsters = {
@@ -61,7 +59,6 @@ function Monster(canvas, x, y) {
     }
 
     this.draw = function() {
-        // this.ctx.drawImage(gameTiles, 147, 0, 158, 45, this.x, this.y, this.width, this.height);
         this.x += this.dx;
         if(this.x>= this.moveX || this.x<= this.originalX){
             this.dx*= -1;
@@ -72,33 +69,30 @@ function Monster(canvas, x, y) {
                 else {
                     this.choosen = "awkwardMover";
                 }
-            }
-            
+            }   
         }
+
         if(this.choosen == "awkwardMover" || this.choosen == "awkwardMoverFlip") {
             if(this.frameCounter <= 10) {
                 this.y += this.dy;
             }
             else if(this.frameCounter > 10) {
-                
                 this.dy *= -1;
                 this.frameCounter = 0;
             }
             this.frameCounter++;
         }
+
         this.ctx.drawImage(gameTiles, this.monsters[this.choosen].sx, this.monsters[this.choosen].sy,
             this.monsters[this.choosen].width, this.monsters[this.choosen].height, 
             this.x, this.y, this.monsters[this.choosen].width, this.monsters[this.choosen].height);
     }
 
     this.detectCollision = function(player) {
-        // console.log("cc");
         if(player.x <= this.x + this.monsters[this.choosen].width &&
             player.x + player.width >= this.x &&
             player.y <= this.y + this.monsters[this.choosen].height &&
             player.y + player.height >= this.y){
-            // console.log('enemy collison');
-            // player.createGameOverScreen();
             if(!player.falling){
                 if(player.hasPickup){
                     if(player.pickupType == "propellerHat" || player.pickupType == "jetpack" || player.pickupType == "rocket"){

@@ -7,7 +7,6 @@ function Pickup(canvas, x, y) {
     this.height = 50;
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
-    // this.canvas=canvas;
     
     this.pickups = {
         springShoe : {
@@ -41,17 +40,13 @@ function Pickup(canvas, x, y) {
             height: 32
         }
     }
+
     let options = ['springShoe', 'jetpack', 'propellerHat', "rocket", "shield"];
     let random = parseInt(Math.random() * 5);
     this.choosen = options[random];
     // this.choosen = "shield";
 
-    this.test = function() {
-        console.log('test');
-    }
-
     this.draw = function() {
-        // this.ctx.fillRect(this.x, this.y, 40,40);
         //Shift in x for positioning closer to center and y for matching the bottom of pickup on the tile
         this.ctx.drawImage(gameTiles, this.pickups[this.choosen].sx, this.pickups[this.choosen].sy,
             this.pickups[this.choosen].width, this.pickups[this.choosen].height, 

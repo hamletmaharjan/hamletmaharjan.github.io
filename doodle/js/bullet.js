@@ -1,3 +1,9 @@
+/**
+ * @param  {canvas object} canvas
+ * @param  {player object} player
+ * @param  {float} dx
+ * @param  {float} dy
+ */
 function Bullet(canvas, player, dx, dy) {
     this.x = Math.floor(player.x + player.width / 2);
     this.y = player.y;

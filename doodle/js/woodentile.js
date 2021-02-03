@@ -7,22 +7,12 @@ function WoodenTile(canvas, x ,y) {
     this.height = 16;
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
-
     this.animating = false;
-
-    var dis = this;
-    
-
     this.sx = 0;
     this.sy = 71;
-
     this.frameIndex = 0;
     this.frameCounter = 0;
     this.outOfBorder = false;
-
-    this.init = function() {   
-        
-    }
 
     this.draw = function() {
         this.ctx.drawImage(gameTiles,this.sx, this.sy, this.width, this.height,this.x,  this.y, this.width, this.height);
@@ -48,7 +38,6 @@ function WoodenTile(canvas, x ,y) {
                 this.sy = 151;
                 this.y += 5;
                 this.height = 30;
-                
             }
             else {
                 this.y+= 5;
@@ -58,7 +47,6 @@ function WoodenTile(canvas, x ,y) {
                 this.animating = false;
                 this.outOfBorder = true;
             }
-           
             this.frameCounter++;
         }
         this.draw();
