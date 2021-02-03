@@ -68,7 +68,7 @@ function Tile(canvas, x ,y, frequency) {
         if(this.isBlue){
             
             this.x += this.dx;
-            if(this.x> 400-this.width || this.x<= 0){
+            if(this.x> canvasWidth-this.width || this.x<= 0){
                 this.dx*= -1;
             }
         }

@@ -37,7 +37,7 @@ function Bullet(canvas, player, dx, dy) {
     }
 
     this.detectBorderCollision = function() {
-        if(this.y <= 0) {
+        if(this.y <= 0 || this.x <= 0 || this.x >= canvasWidth) {
             return true;
         }
     }

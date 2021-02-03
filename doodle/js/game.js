@@ -267,7 +267,7 @@ function Game(canvas) {
     this.createGameOverScreen = function() {
         gameState = "gameover";
         cancelAnimationFrame(this.reqId);
-        this.ctx.drawImage(background,0,0,this.width,this.height);
+        // this.ctx.drawImage(background,0,0,this.width,this.height);
         this.ctx.font = "24px Comic Sans MS";
         this.ctx.fillStyle = "black";
         // this.ctx.textAlign = "center";

@@ -123,9 +123,9 @@ function Player(canvas, x ,y) {
         }
 
         if(this.x <= 0-this.width){
-            this.x = 400;
+            this.x = canvasWidth;
         }
-        else if(this.x>=400){
+        else if(this.x >= canvasWidth){
             this.x = -this.width;
         }
 
@@ -351,7 +351,7 @@ function Player(canvas, x ,y) {
                         
 
                         if(tiles[i].isWhite) {
-                            let temp = 657-tiles[i].y;
+                            let temp = canvasHeight - tiles[i].y;
                             let t = new Tile(this.canvas, getRandomValue(0,360), -temp-50);
                             tiles.splice(i,1);
                             

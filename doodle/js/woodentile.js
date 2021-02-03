@@ -54,7 +54,7 @@ function WoodenTile(canvas, x ,y) {
                 this.y+= 5;
             }
 
-            if(this.y >= 657) {
+            if(this.y >= canvasHeight) {
                 this.animating = false;
                 this.outOfBorder = true;
             }

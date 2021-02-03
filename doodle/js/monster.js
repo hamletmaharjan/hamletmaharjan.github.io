@@ -120,7 +120,7 @@ function Monster(canvas, x, y) {
     }
 
     this.detectOutOfFrame = function() {
-        if(this.y>=657) {
+        if(this.y >= canvasHeight) {
             return true;
         }
         return false;

@@ -52,6 +52,7 @@ function Pickup(canvas, x, y) {
 
     this.draw = function() {
         // this.ctx.fillRect(this.x, this.y, 40,40);
+        //Shift in x for positioning closer to center and y for matching the bottom of pickup on the tile
         this.ctx.drawImage(gameTiles, this.pickups[this.choosen].sx, this.pickups[this.choosen].sy,
             this.pickups[this.choosen].width, this.pickups[this.choosen].height, 
             this.x+10, this.y-this.pickups[this.choosen].height+5, this.pickups[this.choosen].width, this.pickups[this.choosen].height);
