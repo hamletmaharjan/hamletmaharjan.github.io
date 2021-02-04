@@ -32,9 +32,9 @@ function Game(canvas) {
         let background = document.getElementById('background');
         this.ctx.drawImage(background,0,0,this.width,this.height);
 
-        this.player = new Player(this.canvas, 40,500);
+        this.player = new Player(this.canvas, game.player.initialX, game.player.initialY);
         this.player.draw();
-        this.tile = new Tile(this.canvas, 20,620, this.pickupFrequency);
+        this.tile = new Tile(this.canvas, game.tile.initialX, game.tile.initialY, this.pickupFrequency);
         this.tile.init();
         this.tiles.push(this.tile);
         this.createTiles(); 
