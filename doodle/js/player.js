@@ -31,9 +31,9 @@ function Player(canvas, x ,y) {
 
     this.draw = function() {
         if (this.isRotating) {
-            this.angle += 6 * Math.PI / 180;
+            this.angle += ANGLE_MULTIPLE * Math.PI / 180;
             this.ctx.save();
-            this.ctx.translate(this.x+25, this.y+ 25);        
+            this.ctx.translate(this.x + ADDITIONAL_TRANSLATION_X, this.y + ADDITIONAL_TRANSLATION_Y);        
             this.ctx.rotate(this.angle);
             this.ctx.drawImage(this.img,this.width / -2, this.height / -2, this.width, this.height);        
             this.ctx.restore(); 
@@ -53,7 +53,7 @@ function Player(canvas, x ,y) {
     }
 
     this.update = function(tiles) {
-        if (!(this.velocity<= 0 && this.y < 300))
+        if (!(this.velocity<= 0 && this.y < JUMP_THRESHOLD))
             this.y += this.velocity;
         if (this.falling) {
             this.velocity+= this.acceleration;
@@ -62,7 +62,7 @@ function Player(canvas, x ,y) {
             this.velocity+= this.acceleration;
             if (this.velocity >= 0) {
                 this.isRotating = false;
-                this.acceleration = 0.25;
+                this.acceleration = TRUE_ACCELERATION;
                 this.width = this.trueWidth;
                 this.height = this.trueHeight;
                 if (this.hasPickup) {
@@ -80,10 +80,10 @@ function Player(canvas, x ,y) {
         }
         this.detectTilesCollision(tiles);
         if (this.left) {
-            this.x_velocity -= 0.5;
+            this.x_velocity -= X_VELOCITY;
         }
         if (this.right) {
-            this.x_velocity += 0.5;
+            this.x_velocity += X_VELOCITY;
         }
         if (this.x <= 0-this.width) {
             this.x = canvasWidth;
@@ -92,10 +92,10 @@ function Player(canvas, x ,y) {
             this.x = -this.width;
         }
         this.x += this.x_velocity;
-        this.x_velocity *= 0.9;
+        this.x_velocity *= FRICTION;
 
         if (this.animating) {
-            if (this.frameCounter<=20) {
+            if (this.frameCounter <= ANIMATION_FRAME_THRESHOLD) {
                 this.frameCounter++;
             }
             else{
@@ -139,20 +139,20 @@ function Player(canvas, x ,y) {
                 if (!this.hasPickup) {
                     if (tiles[i].hasPickup) {
                         if (tiles[i].pickup.choosen == "propellerHat") {
-                            this.setJumpspeed(-15);
+                            this.jumpSpeed = MEDIUM_JUMP_SPEED;
                             this.velocity = this.jumpSpeed;
                             this.falling = false;
-                            this.acceleration = 0.10;
+                            this.acceleration = SLOW_ACCELERATION;
                             this.hasPickup = true;
                             this.pickupType = "propellerHat";
                             this.isRotating = false;
                             propellerSound.play();
                         }
                         else if (tiles[i].pickup.choosen == "jetpack") {
-                            this.setJumpspeed(-20);
+                            this.jumpSpeed = JETPACK_JUMP_SPEED;
                             this.velocity = this.jumpSpeed;
                             this.falling = false;
-                            this.acceleration = 0.10;
+                            this.acceleration = SLOW_ACCELERATION;
                             this.hasPickup = true;
                             this.pickupType = "jetpack";
                             if (this.left) {
@@ -165,15 +165,15 @@ function Player(canvas, x ,y) {
                             jetpackSound.play();
                         }
                         else if (tiles[i].pickup.choosen == "rocket") {
-                            this.setJumpspeed(-30);
+                            this.jumpSpeed = ROCKET_JUMP_SPEED;
                             this.velocity = this.jumpSpeed;
                             this.falling = false;
-                            this.acceleration = 0.10;
+                            this.acceleration = SLOW_ACCELERATION;
                             this.hasPickup = true;
                             this.pickupType = "rocket";
                             this.img = doodleRocket;
-                            this.width = 72;
-                            this.height = 129;
+                            this.width = ROCKET_WIDTH;
+                            this.height = ROCKET_HEIGHT;
                             rocketSound.play();
                             this.isRotating = false;
                         }
@@ -186,33 +186,32 @@ function Player(canvas, x ,y) {
                             if (tiles[i].hasSpring) {
                                 if (this.x <= tiles[i].springX + tiles[i].springWidth &&
                                     this.x + this.width >= tiles[i].springX) {
-                                        this.setJumpspeed(-15);
+                                        this.jumpSpeed = MEDIUM_JUMP_SPEED;
                                         tiles[i].inflateSpring(116, 28);
                                         springShoeSound.play();
-                                        // this.velocity = this.jumpSpeed;
                                 }
                                 else if (this.pickupType == "springShoe") {
-                                    this.setJumpspeed(-15);
+                                    this.jumpSpeed = MEDIUM_JUMP_SPEED;
                                     springShoeSound.play();
                                 }
                                 else{
-                                    this.setJumpspeed(-10);
+                                    this.jumpSpeed = LOWEST_JUMP_SPEED;
                                     jumpSound.play();
                                 }
                             }
                             else if (tiles[i].hasTrampoline) {
                                 this.isRotating = true;
-                                this.setJumpspeed(-15);
+                                this.jumpSpeed = MEDIUM_JUMP_SPEED;
                                 this.angle= 0;
                                 tiles[i].inflateTrampoline(148,93, 19);
                                 trampolineSound.play();
                             }
                             else if (this.pickupType == "springShoe") {
-                                this.setJumpspeed(-15);
+                                this.jumpSpeed = MEDIUM_JUMP_SPEED;
                                 springShoeSound.play();
                             }
                             else{
-                                this.setJumpspeed(-10);
+                                this.jumpSpeed = LOWEST_JUMP_SPEED;
                                 jumpSound.play();
                             }
                         }
@@ -220,19 +219,19 @@ function Player(canvas, x ,y) {
                             if (tiles[i].hasSpring) {
                                 if (this.x <= tiles[i].springX + tiles[i].springWidth &&
                                     this.x + this.width >= tiles[i].springX) {
-                                    this.setJumpspeed(-15);
+                                    this.jumpSpeed = MEDIUM_JUMP_SPEED;
                                     tiles[i].inflateSpring(116, 28);
                                     springShoeSound.play();
                                     // this.velocity = this.jumpSpeed;
                                 }
                                 else{
-                                    this.setJumpspeed(-10);
+                                    this.jumpSpeed = LOWEST_JUMP_SPEED;
                                     jumpSound.play();
                                 }
                             }
                             else if (tiles[i].hasTrampoline) {
                                 this.isRotating = true;
-                                this.setJumpspeed(-15);
+                                this.jumpSpeed = MEDIUM_JUMP_SPEED;
                                 this.angle= 0; 
                                 tiles[i].inflateTrampoline(148,93, 19);
                                 trampolineSound.play();
@@ -242,8 +241,8 @@ function Player(canvas, x ,y) {
                                     console.log('spring');
                                     this.hasPickup = true;
                                     this.pickupType = "springShoe";
-                                    this.springJumpCounter = 5;
-                                    this.setJumpspeed(-15);
+                                    this.springJumpCounter = SPRING_JUMP_COUNT;
+                                    this.jumpSpeed = MEDIUM_JUMP_SPEED;
                                     if (this.left) {
                                         this.img = doodleLeftSpring;
                                     }
@@ -255,19 +254,19 @@ function Player(canvas, x ,y) {
                                 else if (tiles[i].pickup.choosen == "shield") {
                                     this.hasPickup = true;
                                     this.pickupType = "shield";
-                                    this.shieldCounter = 3;
+                                    this.shieldCounter = SHIELD_COUNT;
                                     jumpSound.play();
                                 }
                             }
                             else {
-                                this.setJumpspeed(-10);
+                                this.jumpSpeed = LOWEST_JUMP_SPEED;
                                 jumpSound.play();
                             }
                         }
                         
                         this.velocity = this.jumpSpeed;
                         this.falling = false;
-                        this.acceleration = 0.25;
+                        this.acceleration = TRUE_ACCELERATION;
 
                         if (this.springJumpCounter == 0) {
                             this.hasPickup = false;

@@ -19,11 +19,8 @@ function Bullet(canvas, player, dx, dy) {
     this.dy = dy || -1;
 
     this.draw = function() {
-        // this.ctx.clearRect(0,0, 500,500);
-        this.ctx.drawImage(gameTiles,this.sx, this.sy,this.width, this.height, this.x-5, this.y, this.width, this.height);
-        // this.ctx.stroke();
+        this.ctx.drawImage(gameTiles,this.sx, this.sy,this.width, this.height, this.x-this.radius, this.y, this.width, this.height);
     }
-
 
     this.update = function() {
         this.x += this.dx * this.speed;
@@ -37,8 +34,6 @@ function Bullet(canvas, player, dx, dy) {
             this.y <= monster.y + monster.monsters[monster.choosen].height &&
             this.y + this.height >= monster.y){
             return true;
-            // console.log('enemy dissapear');
-            
         }
     }
 

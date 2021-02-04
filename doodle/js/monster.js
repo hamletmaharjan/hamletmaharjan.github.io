@@ -73,10 +73,10 @@ function Monster(canvas, x, y) {
         }
 
         if(this.choosen == "awkwardMover" || this.choosen == "awkwardMoverFlip") {
-            if(this.frameCounter <= 10) {
+            if(this.frameCounter <= MONSTER_MOVE_THRESHOLD) {
                 this.y += this.dy;
             }
-            else if(this.frameCounter > 10) {
+            else if(this.frameCounter > MONSTER_MOVE_THRESHOLD) {
                 this.dy *= -1;
                 this.frameCounter = 0;
             }

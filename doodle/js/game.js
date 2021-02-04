@@ -19,6 +19,7 @@ function Game(canvas) {
     this.hitsCount = 0;
     this.pickupFrequency = 25;
     this.monsterSpawnHeight = 400;
+    this.holeSpawnHeight = 500;
 
 
     this.init = function() {
@@ -45,10 +46,10 @@ function Game(canvas) {
         this.ctx.fillStyle = "black";
         this.ctx.fillText(this.score.toFixed(0),20,25);
         this.ctx.drawImage(topScore, 472, 2, 12, 14, this.width-30, 7, 12, 14);
-        if(this.score > 0 && this.score.toFixed(0) % 500 == 0) {
+        if(this.score > 0 && this.score.toFixed(0) % this.holeSpawnHeight == 0) {
             this.hasHoles = true;
             this.hole = new Hole(this.canvas, this.getRandomValue(0, this.width-50), -70);
-            this.pickupFrequency+=5;   
+            this.pickupFrequency += PICKUP_FREQUENCY;   
         }
 
         if(this.score > 0 && this.score.toFixed(0) % this.monsterSpawnHeight == 0) {
@@ -59,8 +60,8 @@ function Game(canvas) {
             this.counter = 0;
             monsterSound.play();
             console.log(this.monster.choosen);
-            if(this.monsterSpawnHeight >= 250) {
-                this.monsterSpawnHeight -= 20;
+            if(this.monsterSpawnHeight >= MIN_MONSTER_SPAWN_HEIGHT) {
+                this.monsterSpawnHeight -= MONSTER_HEIGHT_DECREMENT_BY;
             }
             this.hitsCount++;
         }
@@ -76,7 +77,6 @@ function Game(canvas) {
         for(let i=2; i>=-5; i--){
             let t = new WoodenTile(this.canvas, getRandomValue(0, this.width-60), (i*200) + 40);
             this.woodenTiles.push(t);
-
         }
     }
 
@@ -117,7 +117,7 @@ function Game(canvas) {
                 dis.createGameOverScreen();
             }
             else if(dis.monster.detectCollision(dis.player) == "jumped") {
-                dis.player.setJumpspeed(-10);
+                dis.player.setJumpspeed(LOWEST_JUMP_HEIGHT);
                 dis.player.velocity = dis.player.jumpSpeed;
                 dis.player.falling = false;
                 dis.monster = null;
@@ -148,26 +148,6 @@ function Game(canvas) {
         }
         
         dis.drawTopScore();
-
-        // console.log(dis.tiles.length);
-        // dis.detectOutOfFrame();
-
-
-        // setInterval(() => {
-        //     dis.ctx.clearRect(0,0, this.width,this.height);
-        //     dis.ctx.drawImage(background,0,0);
-
-        //     for(let i=0; i<dis.tiles.length; i++){
-        //         dis.tiles[i].draw();
-        //     }
-
-
-        //     // dis.player.y += dis.dy;
-        //     // dis.player.draw();
-
-            
-        //     dis.player.update(dis.tiles);
-        // }, 50);
     }
 
     this.moveDown = function() {
