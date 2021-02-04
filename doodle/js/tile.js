@@ -87,32 +87,32 @@ function Tile(canvas, x ,y, frequency, isOrange) {
             this.pickup.update(this.y);
         }
         if(this.isOrange) {
-            if(this.frameCounter>= 300 && this.frameCounter<=310) {
+            if(this.frameCounter >= ORANGE_ANIMATION_START && this.frameCounter <= ORANGE_ANIMATION_START + 10) {
                 this.sy = ORANGE_1;
             }
-            else if(this.frameCounter >= 311 && this.frameCounter <= 320) {
+            else if(this.frameCounter >= ORANGE_ANIMATION_START + 11 && this.frameCounter <= ORANGE_ANIMATION_START + 20) {
                 this.sy = ORANGE_2;
             }
-            else if(this.frameCounter >= 321 && this.frameCounter <= 330) {
+            else if(this.frameCounter >= ORANGE_ANIMATION_START + 21 && this.frameCounter <= ORANGE_ANIMATION_START + 30) {
                 this.sy = ORANGE_3;
             }
-            else if(this.frameCounter >= 331 && this.frameCounter <= 340) {
+            else if(this.frameCounter >= ORANGE_ANIMATION_START + 31 && this.frameCounter <= ORANGE_ANIMATION_START + 40) {
                 this.sy = ORANGE_4;
             }
-            else if(this.frameCounter >= 341 && this.frameCounter <= 345) {
+            else if(this.frameCounter >= ORANGE_ANIMATION_START + 41 && this.frameCounter <= ORANGE_ANIMATION_START + 45) {
                 this.sy = ORANGE_5;
                 this.height = EXPLODE_HEIGHT;
                 explodingTileSound.play();
             }
-            else if(this.frameCounter >= 346 && this.frameCounter <= 350) {
+            else if(this.frameCounter >= ORANGE_ANIMATION_START + 46 && this.frameCounter <= ORANGE_ANIMATION_START + 50) {
                 this.sy = ORANGE_6;
                 this.height = EXPLODE_HEIGHT;
             }
-            else if(this.frameCounter >= 351 && this.frameCounter <= 355) {
+            else if(this.frameCounter >= ORANGE_ANIMATION_START + 51 && this.frameCounter <= ORANGE_ANIMATION_START + 55) {
                 this.sy = ORANGE_7;
                 this.height = EXPLODE_HEIGHT;
             }
-            else if(this.frameCounter >= 356){
+            else if(this.frameCounter >= ORANGE_ANIMATION_START + 56){
                 this.exploaded = true;
             }
             this.frameCounter++;
