@@ -1,5 +1,8 @@
-
-
+/**
+ * @param  {Canvas Object} canvas
+ * @param  {Number} x
+ * @param  {Number} y
+ */
 function Pickup(canvas, x, y) {
     this.x = x;
     this.y = y;
@@ -41,6 +44,7 @@ function Pickup(canvas, x, y) {
         }
     }
 
+    //Randomly choose a pickup each time
     let options = ['springShoe', 'jetpack', 'propellerHat', "rocket", "shield"];
     let random = parseInt(Math.random() * 5);
     this.choosen = options[random];

@@ -12,7 +12,7 @@ function Bullet(canvas, player, dx, dy) {
     this.radius = 5;
     this.speed = 10;
     this.canvas=canvas;
-    this.ctx=this.canvas.getContext("2d");
+    this.ctx = this.canvas.getContext("2d");
     this.sx = 653;
     this.sy = 0;
     this.dx = dx || 0;
@@ -28,6 +28,7 @@ function Bullet(canvas, player, dx, dy) {
         this.draw();
     }
 
+    //detects bullet collision with monster
     this.detectCollision = function(monster) {
         if(this.x <= monster.x + monster.monsters[monster.choosen].width &&
             this.x + this.width >= monster.x &&
@@ -37,8 +38,9 @@ function Bullet(canvas, player, dx, dy) {
         }
     }
 
+    //detects if the bullet is out of frame
     this.detectBorderCollision = function() {
-        if(this.y <= 0 || this.x <= 0 || this.x >= canvasWidth) {
+        if(this.y <= 0 || this.x <= 0 || this.x >= canvasWidth || this.y >= canvasHeight) {
             return true;
         }
     }

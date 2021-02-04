@@ -1,3 +1,8 @@
+/**
+ * @param  {Canvas Object} canvas
+ * @param  {Number} x
+ * @param  {Number} y
+ */
 function Monster(canvas, x, y) {
     this.x = x;
     this.y = y;
@@ -6,7 +11,7 @@ function Monster(canvas, x, y) {
     this.canvas=canvas;
     this.ctx=this.canvas.getContext("2d");
     this.originalX = x;
-    this.moveX = x + 20;
+    this.moveX = x + MONSTER_MOVE_THRESHOLD; //moves monster upto certain threshold
     this.dx = 2;
     this.dy = 1;
     this.frameCounter = 0;
@@ -45,12 +50,14 @@ function Monster(canvas, x, y) {
         }
     }
 
+    //To choose a random monster each time
     let options = ['small', 'spider', 'flyingtwins', 'awkwardMover'];
     let random = parseInt(Math.random() * 4);
     this.choosen = options[random];
     // this.choosen = "awkwardMover";
 
     this.init = function() {
+        //If the choosen monster is awakwardMover then it moves upto full canvas width
         if(this.choosen == "awkwardMover") {
             this.moveX = canvasWidth - this.monsters[this.choosen].width;
             this.originalX = 0;
@@ -62,6 +69,8 @@ function Monster(canvas, x, y) {
         this.x += this.dx;
         if(this.x>= this.moveX || this.x<= this.originalX){
             this.dx*= -1;
+
+            //Change monster direction after its max moving distance
             if(this.choosen == "awkwardMover" || this.choosen == "awkwardMoverFlip"){
                 if(this.choosen == "awkwardMover") {
                     this.choosen = "awkwardMoverFlip";
@@ -72,6 +81,7 @@ function Monster(canvas, x, y) {
             }   
         }
 
+        //Moves awakwardMover vertically
         if(this.choosen == "awkwardMover" || this.choosen == "awkwardMoverFlip") {
             if(this.frameCounter <= MONSTER_MOVE_THRESHOLD) {
                 this.y += this.dy;

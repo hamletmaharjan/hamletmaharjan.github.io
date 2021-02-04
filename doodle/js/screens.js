@@ -1,6 +1,9 @@
 let gameState = "start";
 let restart = false;
 
+/**
+ * @param  {Canvas Object} canvas
+ */
 function Screen(canvas) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext('2d');
@@ -26,7 +29,7 @@ function Screen(canvas) {
         this.ctx.font = "20px Comic Sans MS";
         this.ctx.fillStyle = "black";
         this.ctx.fillText("Press arrow keys to move left and right",10,300);
-        this.ctx.fillText("Space key to shoot",100,350);
+        this.ctx.fillText("Left click or Space key to shoot",30,350);
         this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 200, 500, 110, 41);
     }
 
@@ -69,7 +72,7 @@ function Screen(canvas) {
 
     this.addListeners = function() {
         canvas.addEventListener('click', function(e) {
-            console.log(e);
+           
             if(gameState == "start"){
                 if(e.offsetX >= 69 && e.offsetX <= 194 && e.offsetY <= 222 && e.offsetY >= 183) {
                     if(restart){
@@ -204,6 +207,7 @@ startScreen = new Image();
 startScreen.src = "./images/start-screen.jpg";
 startScreen.addEventListener("load",loadCount,false);
 
+//Initialize game screen only after loading all images
 function loadCount() {
     loadMedia--;
     if(loadMedia == 0) {

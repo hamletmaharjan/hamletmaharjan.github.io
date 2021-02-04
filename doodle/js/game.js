@@ -1,4 +1,6 @@
-
+/**
+ * @param  {Canvas Object} canvas
+ */
 function Game(canvas) {
     this.canvas = canvas;
     this.ctx = this.canvas.getContext('2d');
@@ -21,7 +23,7 @@ function Game(canvas) {
     this.monsterSpawnHeight = 400;
     this.holeSpawnHeight = 500;
 
-
+    //instantiates the initial game objects
     this.init = function() {
         gameState = "playing";
         this.highScore = localStorage.getItem('doodleHigh') || 0;
@@ -40,18 +42,22 @@ function Game(canvas) {
         this.update();
     }
 
+    //Displays scores on top
     this.drawTopScore = function() {
         this.ctx.drawImage(topScore, 0,0, 320, 38,0,0, this.width, 38);
         this.ctx.font = "24px Comic Sans MS";
         this.ctx.fillStyle = "black";
         this.ctx.fillText(this.score.toFixed(0),20,25);
         this.ctx.drawImage(topScore, 472, 2, 12, 14, this.width-30, 7, 12, 14);
+
+        //Creates holes at a certain intervals in height at the top
         if(this.score > 0 && this.score.toFixed(0) % this.holeSpawnHeight == 0) {
             this.hasHoles = true;
             this.hole = new Hole(this.canvas, this.getRandomValue(0, this.width-50), -70);
             this.pickupFrequency += PICKUP_FREQUENCY;   
         }
 
+        //Creates a random monsters at the top
         if(this.score > 0 && this.score.toFixed(0) % this.monsterSpawnHeight == 0) {
             this.hasMonsters = true;
             this.score++;
@@ -59,7 +65,6 @@ function Game(canvas) {
             this.monster.init();
             this.counter = 0;
             monsterSound.play();
-            console.log(this.monster.choosen);
             if(this.monsterSpawnHeight >= MIN_MONSTER_SPAWN_HEIGHT) {
                 this.monsterSpawnHeight -= MONSTER_HEIGHT_DECREMENT_BY;
             }
@@ -67,6 +72,7 @@ function Game(canvas) {
         }
     }
 
+    //Creates the initial tiles
     this.createTiles = function() {
         for(let i=5; i>=0; i--){
             let t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), i*100, this.pickupFrequency);
@@ -80,6 +86,7 @@ function Game(canvas) {
         }
     }
 
+    //Main game loop
     this.update = function() {
         dis.reqId = requestAnimationFrame(dis.update);
         dis.ctx.clearRect(0,0, this.width,this.height);
@@ -115,6 +122,7 @@ function Game(canvas) {
             dis.monster.draw();
             if(dis.monster.detectCollision(dis.player) == "collided"){
                 dis.createGameOverScreen();
+                monsterCollisionSound.play();
             }
             else if(dis.monster.detectCollision(dis.player) == "jumped") {
                 dis.player.setJumpspeed(LOWEST_JUMP_HEIGHT);
@@ -150,6 +158,7 @@ function Game(canvas) {
         dis.drawTopScore();
     }
 
+    //If the player reaches a certain threshold height, game tiles moves down
     this.moveDown = function() {
         if(this.player.y <= this.jumpThreshold) {
             diff = this.jumpThreshold- this.player.y;
@@ -187,15 +196,29 @@ function Game(canvas) {
     this.createGameOverScreen = function() {
         gameState = "gameover";
         cancelAnimationFrame(this.reqId);
+
+        this.ctx.font = "bold 40px Comic Sans MS";
+        this.ctx.fillStyle = "brown";
+        if(parseInt(this.score)> this.highScore) {
+            this.highScore = parseInt(this.score);
+            localStorage.setItem('doodleHigh', this.highScore);
+        }
+        this.ctx.shadowBlur = 20;
+        this.ctx.shadowColor = "white";
+        this.ctx.fillText("Game Over",100,250);
+       
+        // this.ctx.drawImage(gameTiles , 724, 48, 110, 41, 150, 450, 110, 41);
+        // this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 150, 520, 110, 41);
+
         setTimeout(() => {
             this.ctx.drawImage(background,0,0,this.width,this.height);
             this.ctx.font = "24px Comic Sans MS";
+            this.ctx.shadowBlur = 0;
             this.ctx.fillStyle = "black";
             if(parseInt(this.score)> this.highScore) {
                 this.highScore = parseInt(this.score);
                 localStorage.setItem('doodleHigh', this.highScore);
             }
-            this.ctx.fillText("game Over",100,250);
             this.ctx.fillText("Your Score: "+ this.score.toFixed(0), 100, 300);
             this.ctx.fillText("Best Score: "+ this.highScore, 100, 350);
 

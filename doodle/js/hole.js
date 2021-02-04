@@ -1,5 +1,8 @@
-
-
+/**
+ * @param  {Canvas Object} canvas
+ * @param  {Number} x
+ * @param  {Number} y
+ */
 function Hole(canvas, x, y) {
     this.x = x;
     this.y = y;

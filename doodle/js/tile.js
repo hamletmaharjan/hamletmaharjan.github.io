@@ -1,4 +1,9 @@
-
+/**
+ * @param  {Canvas Object} canvas
+ * @param  {Number} x - x position of tile
+ * @param  {Number} y - y position of tile
+ * @param  {Number} frequency - the highter the frequency the lower the change of having pickup
+ */
 function Tile(canvas, x ,y, frequency) {
     this.x = x;
     this.y = y;

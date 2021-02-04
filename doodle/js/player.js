@@ -1,3 +1,8 @@
+/**
+ * @param  {Canvas Object} canvas
+ * @param  {Number} x
+ * @param  {Number} y
+ */
 function Player(canvas, x ,y) {
     this.x = x;
     this.y = y;
@@ -30,6 +35,7 @@ function Player(canvas, x ,y) {
     let dis = this;
 
     this.draw = function() {
+        //Rotates the doodler if the condition meets
         if (this.isRotating) {
             this.angle += ANGLE_MULTIPLE * Math.PI / 180;
             this.ctx.save();
@@ -42,6 +48,7 @@ function Player(canvas, x ,y) {
             this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
         }
         
+        //Draws pickup items on top of the doodler if haspickup
         if (this.hasPickup) {
             if (this.pickupType == "propellerHat") {
                 this.ctx.drawImage(gameTiles,671, 38, 32, 19, this.x+15, this.y, 32, 19);
@@ -53,8 +60,12 @@ function Player(canvas, x ,y) {
     }
 
     this.update = function(tiles) {
-        if (!(this.velocity<= 0 && this.y < JUMP_THRESHOLD))
+        /* If player is jumping and it's threshold height is less than
+        *  threshold, it y value decrease and it goes up else it's y position stays same
+        */
+        if (!(this.velocity<= 0 && this.y < JUMP_THRESHOLD)){
             this.y += this.velocity;
+        }   
         if (this.falling) {
             this.velocity+= this.acceleration;
         }
@@ -66,6 +77,7 @@ function Player(canvas, x ,y) {
                 this.width = this.trueWidth;
                 this.height = this.trueHeight;
                 if (this.hasPickup) {
+                    //Spring shoe and shield last longer than one jump so haspickup flag stays true
                     if (this.pickupType != "springShoe" && this.pickupType!= "shield") {
                         this.hasPickup = false;
                     }  
@@ -85,15 +97,19 @@ function Player(canvas, x ,y) {
         if (this.right) {
             this.x_velocity += X_VELOCITY;
         }
+
+        //If doodler goes beyond left border, appear from right
         if (this.x <= 0-this.width) {
             this.x = canvasWidth;
         }
+        //If doodler goes beyond right border, appear from left
         else if (this.x >= canvasWidth) {
             this.x = -this.width;
         }
         this.x += this.x_velocity;
         this.x_velocity *= FRICTION;
 
+        //The main purpose is to go back to previous doodler state after shooting once
         if (this.animating) {
             if (this.frameCounter <= ANIMATION_FRAME_THRESHOLD) {
                 this.frameCounter++;
@@ -284,6 +300,9 @@ function Player(canvas, x ,y) {
                         this.shieldCounter--;
                        
                         if (tiles[i].isWhite) {
+                            /* Spawns the disappeared white tile in the position where it is supposed to be
+                                if it were to disappear out of border
+                            */
                             let temp = canvasHeight - tiles[i].y;
                             let t = new Tile(this.canvas, getRandomValue(0,360), -temp-50);
                             tiles.splice(i,1);
@@ -310,14 +329,19 @@ function Player(canvas, x ,y) {
     this.addListeners = function() {
         window.addEventListener("keydown", this.keyListener);
         window.addEventListener("keyup", this.keyListener);
+
+        //only adds mousedown listener if directional shooting is on
         if (directionalShooting == "on" && gameState == "playing") {
             window.addEventListener("mousedown", this.clickListener);
         }
     }
 
     this.clickListener = function(e) {
+        // Get the direction in x and y
         let dx = (e.offsetX - dis.x);
         let dy = (e.offsetY - dis.y);
+
+        // Normalize the direction
         let mag = Math.sqrt(dx * dx + dy * dy);
         let vx = (dx / mag);
         let vy = (dy / mag);
@@ -416,7 +440,6 @@ function Player(canvas, x ,y) {
                         bulletSound.play();
                     }
                     dis.animating = true;
-                    // console.log(bullet);
                 }
                 break;
 

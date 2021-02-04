@@ -1,3 +1,7 @@
+/**
+ * @param  {String} src - path to the audio
+ * @param  {Boolean} loop - to loop the audio or not
+ */
 function Sound(src, loop) {
   this.sound = document.createElement("audio");
   this.sound.src = src;
@@ -38,3 +42,4 @@ let trampolineSound = new Sound("./audio/trampoline.mp3", false);
 let rocketSound = new Sound("./audio/rocket.mp3", false);
 let fallingSound = new Sound("./audio/pada.mp3", false);
 let woodenTileSound = new Sound("./audio/lomise.mp3", false);
+let monsterCollisionSound = new Sound("./audio/monster-crash.mp3", false);
