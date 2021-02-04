@@ -53,7 +53,16 @@ function Game(canvas) {
         //Creates holes at a certain intervals in height at the top
         if(this.score > 0 && this.score.toFixed(0) % this.holeSpawnHeight == 0) {
             this.hasHoles = true;
+            let last = this.tiles.length - 1;
             this.hole = new Hole(this.canvas, this.getRandomValue(0, this.width-50), -70);
+            if(detectRectCollision(this.hole, this.tiles[last])) {
+                if(this.hole.x >=200) {
+                    this.hole.x -= 100;
+                }
+                else{
+                    this.hole.x += 100;
+                }
+            }
             this.pickupFrequency += PICKUP_FREQUENCY;   
         }
 
