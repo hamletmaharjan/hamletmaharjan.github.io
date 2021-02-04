@@ -206,10 +206,7 @@ function Game(canvas) {
         this.ctx.shadowBlur = 20;
         this.ctx.shadowColor = "white";
         this.ctx.fillText("Game Over",100,250);
-       
-        // this.ctx.drawImage(gameTiles , 724, 48, 110, 41, 150, 450, 110, 41);
-        // this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 150, 520, 110, 41);
-
+    
         setTimeout(() => {
             this.ctx.drawImage(background,0,0,this.width,this.height);
             this.ctx.font = "24px Comic Sans MS";

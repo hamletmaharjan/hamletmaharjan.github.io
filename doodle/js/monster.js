@@ -47,18 +47,24 @@ function Monster(canvas, x, y) {
             sy: 187,
             width: 38,
             height: 49
+        },
+        ghostWing: {
+            sx: 69,
+            sy: 1,
+            width: 62,
+            height: 90
         }
     }
 
     //To choose a random monster each time
-    let options = ['small', 'spider', 'flyingtwins', 'awkwardMover'];
-    let random = parseInt(Math.random() * 4);
+    let options = ['small', 'spider', 'flyingtwins', 'awkwardMover', 'ghostWing'];
+    let random = parseInt(Math.random() * 5);
     this.choosen = options[random];
-    // this.choosen = "awkwardMover";
+    // this.choosen = "ghostWing";
 
     this.init = function() {
         //If the choosen monster is awakwardMover then it moves upto full canvas width
-        if(this.choosen == "awkwardMover") {
+        if(this.choosen == "awkwardMover" || this.choosen == "ghostWing") {
             this.moveX = canvasWidth - this.monsters[this.choosen].width;
             this.originalX = 0;
             this.dx = 1;
@@ -87,6 +93,17 @@ function Monster(canvas, x, y) {
                 this.y += this.dy;
             }
             else if(this.frameCounter > MONSTER_MOVE_THRESHOLD) {
+                this.dy *= -1;
+                this.frameCounter = 0;
+            }
+            this.frameCounter++;
+        }
+
+        if(this.choosen == "ghostWing") {
+            if(this.frameCounter <= GHOST_WING_THRESHOLD) {
+                this.y += this.dy;
+            }
+            else if(this.frameCounter > GHOST_WING_THRESHOLD) {
                 this.dy *= -1;
                 this.frameCounter = 0;
             }
