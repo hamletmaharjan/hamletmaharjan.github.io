@@ -187,19 +187,23 @@ function Game(canvas) {
     this.createGameOverScreen = function() {
         gameState = "gameover";
         cancelAnimationFrame(this.reqId);
-        // this.ctx.drawImage(background,0,0,this.width,this.height);
-        this.ctx.font = "24px Comic Sans MS";
-        this.ctx.fillStyle = "black";
-        if(parseInt(this.score)> this.highScore) {
-            this.highScore = parseInt(this.score);
-            localStorage.setItem('doodleHigh', this.highScore);
-        }
-        this.ctx.fillText("game Over",100,250);
-        this.ctx.fillText("Your Score: "+ this.score.toFixed(0), 100, 300);
-        this.ctx.fillText("Best Score: "+ this.highScore, 100, 350);
+        setTimeout(() => {
+            this.ctx.drawImage(background,0,0,this.width,this.height);
+            this.ctx.font = "24px Comic Sans MS";
+            this.ctx.fillStyle = "black";
+            if(parseInt(this.score)> this.highScore) {
+                this.highScore = parseInt(this.score);
+                localStorage.setItem('doodleHigh', this.highScore);
+            }
+            this.ctx.fillText("game Over",100,250);
+            this.ctx.fillText("Your Score: "+ this.score.toFixed(0), 100, 300);
+            this.ctx.fillText("Best Score: "+ this.highScore, 100, 350);
 
-        this.ctx.drawImage(gameTiles , 724, 48, 110, 41, 150, 450, 110, 41);
-        this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 150, 520, 110, 41);
+            this.ctx.drawImage(gameTiles , 724, 48, 110, 41, 150, 450, 110, 41);
+            this.ctx.drawImage(gameTiles , 724, 93, 110, 41, 150, 520, 110, 41);
+            
+        }, 2000);
+        
 
         window.removeEventListener("mousedown", this.player.clickListener);
         propellerSound.stop();

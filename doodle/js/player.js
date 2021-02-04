@@ -147,6 +147,7 @@ function Player(canvas, x ,y) {
                             this.pickupType = "propellerHat";
                             this.isRotating = false;
                             propellerSound.play();
+                            tiles[i].hasPickup = false;
                         }
                         else if (tiles[i].pickup.choosen == "jetpack") {
                             this.jumpSpeed = JETPACK_JUMP_SPEED;
@@ -163,6 +164,7 @@ function Player(canvas, x ,y) {
                             }
                             this.isRotating = false;
                             jetpackSound.play();
+                            tiles[i].hasPickup = false;
                         }
                         else if (tiles[i].pickup.choosen == "rocket") {
                             this.jumpSpeed = ROCKET_JUMP_SPEED;
@@ -176,7 +178,9 @@ function Player(canvas, x ,y) {
                             this.height = ROCKET_HEIGHT;
                             rocketSound.play();
                             this.isRotating = false;
+                            tiles[i].hasPickup = false;
                         }
+                        
                     }
                 }
                 
@@ -250,12 +254,14 @@ function Player(canvas, x ,y) {
                                         this.img = doodleRightSpring;
                                     }
                                     springShoeSound.play();
+                                    tiles[i].hasPickup = false;
                                 }
                                 else if (tiles[i].pickup.choosen == "shield") {
                                     this.hasPickup = true;
                                     this.pickupType = "shield";
                                     this.shieldCounter = SHIELD_COUNT;
                                     jumpSound.play();
+                                    tiles[i].hasPickup = false;
                                 }
                             }
                             else {

@@ -44,7 +44,7 @@ function Pickup(canvas, x, y) {
     let options = ['springShoe', 'jetpack', 'propellerHat', "rocket", "shield"];
     let random = parseInt(Math.random() * 5);
     this.choosen = options[random];
-    // this.choosen = "propellerHat";
+    // this.choosen = "shield";
 
     this.draw = function() {
         //Shift in x for positioning closer to center and y for matching the bottom of pickup on the tile
