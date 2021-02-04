@@ -5,6 +5,8 @@ const PICKUP_FREQUENCY = 5;
 const MAX_MONSTER_WIDTH = 158;
 const LOWEST_JUMP_HEIGHT = -10;
 const SCORE_INCREMENT = 0.1;
+const ORANGE_TILE_START = 1000;
+const ORANGE_TILE_END = 1100;
 // const PICKUP_ACCELERATION = 0.10;
 
 
@@ -17,6 +19,15 @@ const GHOST_WING_THRESHOLD = 40;
 
 //pickup
 const PICKUP_SHIFT_X = 10;
+const ORANGE_1 = 201;
+const ORANGE_2 = 219;
+const ORANGE_3 = 237;
+const ORANGE_4 = 255;
+const ORANGE_5 = 273;
+const ORANGE_6 = 295;
+const ORANGE_7 = 321;
+const EXPLODE_WIDTH = 62;
+const EXPLODE_HEIGHT = 24;
 
 //player
 const ANGLE_MULTIPLE = 6;

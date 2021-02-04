@@ -3,8 +3,9 @@
  * @param  {Number} x - x position of tile
  * @param  {Number} y - y position of tile
  * @param  {Number} frequency - the highter the frequency the lower the change of having pickup
+ * @param  {Boolean} isOrange - sets the tile as orange, the exploading one
  */
-function Tile(canvas, x ,y, frequency) {
+function Tile(canvas, x ,y, frequency, isOrange) {
     this.x = x;
     this.y = y;
     this.width = 58;
@@ -20,6 +21,7 @@ function Tile(canvas, x ,y, frequency) {
     this.isBlue = (ran <= 3) ? true: false;
     this.isWhite = (ran == 10) ? true: false;
     this.hasPickup = (ran == 16) ? true: false;
+    this.isOrange = isOrange || false;
 
     this.dx = 1;
     this.img = tile;
@@ -35,14 +37,25 @@ function Tile(canvas, x ,y, frequency) {
     this.trampolineHeight = 15;
     this.trampolineDiff = 10;
     this.sy =0;
+    this.frameCounter = 0;
+    this.exploaded = false;
 
     this.positionY = {
         green: 0 ,
         blue : 18,
-        white: 54    
+        white: 54,
+        orange: 183
     }
 
     this.init = function() {
+        if(this.isOrange) {
+            this.hasPickup = false;
+            this.hasSpring = false;
+            this.hasTrampoline = false;
+            this.isWhite = false;
+            this.isBlue = false;
+            this.sy = this.positionY.orange;
+        }
         if(this.isBlue){
             this.sy = this.positionY.blue;
         }
@@ -52,6 +65,7 @@ function Tile(canvas, x ,y, frequency) {
         if(this.hasPickup){
             this.pickup = new Pickup(this.canvas, this.x, this.y);
         }
+        
     }
 
     this.draw = function() {
@@ -71,6 +85,37 @@ function Tile(canvas, x ,y, frequency) {
         }
         if(this.hasPickup) {
             this.pickup.update(this.y);
+        }
+        if(this.isOrange) {
+            if(this.frameCounter>= 300 && this.frameCounter<=310) {
+                this.sy = ORANGE_1;
+            }
+            else if(this.frameCounter >= 311 && this.frameCounter <= 320) {
+                this.sy = ORANGE_2;
+            }
+            else if(this.frameCounter >= 321 && this.frameCounter <= 330) {
+                this.sy = ORANGE_3;
+            }
+            else if(this.frameCounter >= 331 && this.frameCounter <= 340) {
+                this.sy = ORANGE_4;
+            }
+            else if(this.frameCounter >= 341 && this.frameCounter <= 345) {
+                this.sy = ORANGE_5;
+                this.height = EXPLODE_HEIGHT;
+                explodingTileSound.play();
+            }
+            else if(this.frameCounter >= 346 && this.frameCounter <= 350) {
+                this.sy = ORANGE_6;
+                this.height = EXPLODE_HEIGHT;
+            }
+            else if(this.frameCounter >= 351 && this.frameCounter <= 355) {
+                this.sy = ORANGE_7;
+                this.height = EXPLODE_HEIGHT;
+            }
+            else if(this.frameCounter >= 356){
+                this.exploaded = true;
+            }
+            this.frameCounter++;
         }
     }
 

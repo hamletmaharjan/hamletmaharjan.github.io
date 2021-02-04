@@ -113,6 +113,7 @@ function Game(canvas) {
             fallingSound.play();
         }
         dis.moveDown();
+        dis.checkOrangeTile();
         if(dis.hasHoles){
             if(dis.player.detectHolesCollision(dis.hole)) {
                 dis.createGameOverScreen();
@@ -185,7 +186,27 @@ function Game(canvas) {
                 this.score += 0.1;
                 if(this.tiles[i].y > this.height){
                     this.tiles.splice(i,1);
-                    let t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), -50, this.pickupFrequency);
+                    let t = null;
+                    if(parseInt(this.score) >= ORANGE_TILE_START && parseInt(this.score) <= ORANGE_TILE_END) {
+                        t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), -50, this.pickupFrequency, true);
+                    }
+                    else {
+                        t = new Tile(this.canvas, this.getRandomValue(0,this.width-60), -50, this.pickupFrequency);
+                    }
+                    t.init();
+                    this.tiles.push(t);
+                }
+            }
+        }
+    }
+
+    this.checkOrangeTile = function() {
+        for(let i=0; i<this.tiles.length; i++) {
+            if(this.tiles[i].isOrange) {
+                if(this.tiles[i].exploaded) {
+                    let temp = canvasHeight - this.tiles[i].y;
+                    let t = new Tile(this.canvas, getRandomValue(0,360), -temp-50);
+                    this.tiles.splice(i,1);
                     t.init();
                     this.tiles.push(t);
                 }

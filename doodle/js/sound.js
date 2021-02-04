@@ -43,3 +43,4 @@ let rocketSound = new Sound("./audio/rocket.mp3", false);
 let fallingSound = new Sound("./audio/pada.mp3", false);
 let woodenTileSound = new Sound("./audio/lomise.mp3", false);
 let monsterCollisionSound = new Sound("./audio/monster-crash.mp3", false);
+let explodingTileSound = new Sound("./audio/explodingplatform.mp3", false);
