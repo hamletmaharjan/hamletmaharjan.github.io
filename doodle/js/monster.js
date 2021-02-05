@@ -132,7 +132,7 @@ function Monster(canvas, x, y) {
                 return "collided";
             }
             else{
-                if(player.y + player.height <= this.monsters[this.choosen].y+ this.monsters[this.choosen].height){
+                if(player.y + player.height <= this.monsters[this.choosen].y){
                     return "jumped";
                 }
                 return "jumped";
